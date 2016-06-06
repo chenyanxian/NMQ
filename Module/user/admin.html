@@ -1,0 +1,124 @@
+<div class="navigation">我的应用 > 人员管理 > 管理员</div>
+<div class="searchRow clearfix">
+    <div class="left mr15">
+        <label>人员类型：</label>
+        <select class="width220">
+            <option>教职人员</option>
+            <option>学生</option>
+            <option>管理员</option>
+        </select>
+    </div>
+
+    <div class="left">
+        <label>录入时间：</label>
+        <input type="date" class="width150"/>
+        <span> 到 </span>
+        <input type="date" class="width150"/>
+    </div>
+</div>
+
+<div class="searchRow clearfix">
+    <div class="left mr15">
+        <label>人员名称：</label>
+        <input type="text" placeholder="请输入人员名称" class="width200"/>
+    </div>
+
+    <div class="left" style="margin-left: 24px">
+        <label>讲师：</label>
+        <select class="width220">
+            <option>张三</option>
+            <option>李四</option>
+            <option>小陈</option>
+        </select>
+    </div>
+</div>
+
+<div class="mt10">
+    <button class="btnGreen ml65">查询</button>
+    <button class="btnGreen">新建人员信息</button>
+</div>
+
+<div class="grayLine"></div>
+
+<div class="mt10 tr">
+    <button class="nextBtn">上一页</button>
+    <button class="nextBtn">下一页</button>
+</div>
+
+<table class="tableBox" border="1">
+    <thead>
+    <tr>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>人员类型</th>
+        <th>岗位</th>
+        <th>性别</th>
+        <th>备注</th>
+        <th>更新时间</th>
+        <th>功能操作</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td>B00001</td>
+        <td>李思思</td>
+        <td>教职人员</td>
+        <td>讲师</td>
+        <td>女</td>
+        <td>调查学生的交通知识</td>
+        <td>2016-3-24 22:34</td>
+        <td>
+            <button>修改</button>
+            <button>删除</button>
+        </td>
+    </tr>
+
+    <tr>
+        <td>B00001</td>
+        <td>李思思</td>
+        <td>教职人员</td>
+        <td>讲师</td>
+        <td>女</td>
+        <td>调查学生的交通知识</td>
+        <td>2016-3-24 22:34</td>
+        <td>
+            <button>修改</button>
+            <button>删除</button>
+        </td>
+    </tr>
+
+    <tr>
+        <td>B00001</td>
+        <td>李思思</td>
+        <td>教职人员</td>
+        <td>讲师</td>
+        <td>女</td>
+        <td>调查学生的交通知识</td>
+        <td>2016-3-24 22:34</td>
+        <td>
+            <button>修改</button>
+            <button>删除</button>
+        </td>
+    </tr>
+
+    <tr>
+        <td>B00001</td>
+        <td>李思思</td>
+        <td>教职人员</td>
+        <td>讲师</td>
+        <td>女</td>
+        <td>调查学生的交通知识</td>
+        <td>2016-3-24 22:34</td>
+        <td>
+            <button>修改</button>
+            <button>删除</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="pagingContainer clearfix">
+    <paging url={{url}} callback-fn="directiveCallBack"></paging>
+</div>
+
