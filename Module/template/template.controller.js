@@ -1,9 +1,17 @@
 'use strict';
 
 angular.module('app')
-    .controller('templateListCtrl', function ($http,$rootScope,$scope,$stateParams,$state,core) {
+    .controller('templateListCtrl',function ($http,$scope,enume,cooke) {
 
-        $scope.name = core.getUser();
+
+        $scope.name = cooke.getUser();
+
+        $scope.templateCate = [
+            {"name":"问卷调查","val":"1"},
+            {"name":"知识评测","val":"2"},
+            {"name":"安全调查","val":"3"}];
+
+        console.log(enume.templateCate);
 
         $scope.doSearch = function(){
             $scope.selectAll = false;
@@ -20,7 +28,7 @@ angular.module('app')
 
 
 angular.module('app')
-    .controller('createTemplateCtrl', function ($http,$rootScope,$scope,$stateParams,$state,core) {
+    .controller('createTemplateCtrl', function ($http,$scope) {
 
         //映射问题
         $scope.getTiXing = function(cate){

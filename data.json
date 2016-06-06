@@ -1,0 +1,14 @@
+
+
+{
+  "templateCate":[
+    {"name":"问卷调查","val":"1"},
+    {"name":"知识评测","val":"2"},
+    {"name":"安全调查","val":"3"}
+  ],
+  "templateType":[
+    {"name":"消防安全","val":"1"},
+    {"name":"交通安全","val":"2"},
+    {"name":"教育安全","val":"3"}
+  ]
+}

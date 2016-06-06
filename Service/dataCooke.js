@@ -1,12 +1,6 @@
 
 
-angular.module('app').service("core",function($http,$state){
-
-    //return {
-    //    splitStr:function(str){
-    //        return str.split(',');
-    //    }
-    //}
+angular.module('app').service("cooke",function($http,$state){
 
     var cooke = function(){
 
@@ -16,18 +10,18 @@ angular.module('app').service("core",function($http,$state){
             this.user = user;
         }
 
-        /*this.getUser = function(){
+        this.getUser = function(){
             if(this.user){
                 return this.user;
             }else{
-                $state.go("admin");
+                //$state.go("login");
+                return {name:111};
             }
         }
-*/
+
         this.clearCacheData = function(){
             this.user = null;
         }
-
     }
     return new cooke();
 })
