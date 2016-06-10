@@ -2,7 +2,7 @@ angular.module('app')
     .controller('userManagementCtrl', function ($http,$rootScope,$scope,$stateParams,$state) {
 
     })
-    .controller('adminCtrl',function($http,$rootScope,$scope,$stateParams,$state,core){
+    .controller('classManagementCtrl',function($http,$rootScope,$scope,$stateParams,$state,core){
 
         core.setUser({name:"Damon",key:"abcd-1234",tag:"aaa"});
 
@@ -10,3 +10,6 @@ angular.module('app')
     .controller('createUserCtrl',function($http,$rootScope,$scope,$stateParams,$state){
 
     })
+    .controller('stuManagement',function($http,$rootScope,$scope,$stateParams,$state){
+
+    });

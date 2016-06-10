@@ -14,7 +14,7 @@ angular.module('app').service("cooke",function($http,$state){
             if(this.user){
                 return this.user;
             }else{
-                $state.go("login");
+                $state.go("");
             }
         }
 
