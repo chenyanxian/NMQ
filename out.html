@@ -5,6 +5,9 @@
     <title></title>
     <link type="text/css" rel="stylesheet" href="app.css" />
     <script src="Resource/lib/jquery-1.11.2.min.js"></script>
+    <meta content="width=device-width,user-scalable=no" name="viewport">
+    <meta content="telephone=no" name="format-detection" />
+
 </head>
 <body>
     <div id="container"></div>
@@ -218,16 +221,16 @@
         var html = "<div>";
         for(var i=0;i<zj.length;i++){
 
-            html += "<div code='"+zj[i].code+"'>";
+            html += "<div class='outZjBox' code='"+zj[i].code+"'>";
 
             //章节
-            html += "<div class='cT_item_title'>"+zj[i].title+"</div>";
+            html += "<div class='outZjTitle'>"+zj[i].title+"</div>";
             //题目
             var tm = zj[i].tms;
             html += "<div>";
             for(var j = 0;j<tm.length;j++){
 
-                html += "<div class='mb tmb'>"+tm[j].sort+" :"+tm[j].name+"</div>";
+                html += "<div class='outZjSubject'>"+tm[j].sort+" :"+tm[j].name+"</div>";
 
                 var da = tm[j].items;
 
@@ -235,19 +238,19 @@
 
                 html += "<div class='heightAuto clearfix' code='"+tm[j].code+"' cate='"+tm[j].cate+"'>";
                 for(var k=0;k<da.length;k++){
-                    html += "<div>";
+                    html += "<div style='padding: 2px 0'>";
                     if(tm[j].cate == "checkbox"){
                         html += "<input type='checkbox' code='"+da[k].code+"' />";
-                        html += "<span>"+da[k].name+"</span>";
+                        html += "<span class='ml5'>"+da[k].name+"</span>";
                     }else if(tm[j].cate == "radio"){
                         html += "<input type='radio' name='"+pingfenID+"' code='"+da[k].code+"'/>";
-                        html += "<span>"+da[k].name+"</span>";
+                        html += "<span class='ml5'>"+da[k].name+"</span>";
                     }else if(tm[j].cate == "textbox"){
-                        html += "<span>"+da[k].title+"</span>";
+                        html += "<span class='mr5'>"+da[k].title+"</span>";
                         html += "<input type='text' code='"+da[k].code+"'/>";
                     }else if(tm[j].cate == "pingfen"){
                         html += "<input type='radio' name='"+pingfenID+"' code='"+da[k].code+"' num ='"+da[k].number+"' />";
-                        html += "<span>"+da[k].name+"</span>";
+                        html += "<span class='ml5'>"+da[k].name+"</span>";
                     }
                     html += "</div>";
                 }
@@ -263,9 +266,9 @@
     //概要
     function renderGaiyao(c,data){
         var html = "";
-        html += "<div class='tmb'>";
-        html += "<div style='text-align: center;'>"+data.title+"</div>";
-        html += "<div>"+data.content+"</div>";
+        html += "<div class='outTop'>";
+        html += "<div class='outTopTitle'>"+data.title+"</div>";
+        html += "<div class='outTopTip'>"+data.content+"</div>";
         html += "</div>";
 
         $(c).append($(html));
