@@ -10,21 +10,28 @@ angular.module('app').factory("enume",function($http){
 
         var that = this;
 
-        this.templateCate = new Array();
-        this.templateType = new Array();
+        this.templateCate = [{name:"全部",val:""}];
+        this.templateType = [{name:"全部",val:""}];
 
         this.getTemplateCate = function(){
-            if(this.templateCate.length == 0){
+            if(this.templateCate.length <=1 ){
+                console.log("发送templateCate请求!");
                 $http.get("../NMQ/data.json").success(function(d){
-                    that.templateCate = d.templateCate;
+                    for(var i=0;i< d.templateCate.length;i++){
+                        that.templateCate.push({name: d.templateCate[i].name,val: d.templateCate[i].val});
+                    }
                 })
+            }else{
+                console.log("调用方法但是没有发送templateCate请求!");
             }
         }
 
         this.getTemplateType = function(){
-            if(this.templateType.length == 0){
+            if(this.templateType.length <= 1){
                 $http.get("../NMQ/data.json").success(function(d){
-                    that.templateType = d.templateType;
+                    for(var i=0;i< d.templateType.length;i++){
+                        that.templateType.push({name: d.templateType[i].name,val: d.templateType[i].val});
+                    }
                 })
             }
         }

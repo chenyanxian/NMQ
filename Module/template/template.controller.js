@@ -1,24 +1,30 @@
 'use strict';
 
 angular.module('app')
-    .controller('templateListCtrl',function ($http,$scope,enume,cooke) {
-
+    .controller('templateListCtrl',function ($http,$scope,enume,cooke,$state) {
 
         $scope.name = cooke.getUser();
 
-        $scope.templateCate = [
-            {"name":"问卷调查","val":"1"},
-            {"name":"知识评测","val":"2"},
-            {"name":"安全调查","val":"3"}];
+        //初始化下拉框数据  模板分类,模板类型
+        $scope.templateCates =  enume.templateCate;
+        $scope.templateTypes = enume.templateType;
+        $scope.selectCate = "";
+        $scope.selectType = "";
+        $scope.templateName = "";
+        $scope.beginDate = "";
+        $scope.endDate = "";
 
-        console.log(enume.templateCate);
+        //查询模板
+        $scope.templateListSearch = function(){
+            $scope.$broadcast("searchByFilter");
+        }
 
-        $scope.doSearch = function(){
-            $scope.selectAll = false;
+        $scope.createTemplate = function(){
+            $state.go("template.templateCreate");
         }
 
         $scope.getUrl = function(){
-            return "/newGoods/pageQuery?nameLike="
+            return "../../NMQ/data.json?=cate="+$scope.selectCate+"&selectType="+$scope.selectType + "&name="+$scope.templateName+"&begin="+$scope.beginDate + "&end="+$scope.endDate;
         }
 
         $scope.directiveCallBack = function(valueFromDirective){
@@ -28,84 +34,210 @@ angular.module('app')
 
 
 angular.module('app')
-    .controller('createTemplateCtrl', function ($http,$scope) {
+    .controller('createTemplateCtrl', function ($http,$scope,enume) {
 
-        //映射问题
+        $scope.templateCates =  enume.templateCate;
+        $scope.templateTypes = enume.templateType;
+        $scope.selectCate = "";
+        $scope.selectType = "";
+
+        //映射问题类型
         $scope.getTiXing = function(cate){
             if(cate == "checkbox"){
                 return "多选题";
             } else if(cate == "radio"){
                 return "单选题";
+            }else if(cate == "textbox"){
+                return "填空题";
+            }else if(cate == "pingfen"){
+                return "评分提";
             } else{
                 return "未知体型";
             }
         }
 
-        //tag = 1 --->概要说明
-        //tag = 2 --->章节题目
-        $scope.data = [
-            {tag:1,sort:1,title:"安全教育调查问卷",content:"各位同学，您好我是第一章节的描述信息"},
-            {tag:2,sort:1,title:"第一章节",tms:[
-                {cate:"checkbox",bida:true,wtjtt:false,name:"第一题哦",sort:1,items:[
-                    {name:"选项aa",bz:true,sort:1},
-                    {name:"选项bb",bz:true,sort:2},
-                    {name:"选项cc",bz:false,sort:3}
-                ]},
-                {cate:"radio",bida:true,wtjtt:false,name:"第二题哦",sort:2,items:[
-                    {name:"选项aa123123",bz:true,sort:1},
-                    {name:"选项bbdddd",bz:true,sort:2},
-                    {name:"选项ccasdad",bz:false,sort:3}
-                ]},
-                {cate:"checkbox",bida:true,wtjtt:false,name:"第三题哦",sort:3,items:[
-                    {name:"选项azxczca",bz:true,sort:1},
-                    {name:"zxc",bz:true,sort:2},
-                    {name:"zxczxc",bz:false,sort:3}
-                ]}
-            ]},
-            {tag:2,sort:5,title:"第二章节",tms:[
-                {cate:"checkbox",bida:true,wtjtt:false,name:"第一题哦!!!!",sort:1,items:[
-                    {name:"qqq",bz:false,sort:1},
-                    {name:"www",bz:true,sort:2},
-                    {name:"aaa",bz:false,sort:3}
-                ]},
-                {cate:"radio",bida:true,wtjtt:false,name:"第二题哦!!!",sort:2,items:[
-                    {name:"傻",bz:true,sort:1},
-                    {name:"不傻",bz:true,sort:2},
-                    {name:"必须傻",bz:false,sort:3}
-                ]},
-                {cate:"checkbox",bida:true,wtjtt:false,name:"第三题哦!!!",sort:3,items:[
-                    {name:"选项azxczca",bz:false,sort:1},
-                    {name:"zxc",bz:true,sort:2},
-                    {name:"zxczxc",bz:true,sort:3}
-                ]}
-            ]},
-            {tag:2,sort:8,title:"第三章节",tms:[
-                {cate:"checkbox",bida:true,wtjtt:false,name:"第一题哦!!!!",sort:1,items:[
-                    {name:"qqq",bz:false,sort:1},
-                    {name:"www",bz:true,sort:2},
-                    {name:"aaa",bz:false,sort:3}
-                ]},
-                {cate:"radio",bida:true,wtjtt:false,name:"第二题哦!!!",sort:2,items:[
-                    {name:"傻",bz:true,sort:1},
-                    {name:"不傻",bz:true,sort:2},
-                    {name:"必须傻",bz:false,sort:3}
-                ]},
-                {cate:"checkbox",bida:true,wtjtt:false,name:"第三题哦!!!",sort:3,items:[
-                    {name:"选项azxczca",bz:false,sort:1},
-                    {name:"zxc",bz:true,sort:2},
-                    {name:"zxczxc",bz:true,sort:3}
-                ]}
-            ]}
-        ];
+        $scope.data = {
+            templateCategory: "1",
+            templateType: "2",
+            title: "安全问卷调查哟",
+            random: "",
+            content: "一起来参与，赢大奖!",
+            "data": [
+                {
+                    "title": "第一章节",
+                    "tms": [
+                        {
+                            "cate": "radio",
+                            "bida": false,
+                            "wtjtt": false,
+                            "name": "教室安全关注过吗",
+                            "sort": 1,
+                            "items": [
+                                {
+                                    "name": "有",
+                                    "bz": false,
+                                    "sort": 1
+                                },
+                                {
+                                    "name": "没有",
+                                    "bz": false,
+                                    "sort": 2,
+                                }
+                            ]
+                        },
+                        {
+                            "cate": "checkbox",
+                            "bida": true,
+                            "wtjtt": false,
+                            "name": "怕不怕老师尾随",
+                            "sort": 2,
+                            "items": [
+                                {
+                                    "name": "一点都不怕",
+                                    "bz": false,
+                                    "sort": 1
+                                },
+                                {
+                                    "name": "非常害怕",
+                                    "bz": false,
+                                    "sort": 2
+                                },
+                                {
+                                    "name": "我不信你不怕",
+                                    "bz": false,
+                                    "sort": 3
+                                },
+                                {
+                                    "name": "你是不是傻",
+                                    "bz": false,
+                                    "sort": 4
+                                }
+                            ]
+                        },
+                        {
+                            "cate": "textbox",
+                            "bida": true,
+                            "wtjtt": false,
+                            "name": "填空题",
+                            "sort": 3,
+                            "items": [
+                                {
+                                    "name": "",
+                                    "title": "语文老师帅吗",
+                                    "bz": false,
+                                    "sort": 1
+                                },
+                                {
+                                    "name": "",
+                                    "title": "数学老师帅吗",
+                                    "bz": false,
+                                    "sort": 2
+                                },
+                                {
+                                    "name": "",
+                                    "title": "英语老师呢？",
+                                    "bz": false,
+                                    "sort": 3
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "第二章节",
+                    "tms": [
+                        {
+                            "cate": "checkbox",
+                            "bida": false,
+                            "wtjtt": false,
+                            "name": "小伙子们，你们速度真是杠杠的啊",
+                            "sort": 1,
+                            "items": [
+                                {
+                                    "name": "是",
+                                    "bz": false,
+                                    "sort": 1
+                                },
+                                {
+                                    "name": "不是",
+                                    "bz": false,
+                                    "sort": 2
+                                },
+                                {
+                                    "name": "你猜",
+                                    "bz": false,
+                                    "sort": 3
+                                }
+                            ]
+                        },
+                        {
+                            "cate": "pingfen",
+                            "bida": false,
+                            "wtjtt": false,
+                            "name": "你对自己的长相打多少分?",
+                            "sort": 2,
+                            "items": [
+                                {
+                                    "name": "小王",
+                                    "number": "10",
+                                    "bz": false,
+                                    "sort": 1
+                                },
+                                {
+                                    "name": "渣渣",
+                                    "number": "20",
+                                    "bz": false,
+                                    "sort": 2
+                                },
+                                {
+                                    "name": "山炮",
+                                    "number": "30",
+                                    "bz": false,
+                                    "sort": 3
+                                }
+                            ]
+                        },
+                        {
+                            "cate": "checkbox",
+                            "bida": false,
+                            "wtjtt": false,
+                            "name": "我就问你，你是不是傻？",
+                            "sort": 3,
+                            "items": [
+                                {
+                                    "name": "傻",
+                                    "bz": false,
+                                    "sort": 1
+                                },
+                                {
+                                    "name": "不傻",
+                                    "bz": false,
+                                    "sort": 2
+                                },
+                                {
+                                    "name": "傻你麻痹",
+                                    "bz": false,
+                                    "sort": 3
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
 
-        //radio checkbox textbox
+        //当前选中的章节
         var currentZj = null;
 
         //添加题目的开关
         var addFlag = false;
 
         $scope.cls = "";
+        $scope.showGY = false;
 
+        if($scope.data.title){
+            $scope.showGY = true;
+        }
 
         $scope.addTmByZj = function(item){
             $scope.cls = "red";
@@ -118,13 +250,20 @@ angular.module('app')
         }
 
         $scope.addGy = function(){
-            var tmp = {tag:1,title:"设置概要标题调查问卷",content:"设置概要内容",sort:1};
-            $scope.data.push(tmp);
+            $scope.showGY = true;
+            $scope.data.title = "设置概要标题调查问卷";
+            $scope.data.content = "设置概要内容";
+        }
+
+        $scope.hideGy = function(){
+            $scope.showGY = false;
+            $scope.data.title = "";
+            $scope.data.content = "";
         }
 
         $scope.addZj = function(){
-            var tmp = {tag:2,title:"设置章节标题",tms:[]};
-            $scope.data.push(tmp);
+            var tmp = {title:"设置章节标题",tms:[]};
+            $scope.data.data.push(tmp);
         }
 
         $scope.xzTm = function(){
@@ -143,18 +282,12 @@ angular.module('app')
             return {prev:data[index-1],next:data[index+1]};
         }
         //章节的上下移动
-        function getTag2Items(){
-            var res = [];
-            for(var i=0;i<$scope.data.length;i++){
-                if($scope.data[i].tag == 2){
-                    res.push($scope.data[i]);
-                }
-            }
-            return jsCoreMethod.arraySortByField(res,"sort",true,true);
+        function getZjItems(){
+            return jsCoreMethod.arraySortByField($scope.data.data,"sort",true,true);
         }
 
         $scope.moveUp = function(item,data){
-            if(item.sort == getTag2Items()[0].sort){
+            if(item.sort == getZjItems()[0].sort){
                 alert("已经是第一个章节了!");
                 return;
             }
@@ -163,11 +296,11 @@ angular.module('app')
             var tmp2 = tmp1;
             item.sort -= 1;
             getPrevNextItem(item,data).prev.sort = tmp2;
-            $scope.data = jsCoreMethod.arraySortByField($scope.data,"sort",true);
+            $scope.data.data = jsCoreMethod.arraySortByField($scope.data.data,"sort",true);
         }
 
         $scope.moveDown = function(item,data){
-            var tmpRes = getTag2Items();
+            var tmpRes = getZjItems();
             if(item.sort == tmpRes[tmpRes.length-1].sort){
                 alert("已经是最后一个章节了!");
                 return;
@@ -178,7 +311,7 @@ angular.module('app')
             item.sort += 1;
             getPrevNextItem(item,data).next.sort = tmp2;
 
-            $scope.data = jsCoreMethod.arraySortByField($scope.data,"sort",true);
+            $scope.data.data = jsCoreMethod.arraySortByField($scope.data.data,"sort",true);
         }
 
         //题目的上下移动
@@ -241,13 +374,20 @@ angular.module('app')
             p1.tms = jsCoreMethod.arraySortByField(data,"sort",true,true);
         }
 
-        $scope.addDA = function(item,items){
+        $scope.addDA = function(item,items,cate){
 
             var tmp = jsCoreMethod.arraySortByField(items,"sort",true);
 
             var count = tmp[tmp.length-1].sort + 1;
+            if(cate == "textbox"){
+                items.push({name:"请输入答案标题",title:"",bz:false,sort:count});
+            }
+            else if(cate == "pingfen"){
+                items.push({name:"请输入答案标题",number:0,bz:false,sort:count});
+            }else{
+                items.push({name:"请输入答案标题",bz:false,sort:count});
+            }
 
-            items.push({name:"请输入答案标题",bz:false,sort:count});
         }
 
         function getDaAnArray(items){
@@ -296,16 +436,37 @@ angular.module('app')
             //还没有添加题目
             var tmp = null;
             if(!currentZj.tms ||currentZj.tms.length == 0){
-                tmp = {cate:cate,bida:false,wtjtt:false,name:"请输入题目标题",sort:1,items:[
-                    {name:"请输入问题标题",bz:false,sort:1}
-                ]};
-
+                if(cate == "textbox"){
+                    tmp = {cate:cate,bida:false,wtjtt:false,name:"请输入题目标题",sort:1,items:[
+                        {name:"请输入问题内容",title:"请输入题目标题",bz:false,sort:1}
+                    ]};
+                } else if(cate == "pingfen"){
+                    tmp = {cate:cate,bida:false,wtjtt:false,name:"请输入题目标题",sort:1,items:[
+                        {name:"请输入问题内容",number:0,bz:false,sort:1}
+                    ]};
+                }else{
+                    tmp = {cate:cate,bida:false,wtjtt:false,name:"请输入题目标题",sort:1,items:[
+                        {name:"请输入问题标题",bz:false,sort:1}
+                    ]};
+                }
             }else{
                 var res = jsCoreMethod.arraySortByField(currentZj.tms,"sort",true);
                 var lastCount = res[res.length-1].sort + 1;
-                tmp = {cate:cate,bida:false,wtjtt:false,name:"请输入题目标题",sort:lastCount,items:[
-                    {name:"请输入问题标题",bz:false,sort:1}
-                ]};
+
+                if(cate == "textbox"){
+                    tmp = {cate:cate,bida:false,wtjtt:false,name:"请输入题目标题",sort:lastCount,items:[
+                        {name:"请输入问题内容",title:"请输入题目标题",bz:false,sort:1}
+                    ]};
+                }
+                else if(cate == "pingfen"){
+                    tmp = {cate:cate,bida:false,wtjtt:false,name:"请输入题目标题",sort:lastCount,items:[
+                        {name:"请输入问题内容",number:0,bz:false,sort:1}
+                    ]};
+                }else{
+                    tmp = {cate:cate,bida:false,wtjtt:false,name:"请输入题目标题",sort:lastCount,items:[
+                        {name:"请输入问题标题",bz:false,sort:1}
+                    ]};
+                }
             }
             currentZj.tms.push(tmp);
             addFlag = false;
@@ -322,11 +483,23 @@ angular.module('app')
         }
 
         $scope.addPf = function(){
-            addTiMu("radio");
+            addTiMu("pingfen");
         }
 
         $scope.addTk = function(){
             addTiMu("textbox");
+        }
+
+        $scope.preview = function(){
+
+        }
+
+        $scope.doSubmit = function(){
+            console.log($scope.data);
+        }
+
+        $scope.doHoldSubmit = function(){
+
         }
     });
 

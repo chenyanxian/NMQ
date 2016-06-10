@@ -26,7 +26,7 @@ angular.module("app").directive("paging",function(){
                 return $scope.getUrl() + "&curPage="+index+"&pageSize="+size+"&ran="+Math.random();
             }
 
-           /* function getData(){
+            function getData(){
                 $http.get(dealUrl()).success(function(d){
 
                     if(d.errorCode != "0"){
@@ -44,25 +44,25 @@ angular.module("app").directive("paging",function(){
 
                     $scope.callbackFn(d.datas);
                 })
-            }*/
+            }
 
             $scope.$on("searchByFilter",function(event,data){
                 index = 1;
-/*
-                getData(data.url + "&curPage="+index+"&pageSize="+size+"&ran="+Math.random());
-*/
+
+                getData();
+
             })
 
-            $scope.doSearch = function(){
+            $scope.enterValueSearch = function(){
                 var val  = parseInt($scope.enterIndex);
                 if(isNaN(val) || val > parseInt($scope.allPages) || val <1 ){
                     alert("请输入小于总页数的正整数!");
                     return;
                 }
                 index = val;
-/*
-                getData(dealUrl());
-*/
+
+                getData();
+
             }
 
             $scope.prev = function(){
@@ -70,9 +70,9 @@ angular.module("app").directive("paging",function(){
                     return;
                 }
                 index--;
-/*
-                getData(dealUrl());
-*/
+
+                getData();
+
             }
 
             $scope.next = function(){
@@ -80,14 +80,14 @@ angular.module("app").directive("paging",function(){
                     return;
                 }
                 index++;
-/*
-                getData(dealUrl());
-*/
+
+                getData();
+
             }
 
-/*
-            getData(dealUrl());
-*/
+
+            getData();
+
         }
     }
 })

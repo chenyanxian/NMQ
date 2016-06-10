@@ -2,35 +2,31 @@
 <div class="searchRow clearfix">
     <div class="left mr15">
         <label>模版分类：</label>
-        <select class="width287" ng-model="selectType" ng-options="m.name for m in templateCate"></select>
+        <select class="width287" ng-model="selectCate" ng-options="m.val as m.name for m in templateCates"></select>
     </div>
+
     <div class="left">
-        <label>模版名称：</label>
-        <input type="text" placeholder="请输入模版名称" class="width287"/>
+        <label>创建时间：</label>
+        <input type="date" placeholder="请选择开始时间" class="width150" ng-model="beginDate"/>
+        <span> 到 </span>
+        <input type="date" placeholder="请选择结束时间" class="width150" ng-model="endDate"/>
     </div>
 </div>
 
 <div class="searchRow clearfix">
     <div class="left mr15">
         <label>模版类型：</label>
-        <select class="width287">
-            <option>消防安全</option>
-            <option>交通安全</option>
-            <option>户外安全</option>
-        </select>
+        <select class="width287" ng-model="selectType" ng-options="m.val as m.name for m in templateTypes"></select>
     </div>
     <div class="left">
-        <label>创建时间：</label>
-        <input type="date" placeholder="请输入模版名称" class="width150"/>
-        <span> 到 </span>
-        <input type="date" placeholder="请输入模版名称" class="width150"/>
+        <label>模版名称：</label>
+        <input type="text" placeholder="请输入模版名称" class="width287" ng-model="templateName"/>
     </div>
 </div>
 
-
 <div class="mt10">
-    <button class="btnGreen ml65">查询</button>
-    <button class="btnGreen">创建模版</button>
+    <button class="btnGreen ml65" ng-click="templateListSearch();">查询</button>
+    <button class="btnGreen" ng-click="createTemplate();">创建模版</button>
 </div>
 
 <div class="grayLine"></div>
@@ -104,5 +100,5 @@
 </table>
 
 <div class="pagingContainer clearfix">
-    <paging url={{url}} callback-fn="directiveCallBack"></paging>
+    <paging get-url="getUrl" callback-fn="directiveCallBack"></paging>
 </div>
