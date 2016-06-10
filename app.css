@@ -536,3 +536,14 @@ textarea{
     font-weight: bold;
     color: #0085D7;
 }
+.classDown{
+    border: 1px dashed #aaaaaa;
+    padding: 10px 5px;
+    margin-top: 15px;
+}
+
+.downModuleInput{
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    width: 200px;
+}
