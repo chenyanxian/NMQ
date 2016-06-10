@@ -12,8 +12,11 @@ angular.module("app").directive("navigation",function(){
         link:function(){},
         controller:function($scope,$http,cooke,$state){
             var u = cooke.getUser();
-            $scope.uname = u.name;
-            $scope.role = u.role;
+
+            if(u){
+                $scope.uname = u.name;
+                $scope.role = u.role;
+            }
 
             $scope.logout = function(){
                 cooke.clearCacheData();

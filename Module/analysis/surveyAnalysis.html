@@ -22,24 +22,17 @@
 <div class="searchRow clearfix">
     <div class="left mr15">
         <label>模版分类：</label>
-        <select class="width220">
-            <option>问卷调查</option>
-            <option>知识测试</option>
-        </select>
+        <select class="width287" ng-model="selectCate" ng-options="m.val as m.name for m in templateCates"></select>
     </div>
 
     <div class="left mr15">
         <label>模版类型：</label>
-        <select class="width220">
-            <option>消防安全</option>
-            <option>交通安全</option>
-            <option>户外安全</option>
-        </select>
+        <select class="width287" ng-model="selectType" ng-options="m.val as m.name for m in templateTypes"></select>
     </div>
 
     <div class="left mr15">
         <label>模版名称：</label>
-        <input type="text" placeholder="请输入活动名称" class="width200"/>
+        <input type="text" placeholder="请输入模版名称" class="width287" ng-model="templateName"/>
     </div>
 </div>
 
