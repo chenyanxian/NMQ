@@ -22,20 +22,24 @@
         "data": [
             {
                 "title": "第一章节",
+                "code":"1",
                 "tms": [
                     {
                         "cate": "radio",
                         "bida": false,
                         "wtjtt": false,
+                        code:"1-1",
                         "name": "教室安全关注过吗",
                         "sort": 1,
                         "items": [
                             {
+                                code:"1_1_1",
                                 "name": "有",
                                 "bz": false,
                                 "sort": 1
                             },
                             {
+                                code:"1_1_2",
                                 "name": "没有",
                                 "bz": false,
                                 "sort": 2,
@@ -44,27 +48,32 @@
                     },
                     {
                         "cate": "checkbox",
+                        code:"1-2",
                         "bida": true,
                         "wtjtt": false,
                         "name": "怕不怕老师尾随",
                         "sort": 2,
                         "items": [
                             {
+                                code:"1-2_1",
                                 "name": "一点都不怕",
                                 "bz": false,
                                 "sort": 1
                             },
                             {
+                                code:"1-2_2",
                                 "name": "非常害怕",
                                 "bz": false,
                                 "sort": 2
                             },
                             {
+                                code:"1-2_3",
                                 "name": "我不信你不怕",
                                 "bz": false,
                                 "sort": 3
                             },
                             {
+                                code:"1-2_4",
                                 "name": "你是不是傻",
                                 "bz": false,
                                 "sort": 4
@@ -72,6 +81,7 @@
                         ]
                     },
                     {
+                        code:"1-3",
                         "cate": "textbox",
                         "bida": true,
                         "wtjtt": false,
@@ -79,18 +89,21 @@
                         "sort": 3,
                         "items": [
                             {
+                                code:"1-3_1",
                                 "name": "",
                                 "title": "语文老师帅吗",
                                 "bz": false,
                                 "sort": 1
                             },
                             {
+                                code:"1-3_2",
                                 "name": "",
                                 "title": "数学老师帅吗",
                                 "bz": false,
                                 "sort": 2
                             },
                             {
+                                code:"1-3_3",
                                 "name": "",
                                 "title": "英语老师呢？",
                                 "bz": false,
@@ -102,8 +115,10 @@
             },
             {
                 "title": "第二章节",
+                code:"2",
                 "tms": [
                     {
+                        code:"2_1",
                         "cate": "checkbox",
                         "bida": false,
                         "wtjtt": false,
@@ -111,16 +126,19 @@
                         "sort": 1,
                         "items": [
                             {
+                                code:"2_1_1",
                                 "name": "是",
                                 "bz": false,
                                 "sort": 1
                             },
                             {
+                                code:"2_1_2",
                                 "name": "不是",
                                 "bz": false,
                                 "sort": 2
                             },
                             {
+                                code:"2_1_3",
                                 "name": "你猜",
                                 "bz": false,
                                 "sort": 3
@@ -128,6 +146,7 @@
                         ]
                     },
                     {
+                        code:"2_2",
                         "cate": "pingfen",
                         "bida": false,
                         "wtjtt": false,
@@ -135,18 +154,21 @@
                         "sort": 2,
                         "items": [
                             {
+                                code:"2_2_1",
                                 "name": "小王",
                                 "number": "10",
                                 "bz": false,
                                 "sort": 1
                             },
                             {
+                                code:"2_2_2",
                                 "name": "渣渣",
                                 "number": "20",
                                 "bz": false,
                                 "sort": 2
                             },
                             {
+                                code:"2_2_3",
                                 "name": "山炮",
                                 "number": "30",
                                 "bz": false,
@@ -156,23 +178,28 @@
                     },
                     {
                         "cate": "checkbox",
+                        code:"2_3",
                         "bida": false,
                         "wtjtt": false,
                         "name": "我就问你，你是不是傻？",
                         "sort": 3,
                         "items": [
                             {
+                                code:"2_3_1",
                                 "name": "傻",
                                 "bz": false,
                                 "sort": 1
                             },
                             {
+                                code:"2_3_2",
                                 "name": "不傻",
                                 "bz": false,
                                 "sort": 2
                             },
                             {
-                                "name": "傻你麻痹",
+
+                                code:"2_3_3",
+                                "name": "傻你",
                                 "bz": false,
                                 "sort": 3
                             }
@@ -188,45 +215,48 @@
 
         var html = "";
         var zj = data.data;
-
+        var html = "<div>";
         for(var i=0;i<zj.length;i++){
-            html += "<div>";
+
+            html += "<div code='"+zj[i].code+"'>";
+
             //章节
             html += "<div class='cT_item_title'>"+zj[i].title+"</div>";
-            html += "<div>";
             //题目
             var tm = zj[i].tms;
+            html += "<div>";
             for(var j = 0;j<tm.length;j++){
 
-                html += "<div class='mb tmb'>"+tm[j].name+"</div>";
+                html += "<div class='mb tmb'>"+tm[j].sort+" :"+tm[j].name+"</div>";
 
                 var da = tm[j].items;
 
+                var pingfenID ="__" + Math.ceil(Math.random()*100000);
+
+                html += "<div class='heightAuto clearfix' code='"+tm[j].code+"' cate='"+tm[j].cate+"'>";
                 for(var k=0;k<da.length;k++){
-
-                    html += "<div class='heightAuto clearfix'>";
-                    html += "<div class='left'>";
-
+                    html += "<div>";
                     if(tm[j].cate == "checkbox"){
-                        html += "<input type='checkbox' />";
+                        html += "<input type='checkbox' code='"+da[k].code+"' />";
                         html += "<span>"+da[k].name+"</span>";
                     }else if(tm[j].cate == "radio"){
-                        html += "<input type='radio' />";
+                        html += "<input type='radio' name='"+pingfenID+"' code='"+da[k].code+"'/>";
                         html += "<span>"+da[k].name+"</span>";
                     }else if(tm[j].cate == "textbox"){
                         html += "<span>"+da[k].title+"</span>";
-                        html += "<input type='text' />";
+                        html += "<input type='text' code='"+da[k].code+"'/>";
                     }else if(tm[j].cate == "pingfen"){
-                        html += "<input type='radio' />";
+                        html += "<input type='radio' name='"+pingfenID+"' code='"+da[k].code+"' num ='"+da[k].number+"' />";
                         html += "<span>"+da[k].name+"</span>";
                     }
-
-                    html += "</div></div>";
+                    html += "</div>";
                 }
+                html += "</div>";
             }
             html += "</div>";
             html += "</div>";
         }
+        html += "</div>";
         $(c).append(html);
     }
 
@@ -240,7 +270,45 @@
 
         $(c).append($(html));
     }
-
-
     render($("#container"),data);
+
+    function getParams(data){
+        var _d= data.data;
+        var res = [];
+        for(var i=0;i<_d.length;i++){
+            var tmpJson = {code: _d[i].code,tms:[]};
+            var tmp = _d[i].tms;
+            for(var k=0;k<tmp.length;k++){
+                var code = tmp[k].code;
+                var cate = tmp[k].cate;
+                tmpJson.tms.push({code:code,cate:cate,required:tmp[k].bida,title:tmp[k].name,answer:getAnswerByTMCode(code,cate)});
+            }
+            res.push(tmpJson);
+        }
+        return res;
+    }
+
+    function getAnswerByTMCode(code,cate){
+        var res = [];
+        if(cate == "checkbox" || cate == "radio"){
+            $("div[code='"+code+"'] input[type="+cate+"]:checked").each(function(){
+                res.push({code:$(this).attr("code"),title:""});
+            })
+        }
+        else if(cate == "textbox"){
+            $("div[code='"+code+"'] input[type=text]").each(function(){
+                res.push({code:$(this).attr("code"),title:$(this).val()});
+            })
+        }else if(cate == "pingfen"){
+            $("div[code='"+code+"'] input[type=radio]:checked").each(function(){
+                res.push({code:$(this).attr("code"),title:$(this).attr("num")});
+            })
+        }
+        return res;
+    }
+
+    $("#doSubmit").click(function(){
+        var s = getParams(data);
+        console.log(s);
+    })
 </script>
