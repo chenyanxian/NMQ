@@ -106,7 +106,7 @@ textarea{
 .navbar ul li{
     display: inline-block;
     color: #ffffff;
-    width: 100px;
+    width: 120px;
     line-height: 40px;
     text-align: center;
     cursor: pointer;
@@ -536,6 +536,7 @@ textarea{
     font-weight: bold;
     color: #0085D7;
 }
+
 .classDown{
     border: 1px dashed #aaaaaa;
     padding: 10px 5px;
