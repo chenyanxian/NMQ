@@ -70,22 +70,22 @@
                 <div class="heightAuto" ng-repeat="x in itemx.items">
                     <div class="clearfix" ng-switch="itemx.cate">
                         <div class="left">
-                                    <span ng-switch-when="checkbox">
-                                        <input type="checkbox" />
-                                        <input type="text" class="cT_input" ng-model="x.name"/></span>
-                                    <span ng-switch-when="radio">
-                                        <input type="radio" />
-                                        <input type="text" class="cT_input" ng-model="x.name"/>
-                                    </span>
-                                    <span ng-switch-when="textbox">
-                                        <input type="text" ng-model="x.title" />
-                                        <input type="text" class="cT_input" ng-model="x.name"/>
-                                    </span>
-                                    <span ng-switch-when="pingfen">
-                                        <input type="radio" />
-                                        <input type="text" class="cT_input" ng-model="x.name"/>
-                                        分值:<input type="text" ng-model="x.number" />
-                                    </span>
+                            <span ng-switch-when="checkbox">
+                                <input type="checkbox" />
+                                <input type="text" class="cT_input" ng-model="x.name"/></span>
+                            <span ng-switch-when="radio">
+                                <input type="radio" />
+                                <input type="text" class="cT_input" ng-model="x.name"/>
+                            </span>
+                            <span ng-switch-when="textbox">
+                                <input type="text" ng-model="x.title" />
+                                <input type="text" class="cT_input" ng-model="x.name"/>
+                            </span>
+                            <span ng-switch-when="pingfen">
+                                <input type="radio" />
+                                <input type="text" class="cT_input" ng-model="x.name"/>
+                                分值:<input type="text" ng-model="x.number" />
+                            </span>
                         </div>
 
                         <div class="right mt10">
