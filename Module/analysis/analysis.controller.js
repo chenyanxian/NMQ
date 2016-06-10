@@ -1,8 +1,12 @@
 angular.module('app')
-    .controller('surveyAnalysis', function ($http,$rootScope,$scope,$stateParams,$state) {
-
+    .controller('surveyAnalysisCtrl', function ($http,$rootScope,$scope,enume,$state) {
+        $scope.templateCates =  enume.templateCate;
+        $scope.templateTypes = enume.templateType;
+        $scope.selectCate = "";
+        $scope.selectType = "";
+        $scope.templateName = "";
     })
-    .controller('surveyDetailCtrl',function($http,$rootScope,$scope,$stateParams,$state){
+    .controller('surveyDetailCtrl',function($http,$rootScope,$scope,enume,$state){
 
     })
   ;
