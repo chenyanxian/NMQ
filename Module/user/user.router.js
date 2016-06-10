@@ -15,14 +15,19 @@ angular.module('app').config(function($stateProvider){
             templateUrl:'./Module/user/userManagement.html',
             controller:'userManagementCtrl'
         })
-        .state('user.admin',{
-            url:'/admin',
-            templateUrl:'./Module/user/admin.html',
-            controller:'adminCtrl'
+        .state('user.classManagement',{
+            url:'/classManagement',
+            templateUrl:'./Module/user/classManagement.html',
+            controller:'classManagementCtrl'
         })
         .state('user.createUser',{
             url:'/createUser',
             templateUrl:'./Module/user/createUser.html',
             controller:'createUserCtrl'
+        })
+        .state('user.stuManagement',{
+            url:'/stuManagement',
+            templateUrl:'./Module/user/stuManagement.html',
+            controller:'stuManagementCtrl'
         })
 });
