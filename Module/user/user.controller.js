@@ -27,7 +27,7 @@ angular.module('app')
 
         $scope.nation = enume.nation;
         $scope.nationNum = "1";
-        
+
         var dragEl = document.querySelector("#dragEl");
 
         function drop(e){

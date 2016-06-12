@@ -36,8 +36,17 @@ angular.module('app')
 
         $scope.templateCates =  enume.templateCate;
         $scope.templateTypes = enume.templateType;
-        $scope.selectCate = "";
+        $scope.selectCate = "1";
         $scope.selectType = "";
+
+        //是否显示分数
+        $scope.showScores = false;
+
+        if($scope.selectCate == "2"){
+            $scope.selectCate = true;
+        }else{
+            $scope.selectCate = false;
+        }
 
         //映射问题类型
         $scope.getTiXing = function(cate){
@@ -69,6 +78,7 @@ angular.module('app')
                             "bida": false,
                             "wtjtt": false,
                             "name": "教室安全关注过吗",
+                            scores:"5",
                             "sort": 1,
                             "items": [
                                 {
@@ -87,6 +97,7 @@ angular.module('app')
                             "cate": "checkbox",
                             "bida": true,
                             "wtjtt": false,
+                            scores:"5",
                             "name": "怕不怕老师尾随",
                             "sort": 2,
                             "items": [
@@ -97,7 +108,7 @@ angular.module('app')
                                 },
                                 {
                                     "name": "非常害怕",
-                                    "bz": false,
+                                    "bz": true,
                                     "sort": 2
                                 },
                                 {
@@ -117,6 +128,7 @@ angular.module('app')
                             "bida": true,
                             "wtjtt": false,
                             "name": "填空题",
+                            scores:"15",
                             "sort": 3,
                             "items": [
                                 {
@@ -148,6 +160,7 @@ angular.module('app')
                             "cate": "checkbox",
                             "bida": false,
                             "wtjtt": false,
+                            scores:"10",
                             "name": "小伙子们，你们速度真是杠杠的啊",
                             "sort": 1,
                             "items": [
@@ -172,6 +185,7 @@ angular.module('app')
                             "cate": "pingfen",
                             "bida": false,
                             "wtjtt": false,
+                            scores:"20",
                             "name": "你对自己的长相打多少分?",
                             "sort": 2,
                             "items": [
@@ -199,6 +213,7 @@ angular.module('app')
                             "cate": "checkbox",
                             "bida": false,
                             "wtjtt": false,
+                            scores:"15",
                             "name": "我就问你，你是不是傻？",
                             "sort": 3,
                             "items": [
@@ -262,6 +277,23 @@ angular.module('app')
         $scope.addZj = function(){
             var tmp = {title:"设置章节标题",tms:[]};
             $scope.data.data.push(tmp);
+        }
+
+        $scope.changeCate = function(x){
+            if(window.confirm("切换模板类型会导致已填写的数据丢失,你是否确定切换?")){
+                $scope.data = {
+                    templateCategory: x,
+                    templateType: $scope.selectType,
+                    title: "设置概要标题调查问卷",
+                    random: "",
+                    content: "设置概要内容",
+                    "data":[]};
+            }
+            if(x == "2"){
+                $scope.showScores = true;
+            }else{
+                $scope.showScores = false;
+            }
         }
 
         $scope.xzTm = function(){
@@ -435,15 +467,16 @@ angular.module('app')
             var tmp = null;
             if(!currentZj.tms ||currentZj.tms.length == 0){
                 if(cate == "textbox"){
-                    tmp = {cate:cate,bida:false,wtjtt:false,name:"请输入题目标题",sort:1,items:[
+                    tmp = {cate:cate,bida:false,wtjtt:false,scores:0,name:"请输入题目标题",sort:1,items:[
                         {name:"请输入问题内容",title:"请输入题目标题",bz:false,sort:1}
                     ]};
+
                 } else if(cate == "pingfen"){
-                    tmp = {cate:cate,bida:false,wtjtt:false,name:"请输入题目标题",sort:1,items:[
+                    tmp = {cate:cate,bida:false,wtjtt:false,scores:0,name:"请输入题目标题",sort:1,items:[
                         {name:"请输入问题内容",number:0,bz:false,sort:1}
                     ]};
                 }else{
-                    tmp = {cate:cate,bida:false,wtjtt:false,name:"请输入题目标题",sort:1,items:[
+                    tmp = {cate:cate,bida:false,wtjtt:false,scores:0,name:"请输入题目标题",sort:1,items:[
                         {name:"请输入问题标题",bz:false,sort:1}
                     ]};
                 }
@@ -452,16 +485,16 @@ angular.module('app')
                 var lastCount = res[res.length-1].sort + 1;
 
                 if(cate == "textbox"){
-                    tmp = {cate:cate,bida:false,wtjtt:false,name:"请输入题目标题",sort:lastCount,items:[
+                    tmp = {cate:cate,bida:false,wtjtt:false,scores:0,name:"请输入题目标题",sort:lastCount,items:[
                         {name:"请输入问题内容",title:"请输入题目标题",bz:false,sort:1}
                     ]};
                 }
                 else if(cate == "pingfen"){
-                    tmp = {cate:cate,bida:false,wtjtt:false,name:"请输入题目标题",sort:lastCount,items:[
+                    tmp = {cate:cate,bida:false,wtjtt:false,scores:0,name:"请输入题目标题",sort:lastCount,items:[
                         {name:"请输入问题内容",number:0,bz:false,sort:1}
                     ]};
                 }else{
-                    tmp = {cate:cate,bida:false,wtjtt:false,name:"请输入题目标题",sort:lastCount,items:[
+                    tmp = {cate:cate,bida:false,wtjtt:false,scores:0,name:"请输入题目标题",sort:lastCount,items:[
                         {name:"请输入问题标题",bz:false,sort:1}
                     ]};
                 }

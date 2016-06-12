@@ -1,0 +1,17 @@
+
+
+<div>
+    <table class="tableBox" border="1">
+        <thead>
+        <th colspan={{item.colspan}} ng-repeat="item in colSpan">{{item.name}}</th>
+        </thead>
+        <tbody>
+        <tr>
+            <td ng-repeat="s in wtTitles">第{{s.sort}}题</td>
+        </tr>
+        <tr ng-repeat="x in wentis">
+            <td ng-repeat="a in x.children">{{a}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
