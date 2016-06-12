@@ -49,3 +49,16 @@
     <button class="btnGreen ml65 mr15">查询</button>
     <button class="btnGreen">下载(Excel格式)</button>
 </div>
+
+<div>
+    <table class="tableBox" border="1">
+        <thead>
+            <th colspan={{item.colspan}} ng-repeat="item in colSpan">{{item.name}}</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in wentis">
+               <td ng-repeat="a in x.children">{{a}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
