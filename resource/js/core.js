@@ -376,6 +376,20 @@
             else{
                 return JSON.stringify(val);
             }
+        },
+        getLocalStorage:function(key){
+            if(!window.localStorage){
+                alert("您的浏览器不支持localStorage");
+                return
+            }
+            return window.localStorage.getItem(key);
+        },
+        setLocalStorage:function(key,val){
+            if(!window.localStorage){
+                alert("您的浏览器不支持localStorage");
+                return
+            }
+            window.localStorage.setItem(key,val);
         }
     }
 

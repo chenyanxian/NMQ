@@ -1,47 +1,43 @@
 <div class="navigation">我的应用 > 人员管理 > 人员录入</div>
 
-<div style="border: 1px solid #e0e0e0;height: 310px;width: 220px;line-height: 310px;float: right;margin-top: 10px;text-align: center">
-    维护图片
+<div id="dragEl" draggable="true" style="border: 1px solid #e0e0e0;height: 310px;width: 220px;line-height: 310px;float: right;margin-top: 10px;text-align: center">
+    请把图片拖到此区域
 </div>
 
 <div style="margin-right: 230px;">
     <div class="searchRow clearfix">
         <div class="left mr15 ml24">
             <label>工号：</label>
-            <input type="text" placeholder="请输入工号" class="width200"/>
+            <input type="text" placeholder="请输入工号" class="width200" ng-model="gh"/>
         </div>
 
         <div class="left" style="margin-left: 12px;">
             <label>曾用名：</label>
-            <input type="text" placeholder="请输曾用名" class="width200"/>
+            <input type="text" placeholder="请输曾用名" class="width200" ng-model="cym"/>
         </div>
     </div>
 
     <div class="searchRow clearfix">
         <div class="left mr15 ml24">
             <label>姓名：</label>
-            <input type="text" placeholder="请输入姓名" class="width200"/>
+            <input type="text" placeholder="请输入姓名" class="width200" ng-model="xm"/>
         </div>
 
         <div class="left">
             <label>英文姓名：</label>
-            <input type="text" placeholder="请输入英文名字" class="width200"/>
+            <input type="text" placeholder="请输入英文名字" class="width200" ng-model="ywxm"/>
         </div>
     </div>
 
     <div class="searchRow clearfix">
         <div class="left mr15">
             <label>姓名拼音：</label>
-            <input type="text" placeholder="请输入姓名拼音" class="width200"/>
+            <input type="text" placeholder="请输入姓名拼音" class="width200" ng-model="xmpy"/>
         </div>
 
         <div class="left ml24">
             <label>性别：</label>
-            <select class="width220">
-                <option>男</option>
-                <option>女</option>
-                <option>保密</option>
-            </select>
+            <select class="width220" ng-model="sex" ng-options="m.val as m.name for m in useSex"></select>
         </div>
     </div>
 
@@ -53,29 +49,19 @@
 
         <div class="left ml24">
             <label>籍贯：</label>
-            <select class="width220">
-                <option>北京</option>
-                <option>上海</option>
-                <option>广东</option>
-            </select>
+            <select class="width220" ng-model="placeNum" ng-options="m.val as m.name for m in place"></select>
         </div>
     </div>
 
     <div class="searchRow clearfix">
         <div class="left mr15 ml24">
             <label>国籍：</label>
-            <select class="width220">
-                <option>中国</option>
-            </select>
+            <select class="width220" ng-model="nationalityNum" ng-options="m.val as m.name for m in nationality"></select>
         </div>
 
         <div class="left ml24">
-            <label>名族：</label>
-            <select class="width220">
-                <option>汉族</option>
-                <option>满族</option>
-                <option>纳西族</option>
-            </select>
+            <label>民族：</label>
+            <select class="width220" ng-model="nationNum" ng-options="m.val as m.name for m in nation"></select>
         </div>
     </div>
 
@@ -106,11 +92,7 @@
     <div class="searchRow clearfix">
         <div class="left mr15">
             <label>证件类型：</label>
-            <select class="width220">
-                <option>身份证</option>
-                <option>学生证</option>
-                <option>护照</option>
-            </select>
+            <select class="width220" ng-model="idTypeNum" ng-options="m.val as m.name for m in idType"></select>
         </div>
         <div class="left mr15">
             <label>身份证号：</label>
@@ -121,21 +103,12 @@
     <div class="searchRow clearfix">
         <div class="left mr15">
             <label>婚姻状况：</label>
-            <select class="width220">
-                <option>已婚</option>
-                <option>未婚</option>
-                <option>保密</option>
-            </select>
+            <select class="width220" ng-model="maritalStatusNum" ng-options="m.val as m.name for m in maritalStatus"></select>
         </div>
 
         <div class="left">
             <label>港澳台外：</label>
-            <select class="width220">
-                <option>香港同胞</option>
-                <option>澳门同胞</option>
-                <option>台湾同胞</option>
-                <option>外国人</option>
-            </select>
+            <select class="width220" ng-model="macaoNum" ng-options="m.val as m.name for m in macao"></select>
         </div>
     </div>
 </div>

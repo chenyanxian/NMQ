@@ -18,32 +18,6 @@ angular.module('app')
                     "code":"1",
                     "tms": [
                         {
-                            "cate": "radio",
-                            "bida": false,
-                            "wtjtt": false,
-                            code:"1-1",
-                            "name": "教室安全关注过吗",
-                            "sort": 1,
-                            "items": [
-                                {
-                                    code:"1_1_1",
-                                    "name": "有",
-                                    "bz": false,
-                                    pCount:10,
-                                    "sort": 1,
-                                    "percent":"30%"
-                                },
-                                {
-                                    code:"1_1_2",
-                                    "name": "没有",
-                                    pCount:20,
-                                    "bz": false,
-                                    "sort": 2,
-                                    "percent":"70%"
-                                }
-                            ]
-                        },
-                        {
                             "cate": "checkbox",
                             code:"1-2",
                             "bida": true,
@@ -82,6 +56,32 @@ angular.module('app')
                                     "bz": false,
                                     pCount:40,
                                     "sort": 4
+                                }
+                            ]
+                        },
+                        {
+                            "cate": "radio",
+                            "bida": false,
+                            "wtjtt": false,
+                            code:"1-1",
+                            "name": "教室安全关注过吗",
+                            "sort": 1,
+                            "items": [
+                                {
+                                    code:"1_1_1",
+                                    "name": "有",
+                                    "bz": false,
+                                    pCount:10,
+                                    "sort": 1,
+                                    "percent":"30%"
+                                },
+                                {
+                                    code:"1_1_2",
+                                    "name": "没有",
+                                    pCount:20,
+                                    "bz": false,
+                                    "sort": 2,
+                                    "percent":"70%"
                                 }
                             ]
                         },
@@ -129,40 +129,6 @@ angular.module('app')
                     code:"2",
                     "tms": [
                         {
-                            code:"2_1",
-                            "cate": "checkbox",
-                            "bida": false,
-                            "wtjtt": false,
-                            "name": "小伙子们，你们速度真是杠杠的啊",
-                            "sort": 1,
-                            "items": [
-                                {
-                                    code:"2_1_1",
-                                    "name": "是",
-                                    pCount:130,
-                                    "percent":"10%",
-                                    "bz": false,
-                                    "sort": 1
-                                },
-                                {
-                                    code:"2_1_2",
-                                    "name": "不是",
-                                    "bz": false,
-                                    pCount:140,
-                                    "percent":"10%",
-                                    "sort": 2
-                                },
-                                {
-                                    code:"2_1_3",
-                                    "name": "你猜",
-                                    "percent":"80%",
-                                    "bz": false,
-                                    pCount:12,
-                                    "sort": 3
-                                }
-                            ]
-                        },
-                        {
                             code:"2_2",
                             "cate": "pingfen",
                             "bida": false,
@@ -195,6 +161,40 @@ angular.module('app')
                                     "number": "30",
                                     "percent":"30%",
                                     "bz": false,
+                                    "sort": 3
+                                }
+                            ]
+                        },
+                        {
+                            code:"2_1",
+                            "cate": "checkbox",
+                            "bida": false,
+                            "wtjtt": false,
+                            "name": "小伙子们，你们速度真是杠杠的啊",
+                            "sort": 1,
+                            "items": [
+                                {
+                                    code:"2_1_1",
+                                    "name": "是",
+                                    pCount:130,
+                                    "percent":"10%",
+                                    "bz": false,
+                                    "sort": 1
+                                },
+                                {
+                                    code:"2_1_2",
+                                    "name": "不是",
+                                    "bz": false,
+                                    pCount:140,
+                                    "percent":"10%",
+                                    "sort": 2
+                                },
+                                {
+                                    code:"2_1_3",
+                                    "name": "你猜",
+                                    "percent":"80%",
+                                    "bz": false,
+                                    pCount:12,
                                     "sort": 3
                                 }
                             ]
@@ -263,6 +263,16 @@ angular.module('app')
 
     })
     .controller('surveyDetailCtrl',function($http,$rootScope,$scope,enume,$state){
+
+        $scope.templateCates =  enume.templateCate;
+        $scope.templateTypes = enume.templateType;
+        $scope.selectCate = "";
+        $scope.selectType = "";
+        $scope.templateName = "";
+        $scope.beginDate = "";
+        $scope.endDate = "";
+
+
         $scope.data = [
             {
                 templateCategory: "1",
@@ -271,6 +281,33 @@ angular.module('app')
                 random: "",
                 content: "一起来参与，赢大奖!",
                 "data": [
+                    {
+                        "title": "第二章节",
+                        code:"2",
+                        "tms": [
+                            {
+                                code:"2_1",
+                                "cate": "radio",
+                                value:"A",
+                                "name": "小伙子们，你们速度真是杠杠的啊",
+                                "sort": 1,
+                            },
+                            {
+                                code:"2_2",
+                                "cate": "pingfen",
+                                "name": "你对自己的长相打多少分?",
+                                "sort": 2,
+                                value:"40"
+                            },
+                            {
+                                "cate": "checkbox",
+                                code:"2_3",
+                                "name": "我就问你，你是不是傻？",
+                                "sort": 3,
+                                value:"A,B"
+                            }
+                        ]
+                    },
                     {
                         "title": "第一章节",
                         "code":"1",
@@ -311,7 +348,15 @@ angular.module('app')
                                 "sort": 2
                             },
                         ]
-                    },
+                    }
+                ]
+            },{
+                templateCategory: "1",
+                templateType: "2",
+                title: "安全问卷调查哟",
+                random: "",
+                content: "一起来参与，赢大奖!",
+                "data": [
                     {
                         "title": "第二章节",
                         code:"2",
@@ -338,15 +383,7 @@ angular.module('app')
                                 value:"A,B"
                             }
                         ]
-                    }
-                ]
-            },{
-                templateCategory: "1",
-                templateType: "2",
-                title: "安全问卷调查哟",
-                random: "",
-                content: "一起来参与，赢大奖!",
-                "data": [
+                    },
                     {
                         "title": "第一章节",
                         "code":"1",
@@ -388,33 +425,6 @@ angular.module('app')
                             },
                         ]
                     },
-                    {
-                        "title": "第二章节",
-                        code:"2",
-                        "tms": [
-                            {
-                                code:"2_1",
-                                "cate": "radio",
-                                value:"A",
-                                "name": "小伙子们，你们速度真是杠杠的啊",
-                                "sort": 1,
-                            },
-                            {
-                                code:"2_2",
-                                "cate": "pingfen",
-                                "name": "你对自己的长相打多少分?",
-                                "sort": 2,
-                                value:"40"
-                            },
-                            {
-                                "cate": "checkbox",
-                                code:"2_3",
-                                "name": "我就问你，你是不是傻？",
-                                "sort": 3,
-                                value:"A,B"
-                            }
-                        ]
-                    }
                 ]
             },{
                 templateCategory: "1",
@@ -423,6 +433,33 @@ angular.module('app')
                 random: "",
                 content: "一起来参与，赢大奖!",
                 "data": [
+                    {
+                        "title": "第二章节",
+                        code:"2",
+                        "tms": [
+                            {
+                                code:"2_1",
+                                "cate": "radio",
+                                value:"A,B",
+                                "name": "小伙子们，你们速度真是杠杠的啊",
+                                "sort": 1,
+                            },
+                            {
+                                code:"2_2",
+                                "cate": "pingfen",
+                                "name": "你对自己的长相打多少分?",
+                                "sort": 2,
+                                value:"409"
+                            },
+                            {
+                                "cate": "checkbox",
+                                code:"2_3",
+                                "name": "我就问你，你是不是傻？",
+                                "sort": 3,
+                                value:"A,B,D"
+                            }
+                        ]
+                    },
                     {
                         "title": "第一章节",
                         "code":"1",
@@ -462,33 +499,6 @@ angular.module('app')
                                 value:"女",
                                 "sort": 2
                             },
-                        ]
-                    },
-                    {
-                        "title": "第二章节",
-                        code:"2",
-                        "tms": [
-                            {
-                                code:"2_1",
-                                "cate": "radio",
-                                value:"A,B",
-                                "name": "小伙子们，你们速度真是杠杠的啊",
-                                "sort": 1,
-                            },
-                            {
-                                code:"2_2",
-                                "cate": "pingfen",
-                                "name": "你对自己的长相打多少分?",
-                                "sort": 2,
-                                value:"409"
-                            },
-                            {
-                                "cate": "checkbox",
-                                code:"2_3",
-                                "name": "我就问你，你是不是傻？",
-                                "sort": 3,
-                                value:"A,B,D"
-                            }
                         ]
                     }
                 ]

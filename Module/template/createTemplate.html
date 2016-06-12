@@ -54,9 +54,9 @@
             <div class="cT_item_title"><input type="text" class="cT_input" ng-model="item.title"/></div>
             <div class="cT_chapter_oper">
                 <span><a ng-click="addTmByZj(item);">添加题目</a></span>
-                <span><a ng-click="deleteItem(item,data);">删除</a></span>
-                <span><a ng-click="moveUp(item,data);">上移</a></span>
-                <span><a ng-click="moveDown(item,data);">下移</a></span>
+                <span><a ng-click="deleteItem(item,data.data);">删除</a></span>
+                <span><a ng-click="moveUp(item,data.data);">上移</a></span>
+                <span><a ng-click="moveDown(item,data.data);">下移</a></span>
             </div>
             <!--题目描述-->
             <div class="mb tmb" ng-repeat="itemx in item.tms">

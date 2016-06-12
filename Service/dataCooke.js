@@ -7,10 +7,15 @@ angular.module('app').service("cooke",function($http,$state){
         this.user = null;
 
         this.setUser = function(user){
+
+            jsCoreMethod.setLocalStorage("user",jsCoreMethod.convertStringJson(user));
             this.user = user;
         }
 
         this.getUser = function(){
+
+            this.user = jsCoreMethod.convertStringJson(jsCoreMethod.getLocalStorage("user"));
+
             if(this.user){
                 return this.user;
             }else{
