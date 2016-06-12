@@ -1,15 +1,70 @@
 angular.module('app')
-    .controller('userManagementCtrl', function ($http,$rootScope,$scope,$stateParams,$state) {
+    .controller('userManagementCtrl', function ($http,$scope,$state) {
 
     })
-    .controller('classManagementCtrl',function($http,$rootScope,$scope,$stateParams,$state,core){
-
-        core.setUser({name:"Damon",key:"abcd-1234",tag:"aaa"});
+    .controller('classManagementCtrl',function($http,$scope,$state,enume){
 
     })
-    .controller('createUserCtrl',function($http,$rootScope,$scope,$stateParams,$state){
+    .controller('createUserCtrl',function($http,$scope,$state,enume){
+
+        $scope.useSex = enume.userSex;
+        $scope.sex = "1";
+
+        $scope.nationality = enume.nationality;
+        $scope.nationalityNum = "1";
+
+        $scope.place = enume.place;
+        $scope.placeNum = "1";
+
+        $scope.idType = enume.idType;
+        $scope.idTypeNum = "1";
+
+        $scope.maritalStatus = enume.maritalStatus;
+        $scope.maritalStatusNum = "1";
+
+        $scope.macao = enume.macao;
+        $scope.macaoNum = "1";
+
+        $scope.nation = enume.nation;
+        $scope.nationNum = "1";
+        
+        var dragEl = document.querySelector("#dragEl");
+
+        function drop(e){
+            e.stopPropagation();
+            e.preventDefault();
+
+            var fileList = e.dataTransfer.files;
+            var oImg = document.createElement("img");
+            var render = new FileReader();
+
+            render.onerror = function(){
+                alert("读取文件失败!");
+            }
+
+
+            render.onload = function(a){
+                oImg.src = this.result;
+                oImg.style.width = dragEl.style.width;
+                oImg.style.height = dragEl.style.height;
+                dragEl.innerHTML = "";
+                document.querySelector("#dragEl").appendChild(oImg);
+                console.log("ajax",111);
+            }
+
+            render.readAsDataURL(fileList[0]);
+        }
+
+        dragEl.addEventListener("dragstart",function(){},false);
+        dragEl.addEventListener("drop",function(e){
+            drop(e);
+        },false);
+        dragEl.addEventListener("dragover",function(e){
+            e.stopPropagation();
+            e.preventDefault();
+        },false);
 
     })
-    .controller('stuManagement',function($http,$rootScope,$scope,$stateParams,$state){
+    .controller('stuManagementCtrl',function($http,$scope,$state){
 
     });

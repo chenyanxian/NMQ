@@ -3,8 +3,6 @@
 angular.module('app')
     .controller('templateListCtrl',function ($http,$scope,enume,cooke,$state) {
 
-        $scope.name = cooke.getUser();
-
         //初始化下拉框数据  模板分类,模板类型
         $scope.templateCates =  enume.templateCate;
         $scope.templateTypes = enume.templateType;
@@ -57,8 +55,8 @@ angular.module('app')
         }
 
         $scope.data = {
-            templateCategory: "1",
-            templateType: "2",
+            templateCategory: "",
+            templateType: "",
             title: "安全问卷调查哟",
             random: "",
             content: "一起来参与，赢大奖!",

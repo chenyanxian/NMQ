@@ -3,8 +3,7 @@
 {
   "templateCate":[
     {"name":"问卷调查","val":"1"},
-    {"name":"知识评测","val":"2"},
-    {"name":"安全调查","val":"3"}
+    {"name":"考试","val":"2"}
   ],
   "templateType":[
     {"name":"消防安全","val":"1"},
@@ -14,5 +13,44 @@
   "user":{
     "uname":"张三",
     "role":"管理员"
-  }
+  },
+  "sex":[
+    {"name":"男","val":"1"},
+    {"name":"女","val":"2"},
+    {"name":"保密","val":"3"}
+  ],
+  "nationality":[
+    {"name":"中国","val":"1"},
+    {"name":"美国","val":"2"},
+    {"name":"英国","val":"3"},
+    {"name":"西班牙","val":"4"}
+  ],
+  "place":[
+    {"name":"湖北","val":"1"},
+    {"name":"湖南","val":"2"},
+    {"name":"广东","val":"3"},
+    {"name":"广西","val":"4"}
+  ],
+  "idType":[
+    {"name":"身份证","val":"1"},
+    {"name":"驾照","val":"2"},
+    {"name":"军官证","val":"3"},
+    {"name":"残疾证","val":"4"}
+  ],
+  "maritalStatus":[
+    {"name":"未婚","val":"1"},
+    {"name":"已婚","val":"2"},
+    {"name":"保密","val":"3"}
+  ],
+  "macao":[
+    {"name":"香港","val":"1"},
+    {"name":"澳门","val":"2"},
+    {"name":"台湾","val":"3"},
+    {"name":"外国人","val":"4"}
+  ],
+  "nation":[
+    {"name":"汉族","val":"1"},
+    {"name":"少数民族","val":"2"},
+    {"name":"其他","val":"3"}
+  ]
 }
