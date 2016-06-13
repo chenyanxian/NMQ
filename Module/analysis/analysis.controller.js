@@ -1,11 +1,28 @@
 angular.module('app')
     .controller('surveyAnalysisListCtrl', function ($http,$scope,enume,$state) {
-        //初始化下拉框数据  模板分类,模板类型
-        $scope.templateCates =  enume.templateCate;
-        $scope.templateTypes = enume.templateType;
-        $scope.selectCate = "";
-        $scope.selectType = "";
-        $scope.templateName = "";
+
+        //初始化下拉框数据
+        $scope.kcxl = enume.kcxl;
+        $scope.kcxlNum = "";
+
+        $scope.kczt = enume.kczt;
+        $scope.kcztNum = "";
+
+        $scope.xn = enume.xn;
+        $scope.xnNum = "";
+
+        $scope.nj=enume.nj;
+        $scope.njNum ="";
+
+        $scope.bj = enume.bj;
+        $scope.bjNum = "";
+
+        $scope.skbh = enume.skbh;
+        $scope.skbhNum = "";
+
+        $scope.bDate ="";
+        $scope.eDate = "";
+        $scope.xsName="";
 
         //查询模板
         $scope.templateListSearch = function(){
@@ -308,12 +325,28 @@ angular.module('app')
     })
     .controller('surveyInfoListCtrl',function($http,$scope,enume,$state){
 
-        //初始化下拉框数据  模板分类,模板类型
-        $scope.templateCates =  enume.templateCate;
-        $scope.templateTypes = enume.templateType;
-        $scope.selectCate = "";
-        $scope.selectType = "";
-        $scope.templateName = "";
+        //初始化下拉框数据
+        $scope.kcxl = enume.kcxl;
+        $scope.kcxlNum = "";
+
+        $scope.kczt = enume.kczt;
+        $scope.kcztNum = "";
+
+        $scope.xn = enume.xn;
+        $scope.xnNum = "";
+
+        $scope.nj=enume.nj;
+        $scope.njNum ="";
+
+        $scope.bj = enume.bj;
+        $scope.bjNum = "";
+
+        $scope.skbh = enume.skbh;
+        $scope.skbhNum = "";
+
+        $scope.bDate ="";
+        $scope.eDate = "";
+        $scope.xsName="";
 
         //查询模板
         $scope.templateListSearch = function(){
@@ -643,4 +676,92 @@ angular.module('app')
 
         $scope.wentis = getAllWentis($scope.data);
 
+    })
+    .controller('lessonsListCtrl', function ($http,$scope,enume,$state) {
+
+        $scope.kcxl = [];
+        $scope.kcxlNum = "";
+
+        $scope.kczt = [];
+        $scope.kcztNum = "";
+
+        $scope.xn = [];
+        $scope.xnNum = "";
+
+        $scope.nj=[];
+        $scope.njNum ="";
+
+        $scope.bj = [];
+        $scope.bjNum = "";
+
+        $scope.skbh =[];
+        $scope.skbh = "";
+
+        $scope.bDate ="";
+        $scope.eDate = "";
+        $scope.xsName="";
+
+        //查询模板
+        $scope.templateListSearch = function(){
+            $scope.$broadcast("searchByFilter");
+        }
+
+        $scope.createTemplate = function(){
+            $state.go("template.templateCreate");
+        }
+
+        $scope.getUrl = function(){
+            return "../../NMQ/data.json?=cate=&selectType=&name=";
+        }
+
+        $scope.directiveCallBack = function(valueFromDirective){
+            $scope.goodsList = valueFromDirective;
+        }
+
+        $scope.goDetail = function(tag){
+            //$state.go("survey.surveyAnalysisDetail",{id:tag});
+        }
+    })
+    .controller('studentListCtrl', function ($http,$scope,enume,$state) {
+        $scope.kcxl = enume.kcxl;
+        $scope.kcxlNum = "";
+
+        $scope.kczt = enume.kczt;
+        $scope.kcztNum = "";
+
+        $scope.xn = enume.xn;
+        $scope.xnNum = "";
+
+        $scope.nj=enume.nj;
+        $scope.njNum ="";
+
+        $scope.bj = enume.bj;
+        $scope.bjNum = "";
+
+        $scope.skbh = enume.skbh;
+        $scope.skbhNum = "";
+
+        $scope.bDate ="";
+        $scope.eDate = "";
+        $scope.xsName="";
+
+        $scope.templateListSearch = function(){
+            $scope.$broadcast("searchByFilter");
+        }
+
+        $scope.createTemplate = function(){
+            $state.go("template.templateCreate");
+        }
+
+        $scope.getUrl = function(){
+            return "../../NMQ/data.json?=cate=&selectType=&name=";
+        }
+
+        $scope.directiveCallBack = function(valueFromDirective){
+            $scope.goodsList = valueFromDirective;
+        }
+
+        $scope.goDetail = function(tag){
+            //$state.go("survey.surveyAnalysisDetail",{id:tag});
+        }
     })

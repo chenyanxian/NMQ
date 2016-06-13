@@ -30,4 +30,14 @@ angular.module('app').config(function($stateProvider){
             templateUrl:'./Module/analysis/surveyInfoDetail.html',
             controller:'surveyInfoDetailCtrl'
         })
+        .state('survey.lessons',{
+            url:'/surveyLessonsList',
+            templateUrl:'./Module/analysis/lessonsList.html',
+            controller:'lessonsListCtrl'
+        })
+        .state('survey.students',{
+            url:'/surveyStudentsList',
+            templateUrl:'./Module/analysis/studentList.html',
+            controller:'studentListCtrl'
+        })
 });

@@ -36,7 +36,7 @@ angular.module('app')
 
         $scope.templateCates =  enume.templateCate;
         $scope.templateTypes = enume.templateType;
-        $scope.selectCate = "1";
+        $scope.selectCate = "";
         $scope.selectType = "";
 
         //是否显示分数
@@ -64,178 +64,178 @@ angular.module('app')
         }
 
         $scope.data = {
-            templateCategory: "",
-            templateType: "",
-            title: "安全问卷调查哟",
+            templateCategory: $scope.selectCate,
+            templateType: $scope.selectType,
+            title: "",
             random: "",
-            content: "一起来参与，赢大奖!",
+            content: "",
             "data": [
-                {
-                    "title": "第一章节",
-                    "tms": [
-                        {
-                            "cate": "radio",
-                            "bida": false,
-                            "wtjtt": false,
-                            "name": "教室安全关注过吗",
-                            scores:"5",
-                            "sort": 1,
-                            "items": [
-                                {
-                                    "name": "有",
-                                    "bz": false,
-                                    "sort": 1
-                                },
-                                {
-                                    "name": "没有",
-                                    "bz": false,
-                                    "sort": 2,
-                                }
-                            ]
-                        },
-                        {
-                            "cate": "checkbox",
-                            "bida": true,
-                            "wtjtt": false,
-                            scores:"5",
-                            "name": "怕不怕老师尾随",
-                            "sort": 2,
-                            "items": [
-                                {
-                                    "name": "一点都不怕",
-                                    "bz": false,
-                                    "sort": 1
-                                },
-                                {
-                                    "name": "非常害怕",
-                                    "bz": true,
-                                    "sort": 2
-                                },
-                                {
-                                    "name": "我不信你不怕",
-                                    "bz": false,
-                                    "sort": 3
-                                },
-                                {
-                                    "name": "你是不是傻",
-                                    "bz": false,
-                                    "sort": 4
-                                }
-                            ]
-                        },
-                        {
-                            "cate": "textbox",
-                            "bida": true,
-                            "wtjtt": false,
-                            "name": "填空题",
-                            scores:"15",
-                            "sort": 3,
-                            "items": [
-                                {
-                                    "name": "",
-                                    "title": "语文老师帅吗",
-                                    "bz": false,
-                                    "sort": 1
-                                },
-                                {
-                                    "name": "",
-                                    "title": "数学老师帅吗",
-                                    "bz": false,
-                                    "sort": 2
-                                },
-                                {
-                                    "name": "",
-                                    "title": "英语老师呢？",
-                                    "bz": false,
-                                    "sort": 3
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "title": "第二章节",
-                    "tms": [
-                        {
-                            "cate": "checkbox",
-                            "bida": false,
-                            "wtjtt": false,
-                            scores:"10",
-                            "name": "小伙子们，你们速度真是杠杠的啊",
-                            "sort": 1,
-                            "items": [
-                                {
-                                    "name": "是",
-                                    "bz": false,
-                                    "sort": 1
-                                },
-                                {
-                                    "name": "不是",
-                                    "bz": false,
-                                    "sort": 2
-                                },
-                                {
-                                    "name": "你猜",
-                                    "bz": false,
-                                    "sort": 3
-                                }
-                            ]
-                        },
-                        {
-                            "cate": "pingfen",
-                            "bida": false,
-                            "wtjtt": false,
-                            scores:"20",
-                            "name": "你对自己的长相打多少分?",
-                            "sort": 2,
-                            "items": [
-                                {
-                                    "name": "小王",
-                                    "number": "10",
-                                    "bz": false,
-                                    "sort": 1
-                                },
-                                {
-                                    "name": "渣渣",
-                                    "number": "20",
-                                    "bz": false,
-                                    "sort": 2
-                                },
-                                {
-                                    "name": "山炮",
-                                    "number": "30",
-                                    "bz": false,
-                                    "sort": 3
-                                }
-                            ]
-                        },
-                        {
-                            "cate": "checkbox",
-                            "bida": false,
-                            "wtjtt": false,
-                            scores:"15",
-                            "name": "我就问你，你是不是傻？",
-                            "sort": 3,
-                            "items": [
-                                {
-                                    "name": "傻",
-                                    "bz": false,
-                                    "sort": 1
-                                },
-                                {
-                                    "name": "不傻",
-                                    "bz": false,
-                                    "sort": 2
-                                },
-                                {
-                                    "name": "傻你麻痹",
-                                    "bz": false,
-                                    "sort": 3
-                                }
-                            ]
-                        }
-                    ]
-                }
+                //{
+                //    "title": "第一章节",
+                //    "tms": [
+                //        {
+                //            "cate": "radio",
+                //            "bida": false,
+                //            "wtjtt": false,
+                //            "name": "教室安全关注过吗",
+                //            scores:"5",
+                //            "sort": 1,
+                //            "items": [
+                //                {
+                //                    "name": "有",
+                //                    "bz": false,
+                //                    "sort": 1
+                //                },
+                //                {
+                //                    "name": "没有",
+                //                    "bz": false,
+                //                    "sort": 2,
+                //                }
+                //            ]
+                //        },
+                //        {
+                //            "cate": "checkbox",
+                //            "bida": true,
+                //            "wtjtt": false,
+                //            scores:"5",
+                //            "name": "怕不怕老师尾随",
+                //            "sort": 2,
+                //            "items": [
+                //                {
+                //                    "name": "一点都不怕",
+                //                    "bz": false,
+                //                    "sort": 1
+                //                },
+                //                {
+                //                    "name": "非常害怕",
+                //                    "bz": true,
+                //                    "sort": 2
+                //                },
+                //                {
+                //                    "name": "我不信你不怕",
+                //                    "bz": false,
+                //                    "sort": 3
+                //                },
+                //                {
+                //                    "name": "你是不是傻",
+                //                    "bz": false,
+                //                    "sort": 4
+                //                }
+                //            ]
+                //        },
+                //        {
+                //            "cate": "textbox",
+                //            "bida": true,
+                //            "wtjtt": false,
+                //            "name": "填空题",
+                //            scores:"15",
+                //            "sort": 3,
+                //            "items": [
+                //                {
+                //                    "name": "",
+                //                    "title": "语文老师帅吗",
+                //                    "bz": false,
+                //                    "sort": 1
+                //                },
+                //                {
+                //                    "name": "",
+                //                    "title": "数学老师帅吗",
+                //                    "bz": false,
+                //                    "sort": 2
+                //                },
+                //                {
+                //                    "name": "",
+                //                    "title": "英语老师呢？",
+                //                    "bz": false,
+                //                    "sort": 3
+                //                }
+                //            ]
+                //        }
+                //    ]
+                //},
+                //{
+                //    "title": "第二章节",
+                //    "tms": [
+                //        {
+                //            "cate": "checkbox",
+                //            "bida": false,
+                //            "wtjtt": false,
+                //            scores:"10",
+                //            "name": "小伙子们，你们速度真是杠杠的啊",
+                //            "sort": 1,
+                //            "items": [
+                //                {
+                //                    "name": "是",
+                //                    "bz": false,
+                //                    "sort": 1
+                //                },
+                //                {
+                //                    "name": "不是",
+                //                    "bz": false,
+                //                    "sort": 2
+                //                },
+                //                {
+                //                    "name": "你猜",
+                //                    "bz": false,
+                //                    "sort": 3
+                //                }
+                //            ]
+                //        },
+                //        {
+                //            "cate": "pingfen",
+                //            "bida": false,
+                //            "wtjtt": false,
+                //            scores:"20",
+                //            "name": "你对自己的长相打多少分?",
+                //            "sort": 2,
+                //            "items": [
+                //                {
+                //                    "name": "小王",
+                //                    "number": "10",
+                //                    "bz": false,
+                //                    "sort": 1
+                //                },
+                //                {
+                //                    "name": "渣渣",
+                //                    "number": "20",
+                //                    "bz": false,
+                //                    "sort": 2
+                //                },
+                //                {
+                //                    "name": "山炮",
+                //                    "number": "30",
+                //                    "bz": false,
+                //                    "sort": 3
+                //                }
+                //            ]
+                //        },
+                //        {
+                //            "cate": "checkbox",
+                //            "bida": false,
+                //            "wtjtt": false,
+                //            scores:"15",
+                //            "name": "我就问你，你是不是傻？",
+                //            "sort": 3,
+                //            "items": [
+                //                {
+                //                    "name": "傻",
+                //                    "bz": false,
+                //                    "sort": 1
+                //                },
+                //                {
+                //                    "name": "不傻",
+                //                    "bz": false,
+                //                    "sort": 2
+                //                },
+                //                {
+                //                    "name": "傻你麻痹",
+                //                    "bz": false,
+                //                    "sort": 3
+                //                }
+                //            ]
+                //        }
+                //    ]
+                //}
             ]
         };
 
@@ -294,6 +294,10 @@ angular.module('app')
             }else{
                 $scope.showScores = false;
             }
+        }
+
+        $scope.changeType = function(x){
+            $scope.data.templateType = x;
         }
 
         $scope.xzTm = function(){
@@ -527,6 +531,9 @@ angular.module('app')
 
         $scope.doSubmit = function(){
             console.log($scope.data);
+             $http.post("/cmsapi/template/add",{data:$scope.data}).success(function(d){
+                 debugger
+             })
         }
 
         $scope.doHoldSubmit = function(){

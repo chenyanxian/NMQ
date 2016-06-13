@@ -1,47 +1,50 @@
-<div class="navigation">我的应用 > 数据分析 > 调研分析</div>
+<div class="navigation">我的应用 > 数据分析 > 评价分析</div>
 <div class="searchRow clearfix">
     <div class="left mr15">
-        <label>活动类型：</label>
-        <select class="width220">
-            <option>来馆体验</option>
-            <option>送课进校园</option>
-        </select>
+        <label>课程系列：</label>
+        <select class="width220" ng-model="kcxlNum" ng-options="m.val as m.name for m in kcxl"></select>
     </div>
 
     <div class="left mr15">
-        <label>活动名称：</label>
-        <select class="width220">
-            <option>活动1</option>
-            <option>活动2</option>
-            <option>活动3</option>
-        </select>
+        <label>课程主题：</label>
+        <select class="width220" ng-model="kcztNum" ng-options="m.val as m.name for m in kczt"></select>
+    </div>
+
+    <div class="left mr15">
+        <label>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年：</label>
+        <select class="width220" ng-model="xnNum" ng-options="m.val as m.name for m in xn"></select>
     </div>
 </div>
 
-
 <div class="searchRow clearfix">
     <div class="left mr15">
-        <label>模版分类：</label>
-        <select class="width287" ng-model="selectCate" ng-options="m.val as m.name for m in templateCates"></select>
+        <label>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级：</label>
+        <select class="width220" ng-model="njNum" ng-options="m.val as m.name for m in nj"></select>
     </div>
 
     <div class="left mr15">
-        <label>模版类型：</label>
-        <select class="width287" ng-model="selectType" ng-options="m.val as m.name for m in templateTypes"></select>
+        <label>班&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级：</label>
+        <select class="width220" ng-model="bjNum" ng-options="m.val as m.name for m in bj"></select>
     </div>
 
     <div class="left mr15">
-        <label>模版名称：</label>
-        <input type="text" placeholder="请输入模版名称" class="width287" ng-model="templateName"/>
+        <label>授课编号：</label>
+        <select class="width220" ng-model="skbhNum" ng-options="m.val as m.name for m in skbh"></select>
     </div>
 </div>
 
-<div style="margin-top: 50px;">
+<div class="mt10">
     <button class="btnGreen ml65 mr15">查询</button>
     <button class="btnGreen mr15">下载(Word格式)</button>
     <button class="btnGreen">下载(Excel格式)</button>
 </div>
 
+<div class="grayLine"></div>
+
+<div class="mt10 tr">
+    <button class="nextBtn">上一页</button>
+    <button class="nextBtn">下一页</button>
+</div>
 
 <table class="tableBox" border="1">
     <thead>
