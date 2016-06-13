@@ -531,9 +531,10 @@ angular.module('app')
 
         $scope.doSubmit = function(){
             console.log($scope.data);
-             $http.post("/cmsapi/template/add",{data:$scope.data}).success(function(d){
-                 debugger
-             })
+
+            $http.post("/cmsapi/template/add",$scope.data).success(function(d){
+                debugger
+            })
         }
 
         $scope.doHoldSubmit = function(){

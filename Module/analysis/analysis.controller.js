@@ -679,23 +679,23 @@ angular.module('app')
     })
     .controller('lessonsListCtrl', function ($http,$scope,enume,$state) {
 
-        $scope.kcxl = [];
+        $scope.kcxl = enume.kcxl;
         $scope.kcxlNum = "";
 
-        $scope.kczt = [];
+        $scope.kczt = enume.kczt;
         $scope.kcztNum = "";
 
-        $scope.xn = [];
+        $scope.xn = enume.xn;
         $scope.xnNum = "";
 
-        $scope.nj=[];
+        $scope.nj=enume.nj;
         $scope.njNum ="";
 
-        $scope.bj = [];
+        $scope.bj = enume.bj;
         $scope.bjNum = "";
 
-        $scope.skbh =[];
-        $scope.skbh = "";
+        $scope.skbh = enume.skbh;
+        $scope.skbhNum = "";
 
         $scope.bDate ="";
         $scope.eDate = "";
