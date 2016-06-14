@@ -7,9 +7,7 @@ angular.module("app",[
 
         //$locationProvider.html5Mode(true);
 
-
-        $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded';
-        $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+        //$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
         ///**
         // * The workhorse; converts an object to x-www-form-urlencoded serialization.
@@ -22,8 +20,7 @@ angular.module("app",[
         //
         //    for (name in obj) {
         //        value = obj[name];
-        //
-        //        if(typeof value != "function" && name.indexOf('hashKey') == -1){
+        //        if(name != "clone" && name != "equals"){
         //            if (value instanceof Array) {
         //                for (i = 0; i < value.length; ++i) {
         //                    subValue = value[i];
@@ -34,13 +31,15 @@ angular.module("app",[
         //                }
         //            } else if (value instanceof Object) {
         //                for (subName in value) {
-        //                    subValue = value[subName];
-        //                    fullSubName = name + '[' + subName + ']';
-        //                    innerObj = {};
-        //                    innerObj[fullSubName] = subValue;
-        //                    query += param(innerObj) + '&';
+        //                    if(subName != "clone" && subName != "equals"){
+        //                        subValue = value[subName];
+        //                        fullSubName = name + '[' + subName + ']';
+        //                        innerObj = {};
+        //                        innerObj[fullSubName] = subValue;
+        //                        query += param(innerObj) + '&';
+        //                    }
         //                }
-        //            } else if (value !== undefined && value !== null) {
+        //            } else if (value !== undefined && value !== null && name.indexOf('hashKey') == -1) {
         //                query += encodeURIComponent(name) + '='
         //                    + encodeURIComponent(value) + '&';
         //            }
@@ -49,7 +48,7 @@ angular.module("app",[
         //
         //    return query.length ? query.substr(0, query.length - 1) : query;
         //};
-
+        //
         //$httpProvider.defaults.transformRequest = [function(data) {
         //    return angular.isObject(data) && String(data) !== '[object File]'
         //        ? param(data)
