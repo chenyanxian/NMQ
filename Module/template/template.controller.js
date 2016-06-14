@@ -43,9 +43,9 @@ angular.module('app')
         $scope.showScores = false;
 
         if($scope.selectCate == "2"){
-            $scope.selectCate = true;
+            $scope.showScores = true;
         }else{
-            $scope.selectCate = false;
+            $scope.showScores = false;
         }
 
         //映射问题类型
@@ -288,6 +288,8 @@ angular.module('app')
                     random: "",
                     content: "设置概要内容",
                     "data":[]};
+
+                $scope.data.templateCategory = x;
             }
             if(x == "2"){
                 $scope.showScores = true;
@@ -532,7 +534,11 @@ angular.module('app')
         $scope.doSubmit = function(){
             console.log($scope.data);
 
-            $http.post("/cmsapi/template/add",$scope.data).success(function(d){
+            $http({
+                method:"POST",
+                url:"/cmsapi/template/add",
+                data:$scope.data
+            }).success(function(d){
                 debugger
             })
         }
