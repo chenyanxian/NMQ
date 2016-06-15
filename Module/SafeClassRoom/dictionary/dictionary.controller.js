@@ -14,7 +14,7 @@ angular.module('app')
             $scope.showAddChild = true;
         }
 
-        $scope.cates = [];
+        $scope.cates = [{name:"请选择",code:""}];
         $scope.searchSelectCate = "";
         $scope.children = [];
         $scope.selectCate = "";
@@ -47,7 +47,7 @@ angular.module('app')
         }
 
         $scope.addChild = function(){
-            $http.get("/cmsapi/dictionary/add?code="+encodeURIComponent($scope.childName)+"&parentCode="+$scope.selectCate+"&name="+encodeURIComponent($scope.childCode)).success(function(d){
+            $http.get("/cmsapi/dictionary/add?code="+encodeURIComponent($scope.childCode)+"&parentCode="+$scope.selectCate+"&name="+encodeURIComponent($scope.childName)).success(function(d){
                 if(d.status.code == "1"){
                     $scope.children.push({name:$scope.childName,code:$scope.childCode});
                 }else{
