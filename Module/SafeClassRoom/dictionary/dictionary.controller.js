@@ -32,7 +32,7 @@ angular.module('app')
                     $scope.cates.push({name:tmp[i].name,code:tmp[i].code});
                 }
             }else{
-                alert(d.status.msg);
+                alert(d.status.message);
             }
         })
 
@@ -41,7 +41,7 @@ angular.module('app')
                 if(d.status.code == "1"){
                     $scope.cates.push({name:$scope.cateName,code:$scope.cateCode});
                 }else{
-                    alert(d.status.msg);
+                    alert(d.status.message);
                 }
             })
         }
@@ -51,7 +51,7 @@ angular.module('app')
                 if(d.status.code == "1"){
                     $scope.children.push({name:$scope.childName,code:$scope.childCode});
                 }else{
-                    alert(d.status.msg);
+                    alert(d.status.message);
                 }
             })
         }
@@ -64,7 +64,7 @@ angular.module('app')
                          $scope.children.push({name:tmp[i].name,code:tmp[i].code});
                      }
                  }else{
-                     alert(d.status.msg);
+                     alert(d.status.message);
                  }
              })
         }
@@ -87,6 +87,8 @@ angular.module('app')
                     currentItem.code = $scope.editChildCode;
 
                     alert("修改成功!");
+                }else{
+                    alert(d.status.message);
                 }
             })
         }
