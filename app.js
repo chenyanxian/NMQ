@@ -3,7 +3,7 @@ angular.module("app",[
     'ui.router'
 ])
     .config(function($stateProvider,$urlRouterProvider,$locationProvider,$httpProvider){
-        $urlRouterProvider.otherwise('/templateList');
+        $urlRouterProvider.otherwise('/safeRoom/templateList');
 
         //$locationProvider.html5Mode(true);
 

@@ -18,25 +18,27 @@
     <script src="Service/dataCooke.js"></script>
     <script src="Service/enume.js"></script>
 
-    <script src="Module/template/template.router.js"></script>
-    <script src="Module/template/template.controller.js"></script>
+    <!-- 安全教室-->
+    <script src="Module/SafeClassRoom/main/safeMain.router.js"></script>
+    <script src="Module/SafeClassRoom/template/template.controller.js"></script>
+    <script src="Module/SafeClassRoom/user/user.controller.js"></script>
+    <script src="Module/SafeClassRoom/analysis/analysis.controller.js"></script>
 
-    <script src="Module/user/user.router.js"></script>
-    <script src="Module/user/user.controller.js"></script>
+    <!-- 课件 -->
+    <script src="Module/Courseware/main/curseware.router.js"></script>
 
-    <script src="Module/analysis/analysis.router.js"></script>
-    <script src="Module/analysis/analysis.controller.js"></script>
+    <!-- 教育机构管理系统 -->
+    <script src="Module/RoomManagement/main/managerment.router.js"></script>
 
-    <script src="Module/active/active.router.js"></script>
-    <script src="Module/active/active.controller.js"></script>
-
+    <!-- 登录 -->
     <script src="Module/login/login.router.js"></script>
     <script src="Module/login/login.controller.js"></script>
 
+    <!-- directive -->
     <script src="Directive/paging/paging.directive.js"></script>
     <script src="Directive/navigation/navigation.directive.js"></script>
 </head>
 <body>
-    <div ui-view></div>
+    <navigation></navigation>
 </body>
 </html>
