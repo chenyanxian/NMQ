@@ -3,7 +3,7 @@
  */
 
 angular.module('app')
-    .controller('dictionaryCtrl', function ($http,$scope,enume,$state) {
+    .controller('dictionaryCtrl', function ($http,$scope) {
 
         $scope.showAddCate = false;
         $scope.showCateEvent = function(){
@@ -31,25 +31,29 @@ angular.module('app')
                 for(var i=0;i<tmp.length;i++){
                     $scope.cates.push({name:tmp[i].name,code:tmp[i].code});
                 }
+            }else{
+                alert(d.status.msg);
             }
         })
 
         $scope.addCate = function(){
-            $http.get("/cmsapi/dictionary/add?code="+$scope.cateCode+"&parentCode=&name="+$scope.cateName).success(function(d){
+            $http.get("/cmsapi/dictionary/add?code="+encodeURIComponent($scope.cateCode)+"&parentCode=&name="+encodeURIComponent($scope.cateName)).success(function(d){
                 if(d.status.code == "1"){
                     $scope.cates.push({name:$scope.cateName,code:$scope.cateCode});
+                }else{
+                    alert(d.status.msg);
                 }
             })
-            $scope.cates.push({name:$scope.cateName,code:$scope.cateCode});
         }
 
         $scope.addChild = function(){
-            $http.get("/cmsapi/dictionary/add?code="+$scope.childName+"&parentCode="+$scope.selectCate+"&name="+$scope.childCode).success(function(d){
+            $http.get("/cmsapi/dictionary/add?code="+encodeURIComponent($scope.childName)+"&parentCode="+$scope.selectCate+"&name="+encodeURIComponent($scope.childCode)).success(function(d){
                 if(d.status.code == "1"){
                     $scope.children.push({name:$scope.childName,code:$scope.childCode});
+                }else{
+                    alert(d.status.msg);
                 }
             })
-            $scope.children.push({name:$scope.childName,code:$scope.childCode});
         }
 
         $scope.searchCate = function(){
@@ -59,6 +63,8 @@ angular.module('app')
                      for(var i=0;i<tmp.length;i++){
                          $scope.children.push({name:tmp[i].name,code:tmp[i].code});
                      }
+                 }else{
+                     alert(d.status.msg);
                  }
              })
         }
@@ -73,13 +79,14 @@ angular.module('app')
 
         $scope.editChild = function(){
             var item = currentItem;
-            $http.get("/cmsapi/dictionary/update?id="+currentItem.id+"&code="+$scope.editChildCode+"&parentCode="+currentItem.parentCode+"&name="+$scope.editChildName).success(function(d){
+            $http.get("/cmsapi/dictionary/update?id="+currentItem.id+"&code="+encodeURIComponent($scope.editChildCode)+"&parentCode="+currentItem.parentCode+"&name="+encodeURIComponent($scope.editChildName)).success(function(d){
                 if(d.status.code == "1"){
-                    alert("修改成功!");
                     $scope.showEditChild = false;
 
                     currentItem.name = $scope.editChildName;
                     currentItem.code = $scope.editChildCode;
+
+                    alert("修改成功!");
                 }
             })
         }

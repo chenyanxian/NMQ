@@ -18,7 +18,7 @@ angular.module('app')
             }
 
             var u = {name:$scope.name,pwd:$scope.pwd};
-            $http.post("../NMQ/data.json",u).success(function(d){
+            $http.post("data.json",u).success(function(d){
 
                 $scope.error = false;
                 cooke.setUser({name:d.user.uname,role:d.user.role});
