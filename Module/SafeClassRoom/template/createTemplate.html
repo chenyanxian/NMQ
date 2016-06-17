@@ -3,11 +3,11 @@
 <div class="searchRow clearfix">
     <div class="left mr15">
         <label>模版分类：</label>
-        <select class="width287" ng-model="selectCate" ng-options="m.val as m.name for m in templateCates" ng-change="changeCate(selectCate);"></select>
+        <select class="width287" ng-model="selectCate" ng-options="m.code as m.name for m in templateCates" ng-change="changeCate(selectCate);"></select>
     </div>
     <div class="left">
         <label>模版类型：</label>
-        <select class="width287" ng-model="selectType" ng-options="m.val as m.name for m in templateTypes" ng-change="changeType(selectType);"></select>
+        <select class="width287" ng-model="selectType" ng-options="m.code as m.name for m in templateTypes" ng-change="changeType(selectType);"></select>
     </div>
 </div>
 

@@ -12,21 +12,23 @@ angular.module('app')
         $scope.beginDate = "";
         $scope.endDate = "";
 
+        $scope.templateList = [];
+
         //查询模板
         $scope.templateListSearch = function(){
             $scope.$broadcast("searchByFilter");
         }
 
         $scope.createTemplate = function(){
-            $state.go("template.templateCreate");
+            $state.go("safeRoom.templateCreate");
         }
 
         $scope.getUrl = function(){
-            return "../../NMQ/data.json?=cate="+$scope.selectCate+"&selectType="+$scope.selectType + "&name="+$scope.templateName+"&begin="+$scope.beginDate + "&end="+$scope.endDate;
+            return "/cmsapi/template/query?category="+$scope.selectType+"&type="+$scope.selectCate + "&name="+$scope.templateName+"&begin="+$scope.beginDate + "&end="+$scope.endDate;
         }
 
         $scope.directiveCallBack = function(valueFromDirective){
-            $scope.goodsList = valueFromDirective;
+            $scope.templateList = valueFromDirective;
         }
     });
 

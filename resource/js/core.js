@@ -92,6 +92,17 @@
         return false;
     }
 
+    //删除数组某个对象的key = value
+    Array.prototype.deleteByKey = function(key, val){
+        var res = [];
+        for(var i=0;i<this.length;i++){
+            if(this[i][key] != val){
+                res.push(this[i]);
+            }
+        }
+        return res;
+    }
+
     //检测数组是否包含某一个数据类型或者对象类型
     Array.prototype.contains = function(item){
         if(!item){

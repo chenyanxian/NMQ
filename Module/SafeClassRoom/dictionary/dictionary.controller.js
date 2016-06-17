@@ -29,7 +29,7 @@ angular.module('app')
             if(d.status.code == "1"){
                 var tmp = d.data;
                 for(var i=0;i<tmp.length;i++){
-                    $scope.cates.push({name:tmp[i].name,code:tmp[i].code});
+                    $scope.cates.push(tmp[i]);
                 }
             }else{
                 alert(d.status.message);
@@ -39,7 +39,7 @@ angular.module('app')
         $scope.addCate = function(){
             $http.get("/cmsapi/dictionary/add?code="+encodeURIComponent($scope.cateCode)+"&parentCode=&name="+encodeURIComponent($scope.cateName)).success(function(d){
                 if(d.status.code == "1"){
-                    $scope.cates.push({name:$scope.cateName,code:$scope.cateCode});
+                    $scope.cates.push(d.data);
                 }else{
                     alert(d.status.message);
                 }
@@ -49,24 +49,29 @@ angular.module('app')
         $scope.addChild = function(){
             $http.get("/cmsapi/dictionary/add?code="+encodeURIComponent($scope.childCode)+"&parentCode="+$scope.selectCate+"&name="+encodeURIComponent($scope.childName)).success(function(d){
                 if(d.status.code == "1"){
-                    $scope.children.push({name:$scope.childName,code:$scope.childCode});
+                    $scope.children.push(d.data);
                 }else{
                     alert(d.status.message);
                 }
             })
         }
 
-        $scope.searchCate = function(){
-             $http.get("/cmsapi/dictionary/queryByParentCode?parentCode="+$scope.searchSelectCate).success(function(d){
-                 if(d.status.code == "1"){
-                     var tmp = d.data;
-                     for(var i=0;i<tmp.length;i++){
-                         $scope.children.push({name:tmp[i].name,code:tmp[i].code});
-                     }
-                 }else{
-                     alert(d.status.message);
-                 }
-             })
+        function queryChildByCate(cate){
+            $scope.children.length = 0;
+            $http.get("/cmsapi/dictionary/queryByParentCode?parentCode="+cate).success(function(d){
+                if(d.status.code == "1"){
+                    var tmp = d.data;
+                    for(var i=0;i<tmp.length;i++){
+                        $scope.children.push(tmp[i]);
+                    }
+                }else{
+                    alert(d.status.message);
+                }
+            })
+        }
+
+        $scope.searchChildren = function(){
+            queryChildByCate($scope.searchSelectCate);
         }
 
         var currentItem = null;
@@ -92,4 +97,17 @@ angular.module('app')
                 }
             })
         }
+
+        $scope.del = function(item){
+            $http.get("/cmsapi/dictionary/delete/"+item.id).success(function(d){
+                if(d.status.code == "1"){
+                    alert("删除成功!");
+                    $scope.children = $scope.children.deleteByKey("id",item.id);
+                }else{
+                    alert(d.status.message);
+                }
+            })
+        }
+
+        queryChildByCate($scope.searchSelectCate);
     });

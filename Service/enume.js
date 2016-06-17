@@ -10,8 +10,8 @@ angular.module('app').factory("enume",function($http){
 
         var that = this;
 
-        this.templateCate = [{name:"全部",val:""}];          //模板分类
-        this.templateType = [{name:"全部",val:""}];          //模板类型
+        this.templateCate = [{name:"全部",code:""}];          //模板分类
+        this.templateType = [{name:"全部",code:""}];          //模板类型
         this.userSex = [];                                  //性别
         this.nationality = [];                              //国籍
         this.place = [];                                    //籍贯
@@ -20,20 +20,25 @@ angular.module('app').factory("enume",function($http){
         this.macao = [];                                    //港澳台外
         this.nation = [];                                   //民族
 
-        this.kcxl = [{name:"全部",val:""}];                  //课程系列
-        this.kczt = [{name:"全部",val:""}];                  //课程主题
-        this.xn = [{name:"全部",val:""}];                    //学年
-        this.nj = [{name:"全部",val:""}];                    //年级
-        this.bj = [{name:"全部",val:""}];                    //班级
-        this.skbh = [{name:"全部",val:""}];                  //授课编号
+        this.kcxl = [{name:"全部",code:""}];                  //课程系列
+        this.kczt = [{name:"全部",code:""}];                  //课程主题
+        this.xn = [{name:"全部",code:""}];                    //学年
+        this.nj = [{name:"全部",code:""}];                    //年级
+        this.bj = [{name:"全部",code:""}];                    //班级
+        this.skbh = [{name:"全部",code:""}];                  //授课编号
 
         //模板分类
         this.getTemplateCate = function(){
             if(this.templateCate.length <=1 ){
                 console.log("发送templateCate请求!");
-                $http.get("../NMQ/data.json").success(function(d){
-                    for(var i=0;i< d.templateCate.length;i++){
-                        that.templateCate.push({name: d.templateCate[i].name,val: d.templateCate[i].val});
+                $http.get("/cmsapi/template/queryModelTypes").success(function(d){
+                    if(d.status.code == "1"){
+                        var tmp = d.data;
+                        for(var i=0;i<tmp.length;i++){
+                            that.templateCate.push({name: tmp[i].name,code: tmp[i].code});
+                        }
+                    }else{
+                        alert(d.status.message);
                     }
                 })
             }else{
@@ -44,9 +49,14 @@ angular.module('app').factory("enume",function($http){
         //模板类型
         this.getTemplateType = function(){
             if(this.templateType.length <= 1){
-                $http.get("../NMQ/data.json").success(function(d){
-                    for(var i=0;i< d.templateType.length;i++){
-                        that.templateType.push({name: d.templateType[i].name,val: d.templateType[i].val});
+                $http.get("/cmsapi/template/queryModelCategorys").success(function(d){
+                    if(d.status.code == "1"){
+                        var tmp = d.data;
+                        for(var i=0;i<tmp.length;i++){
+                            that.templateType.push({name: tmp[i].name,code: tmp[i].code});
+                        }
+                    }else{
+                        alert(d.status.message);
                     }
                 })
             }
