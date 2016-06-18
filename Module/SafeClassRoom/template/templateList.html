@@ -2,7 +2,7 @@
 <div class="searchRow clearfix">
     <div class="left mr15">
         <label>模版分类：</label>
-        <select class="width287" ng-model="selectCate" ng-options="m.code as m.name for m in templateCates"></select>
+        <select class="width287" ng-model="selectType" ng-options="m.code as m.name for m in templateTypes"></select>
     </div>
 
     <div class="left">
@@ -16,7 +16,7 @@
 <div class="searchRow clearfix">
     <div class="left mr15">
         <label>模版类型：</label>
-        <select class="width287" ng-model="selectType" ng-options="m.code as m.name for m in templateTypes"></select>
+        <select class="width287" ng-model="selectCate" ng-options="m.code as m.name for m in templateCates"></select>
     </div>
     <div class="left">
         <label>模版名称：</label>
@@ -56,8 +56,8 @@
             <td>{{item.remark}}</td>
             <td>{{item.createTime}}</td>
             <td>
-                <button>修改</button>
-                <button>删除</button>
+                <button ng-click="editTemplate(item);">修改</button>
+                <button ng-click="deleteTemplate(item);">删除</button>
             </td>
         </tr>
     </tbody>

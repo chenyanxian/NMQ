@@ -30,13 +30,13 @@ angular.module("app").directive("paging",function(){
                 $http.get(dealUrl()).success(function(d){
 
                     if(d.status.code == "1"){
-                        var tmp = d.data;
+                        var tmp = d.data.datas;
                         for(var i=0;i<tmp.length;i++){
                             tmp[i].ck = false;
                         }
 
-                        $scope.allPages = 10;
-                        $scope.totalProCount = 10;
+                        $scope.allPages = d.data.totalIndex;
+                        $scope.totalProCount = d.data.totalCount;
                         $scope.currentIndex = index;
 
                         $scope.callbackFn(tmp);

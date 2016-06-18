@@ -20,21 +20,35 @@ angular.module('app')
         }
 
         $scope.createTemplate = function(){
-            $state.go("safeRoom.templateCreate");
+            $state.go("safeRoom.templateCreate",{entity:{tag:"add"}});
         }
 
         $scope.getUrl = function(){
-            return "/cmsapi/template/query?category="+$scope.selectType+"&type="+$scope.selectCate + "&name="+$scope.templateName+"&begin="+$scope.beginDate + "&end="+$scope.endDate;
+            return "/cmsapi/template/query?category="+$scope.selectCate+"&type="+$scope.selectType + "&name="+$scope.templateName+"&begin="+$scope.beginDate + "&end="+$scope.endDate;
         }
 
         $scope.directiveCallBack = function(valueFromDirective){
             $scope.templateList = valueFromDirective;
         }
+
+        $scope.editTemplate = function(item){
+            $state.go("safeRoom.templateCreate",{entity:{tag:"edit",code:item.code}});
+        }
+
+        $scope.deleteTemplate = function(item){
+            $http.get("/cmsapi/template/delete/"+item.id).success(function(d){
+                if(d.status.code == "1"){
+                    $scope.templateList = $scope.templateList.deleteByKey("id",item.id);
+                }else{
+                    alert(d.status.message);
+                }
+            })
+        }
     });
 
 
 angular.module('app')
-    .controller('createTemplateCtrl', function ($http,$scope,enume) {
+    .controller('createTemplateCtrl', function ($http,$scope,enume,$state,$stateParams) {
 
         $scope.templateCates =  enume.templateCate;
         $scope.templateTypes = enume.templateType;
@@ -43,12 +57,6 @@ angular.module('app')
 
         //是否显示分数
         $scope.showScores = false;
-
-        if($scope.selectCate == "2"){
-            $scope.showScores = true;
-        }else{
-            $scope.showScores = false;
-        }
 
         //映射问题类型
         $scope.getTiXing = function(cate){
@@ -65,181 +73,33 @@ angular.module('app')
             }
         }
 
-        $scope.data = {
-            templateCategory: $scope.selectCate,
-            templateType: $scope.selectType,
-            title: "",
-            random: "",
-            content: "",
-            "data": [
-                //{
-                //    "title": "第一章节",
-                //    "tms": [
-                //        {
-                //            "cate": "radio",
-                //            "bida": false,
-                //            "wtjtt": false,
-                //            "name": "教室安全关注过吗",
-                //            scores:"5",
-                //            "sort": 1,
-                //            "items": [
-                //                {
-                //                    "name": "有",
-                //                    "bz": false,
-                //                    "sort": 1
-                //                },
-                //                {
-                //                    "name": "没有",
-                //                    "bz": false,
-                //                    "sort": 2,
-                //                }
-                //            ]
-                //        },
-                //        {
-                //            "cate": "checkbox",
-                //            "bida": true,
-                //            "wtjtt": false,
-                //            scores:"5",
-                //            "name": "怕不怕老师尾随",
-                //            "sort": 2,
-                //            "items": [
-                //                {
-                //                    "name": "一点都不怕",
-                //                    "bz": false,
-                //                    "sort": 1
-                //                },
-                //                {
-                //                    "name": "非常害怕",
-                //                    "bz": true,
-                //                    "sort": 2
-                //                },
-                //                {
-                //                    "name": "我不信你不怕",
-                //                    "bz": false,
-                //                    "sort": 3
-                //                },
-                //                {
-                //                    "name": "你是不是傻",
-                //                    "bz": false,
-                //                    "sort": 4
-                //                }
-                //            ]
-                //        },
-                //        {
-                //            "cate": "textbox",
-                //            "bida": true,
-                //            "wtjtt": false,
-                //            "name": "填空题",
-                //            scores:"15",
-                //            "sort": 3,
-                //            "items": [
-                //                {
-                //                    "name": "",
-                //                    "title": "语文老师帅吗",
-                //                    "bz": false,
-                //                    "sort": 1
-                //                },
-                //                {
-                //                    "name": "",
-                //                    "title": "数学老师帅吗",
-                //                    "bz": false,
-                //                    "sort": 2
-                //                },
-                //                {
-                //                    "name": "",
-                //                    "title": "英语老师呢？",
-                //                    "bz": false,
-                //                    "sort": 3
-                //                }
-                //            ]
-                //        }
-                //    ]
-                //},
-                //{
-                //    "title": "第二章节",
-                //    "tms": [
-                //        {
-                //            "cate": "checkbox",
-                //            "bida": false,
-                //            "wtjtt": false,
-                //            scores:"10",
-                //            "name": "小伙子们，你们速度真是杠杠的啊",
-                //            "sort": 1,
-                //            "items": [
-                //                {
-                //                    "name": "是",
-                //                    "bz": false,
-                //                    "sort": 1
-                //                },
-                //                {
-                //                    "name": "不是",
-                //                    "bz": false,
-                //                    "sort": 2
-                //                },
-                //                {
-                //                    "name": "你猜",
-                //                    "bz": false,
-                //                    "sort": 3
-                //                }
-                //            ]
-                //        },
-                //        {
-                //            "cate": "pingfen",
-                //            "bida": false,
-                //            "wtjtt": false,
-                //            scores:"20",
-                //            "name": "你对自己的长相打多少分?",
-                //            "sort": 2,
-                //            "items": [
-                //                {
-                //                    "name": "小王",
-                //                    "number": "10",
-                //                    "bz": false,
-                //                    "sort": 1
-                //                },
-                //                {
-                //                    "name": "渣渣",
-                //                    "number": "20",
-                //                    "bz": false,
-                //                    "sort": 2
-                //                },
-                //                {
-                //                    "name": "山炮",
-                //                    "number": "30",
-                //                    "bz": false,
-                //                    "sort": 3
-                //                }
-                //            ]
-                //        },
-                //        {
-                //            "cate": "checkbox",
-                //            "bida": false,
-                //            "wtjtt": false,
-                //            scores:"15",
-                //            "name": "我就问你，你是不是傻？",
-                //            "sort": 3,
-                //            "items": [
-                //                {
-                //                    "name": "傻",
-                //                    "bz": false,
-                //                    "sort": 1
-                //                },
-                //                {
-                //                    "name": "不傻",
-                //                    "bz": false,
-                //                    "sort": 2
-                //                },
-                //                {
-                //                    "name": "傻你麻痹",
-                //                    "bz": false,
-                //                    "sort": 3
-                //                }
-                //            ]
-                //        }
-                //    ]
-                //}
-            ]
-        };
+        $scope.data = null;
+        if($stateParams.entity.tag == "edit"){
+            $http.get("/cmsapi/template/queryByCode?code="+$stateParams.entity.code).success(function(d){
+                if(d.status.code == "1"){
+                    $scope.data = d.data;
+                    $scope.showGY = true;
+
+                    $scope.selectCate = d.data.templateCategory;
+                    $scope.selectType = d.data.templateType;
+
+                    $scope.showScores = true;
+                }else{
+                    alert(d.status.message);
+                }
+            })
+        }else{
+            $scope.data = {
+                code:"",
+                templateCategory: "",
+                templateType: "",
+                title: "",
+                random: "",
+                content: "",
+                "data": []
+            };
+            $scope.showScores = false;
+        }
 
         //当前选中的章节
         var currentZj = null;
@@ -248,11 +108,8 @@ angular.module('app')
         var addFlag = false;
 
         $scope.cls = "";
-        $scope.showGY = false;
 
-        if($scope.data.title){
-            $scope.showGY = true;
-        }
+        $scope.showGY = false;
 
         $scope.addTmByZj = function(item){
             $scope.cls = "red";
@@ -281,27 +138,20 @@ angular.module('app')
             $scope.data.data.push(tmp);
         }
 
-        $scope.changeCate = function(x){
+        $scope.changeType = function(x){
             if(window.confirm("切换模板类型会导致已填写的数据丢失,你是否确定切换?")){
-                $scope.data = {
-                    templateCategory: x,
-                    templateType: $scope.selectType,
-                    title: "设置概要标题调查问卷",
-                    random: "",
-                    content: "设置概要内容",
-                    "data":[]};
-
-                $scope.data.templateCategory = x;
+                $scope.data.data  = [];
+                $scope.data.templateType = x;
             }
-            if(x == "2"){
+            if(x == "kaoti"){
                 $scope.showScores = true;
             }else{
                 $scope.showScores = false;
             }
         }
 
-        $scope.changeType = function(x){
-            $scope.data.templateType = x;
+        $scope.changeCate = function(x){
+            $scope.data.templateCategory = x;
         }
 
         $scope.xzTm = function(){
@@ -418,7 +268,7 @@ angular.module('app')
 
             var count = tmp[tmp.length-1].sort + 1;
             if(cate == "textbox"){
-                items.push({name:"请输入答案标题",title:"",bz:false,sort:count});
+                items.push({name:"请输入答案标题",title:"请输入答案标题",bz:false,sort:count});
             }
             else if(cate == "pingfen"){
                 items.push({name:"请输入答案标题",number:0,bz:false,sort:count});
@@ -536,12 +386,23 @@ angular.module('app')
         $scope.doSubmit = function(){
             console.log($scope.data);
 
+            var url = "";
+            if($stateParams.entity.tag == "edit"){
+                url = "/cmsapi/template/update";
+            }else{
+                url = "/cmsapi/template/add";
+            }
             $http({
                 method:"POST",
-                url:"/cmsapi/template/add",
+                url:url,
                 data:$scope.data
             }).success(function(d){
-                debugger
+                if(d.status.code == "1"){
+                    alert("保存成功");
+                    $state.go("safeRoom.templateList");
+                }else{
+                    alert(d.status.message);
+                }
             })
         }
 

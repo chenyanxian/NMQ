@@ -10,8 +10,8 @@ angular.module('app').factory("enume",function($http){
 
         var that = this;
 
-        this.templateCate = [{name:"全部",code:""}];          //模板分类
-        this.templateType = [{name:"全部",code:""}];          //模板类型
+        this.templateType = [{name:"全部",code:""}];          //模板分类
+        this.templateCate = [{name:"全部",code:""}];          //模板类型
         this.userSex = [];                                  //性别
         this.nationality = [];                              //国籍
         this.place = [];                                    //籍贯
@@ -28,14 +28,14 @@ angular.module('app').factory("enume",function($http){
         this.skbh = [{name:"全部",code:""}];                  //授课编号
 
         //模板分类
-        this.getTemplateCate = function(){
-            if(this.templateCate.length <=1 ){
-                console.log("发送templateCate请求!");
+        this.getTemplateType = function(){
+            if(this.templateType.length <=1 ){
+                console.log("发送templateType请求!");
                 $http.get("/cmsapi/template/queryModelTypes").success(function(d){
                     if(d.status.code == "1"){
                         var tmp = d.data;
                         for(var i=0;i<tmp.length;i++){
-                            that.templateCate.push({name: tmp[i].name,code: tmp[i].code});
+                            that.templateType.push({name: tmp[i].name,code: tmp[i].code});
                         }
                     }else{
                         alert(d.status.message);
@@ -47,13 +47,13 @@ angular.module('app').factory("enume",function($http){
         }
 
         //模板类型
-        this.getTemplateType = function(){
-            if(this.templateType.length <= 1){
+        this.getTemplateCate = function(){
+            if(this.templateCate.length <= 1){
                 $http.get("/cmsapi/template/queryModelCategorys").success(function(d){
                     if(d.status.code == "1"){
                         var tmp = d.data;
                         for(var i=0;i<tmp.length;i++){
-                            that.templateType.push({name: tmp[i].name,code: tmp[i].code});
+                            that.templateCate.push({name: tmp[i].name,code: tmp[i].code});
                         }
                     }else{
                         alert(d.status.message);
