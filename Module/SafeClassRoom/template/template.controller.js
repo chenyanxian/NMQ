@@ -12,32 +12,51 @@ angular.module('app')
         $scope.beginDate = "";
         $scope.endDate = "";
 
+        $scope.templateList = [];
+
         //查询模板
         $scope.templateListSearch = function(){
             $scope.$broadcast("searchByFilter");
         }
 
         $scope.createTemplate = function(){
-            $state.go("template.templateCreate");
+            $state.go("safeRoom.templateCreate",{entity:{tag:"add"}});
         }
 
         $scope.getUrl = function(){
-            return "../../NMQ/data.json?=cate="+$scope.selectCate+"&selectType="+$scope.selectType + "&name="+$scope.templateName+"&begin="+$scope.beginDate + "&end="+$scope.endDate;
+            return "/cmsapi/template/query?category="+$scope.selectCate+"&type="+$scope.selectType + "&name="+$scope.templateName+"&begin="+$scope.beginDate + "&end="+$scope.endDate;
         }
 
         $scope.directiveCallBack = function(valueFromDirective){
-            $scope.goodsList = valueFromDirective;
+            $scope.templateList = valueFromDirective;
+        }
+
+        $scope.editTemplate = function(item){
+            $state.go("safeRoom.templateCreate",{entity:{tag:"edit",code:item.code}});
+        }
+
+        $scope.deleteTemplate = function(item){
+            $http.get("/cmsapi/template/delete/"+item.id).success(function(d){
+                if(d.status.code == "1"){
+                    $scope.templateList = $scope.templateList.deleteByKey("id",item.id);
+                }else{
+                    alert(d.status.message);
+                }
+            })
         }
     });
 
 
 angular.module('app')
-    .controller('createTemplateCtrl', function ($http,$scope,enume) {
+    .controller('createTemplateCtrl', function ($http,$scope,enume,$state,$stateParams) {
 
         $scope.templateCates =  enume.templateCate;
         $scope.templateTypes = enume.templateType;
         $scope.selectCate = "";
         $scope.selectType = "";
+
+        //是否显示分数
+        $scope.showScores = false;
 
         //映射问题类型
         $scope.getTiXing = function(cate){
@@ -54,175 +73,33 @@ angular.module('app')
             }
         }
 
-        $scope.data = {
-            templateCategory: "",
-            templateType: "",
-            title: "安全问卷调查哟",
-            random: "",
-            content: "一起来参与，赢大奖!",
-            "data": [
-                {
-                    "title": "第一章节",
-                    "tms": [
-                        {
-                            "cate": "radio",
-                            "bida": false,
-                            "wtjtt": false,
-                            "name": "教室安全关注过吗",
-                            "sort": 1,
-                            "items": [
-                                {
-                                    "name": "有",
-                                    "bz": false,
-                                    "sort": 1
-                                },
-                                {
-                                    "name": "没有",
-                                    "bz": false,
-                                    "sort": 2,
-                                }
-                            ]
-                        },
-                        {
-                            "cate": "checkbox",
-                            "bida": true,
-                            "wtjtt": false,
-                            "name": "怕不怕老师尾随",
-                            "sort": 2,
-                            "items": [
-                                {
-                                    "name": "一点都不怕",
-                                    "bz": false,
-                                    "sort": 1
-                                },
-                                {
-                                    "name": "非常害怕",
-                                    "bz": false,
-                                    "sort": 2
-                                },
-                                {
-                                    "name": "我不信你不怕",
-                                    "bz": false,
-                                    "sort": 3
-                                },
-                                {
-                                    "name": "你是不是傻",
-                                    "bz": false,
-                                    "sort": 4
-                                }
-                            ]
-                        },
-                        {
-                            "cate": "textbox",
-                            "bida": true,
-                            "wtjtt": false,
-                            "name": "填空题",
-                            "sort": 3,
-                            "items": [
-                                {
-                                    "name": "",
-                                    "title": "语文老师帅吗",
-                                    "bz": false,
-                                    "sort": 1
-                                },
-                                {
-                                    "name": "",
-                                    "title": "数学老师帅吗",
-                                    "bz": false,
-                                    "sort": 2
-                                },
-                                {
-                                    "name": "",
-                                    "title": "英语老师呢？",
-                                    "bz": false,
-                                    "sort": 3
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "title": "第二章节",
-                    "tms": [
-                        {
-                            "cate": "checkbox",
-                            "bida": false,
-                            "wtjtt": false,
-                            "name": "小伙子们，你们速度真是杠杠的啊",
-                            "sort": 1,
-                            "items": [
-                                {
-                                    "name": "是",
-                                    "bz": false,
-                                    "sort": 1
-                                },
-                                {
-                                    "name": "不是",
-                                    "bz": false,
-                                    "sort": 2
-                                },
-                                {
-                                    "name": "你猜",
-                                    "bz": false,
-                                    "sort": 3
-                                }
-                            ]
-                        },
-                        {
-                            "cate": "pingfen",
-                            "bida": false,
-                            "wtjtt": false,
-                            "name": "你对自己的长相打多少分?",
-                            "sort": 2,
-                            "items": [
-                                {
-                                    "name": "小王",
-                                    "number": "10",
-                                    "bz": false,
-                                    "sort": 1
-                                },
-                                {
-                                    "name": "渣渣",
-                                    "number": "20",
-                                    "bz": false,
-                                    "sort": 2
-                                },
-                                {
-                                    "name": "山炮",
-                                    "number": "30",
-                                    "bz": false,
-                                    "sort": 3
-                                }
-                            ]
-                        },
-                        {
-                            "cate": "checkbox",
-                            "bida": false,
-                            "wtjtt": false,
-                            "name": "我就问你，你是不是傻？",
-                            "sort": 3,
-                            "items": [
-                                {
-                                    "name": "傻",
-                                    "bz": false,
-                                    "sort": 1
-                                },
-                                {
-                                    "name": "不傻",
-                                    "bz": false,
-                                    "sort": 2
-                                },
-                                {
-                                    "name": "傻你麻痹",
-                                    "bz": false,
-                                    "sort": 3
-                                }
-                            ]
-                        }
-                    ]
+        $scope.data = null;
+        if($stateParams.entity.tag == "edit"){
+            $http.get("/cmsapi/template/queryByCode?code="+$stateParams.entity.code).success(function(d){
+                if(d.status.code == "1"){
+                    $scope.data = d.data;
+                    $scope.showGY = true;
+
+                    $scope.selectCate = d.data.templateCategory;
+                    $scope.selectType = d.data.templateType;
+
+                    $scope.showScores = true;
+                }else{
+                    alert(d.status.message);
                 }
-            ]
-        };
+            })
+        }else{
+            $scope.data = {
+                code:"",
+                templateCategory: "",
+                templateType: "",
+                title: "",
+                random: "",
+                content: "",
+                "data": []
+            };
+            $scope.showScores = false;
+        }
 
         //当前选中的章节
         var currentZj = null;
@@ -231,11 +108,8 @@ angular.module('app')
         var addFlag = false;
 
         $scope.cls = "";
-        $scope.showGY = false;
 
-        if($scope.data.title){
-            $scope.showGY = true;
-        }
+        $scope.showGY = false;
 
         $scope.addTmByZj = function(item){
             $scope.cls = "red";
@@ -262,6 +136,22 @@ angular.module('app')
         $scope.addZj = function(){
             var tmp = {title:"设置章节标题",tms:[]};
             $scope.data.data.push(tmp);
+        }
+
+        $scope.changeType = function(x){
+            if(window.confirm("切换模板类型会导致已填写的数据丢失,你是否确定切换?")){
+                $scope.data.data  = [];
+                $scope.data.templateType = x;
+            }
+            if(x == "kaoti"){
+                $scope.showScores = true;
+            }else{
+                $scope.showScores = false;
+            }
+        }
+
+        $scope.changeCate = function(x){
+            $scope.data.templateCategory = x;
         }
 
         $scope.xzTm = function(){
@@ -378,7 +268,7 @@ angular.module('app')
 
             var count = tmp[tmp.length-1].sort + 1;
             if(cate == "textbox"){
-                items.push({name:"请输入答案标题",title:"",bz:false,sort:count});
+                items.push({name:"请输入答案标题",title:"请输入答案标题",bz:false,sort:count});
             }
             else if(cate == "pingfen"){
                 items.push({name:"请输入答案标题",number:0,bz:false,sort:count});
@@ -435,15 +325,16 @@ angular.module('app')
             var tmp = null;
             if(!currentZj.tms ||currentZj.tms.length == 0){
                 if(cate == "textbox"){
-                    tmp = {cate:cate,bida:false,wtjtt:false,name:"请输入题目标题",sort:1,items:[
+                    tmp = {cate:cate,bida:false,wtjtt:false,scores:0,name:"请输入题目标题",sort:1,items:[
                         {name:"请输入问题内容",title:"请输入题目标题",bz:false,sort:1}
                     ]};
+
                 } else if(cate == "pingfen"){
-                    tmp = {cate:cate,bida:false,wtjtt:false,name:"请输入题目标题",sort:1,items:[
+                    tmp = {cate:cate,bida:false,wtjtt:false,scores:0,name:"请输入题目标题",sort:1,items:[
                         {name:"请输入问题内容",number:0,bz:false,sort:1}
                     ]};
                 }else{
-                    tmp = {cate:cate,bida:false,wtjtt:false,name:"请输入题目标题",sort:1,items:[
+                    tmp = {cate:cate,bida:false,wtjtt:false,scores:0,name:"请输入题目标题",sort:1,items:[
                         {name:"请输入问题标题",bz:false,sort:1}
                     ]};
                 }
@@ -452,16 +343,16 @@ angular.module('app')
                 var lastCount = res[res.length-1].sort + 1;
 
                 if(cate == "textbox"){
-                    tmp = {cate:cate,bida:false,wtjtt:false,name:"请输入题目标题",sort:lastCount,items:[
+                    tmp = {cate:cate,bida:false,wtjtt:false,scores:0,name:"请输入题目标题",sort:lastCount,items:[
                         {name:"请输入问题内容",title:"请输入题目标题",bz:false,sort:1}
                     ]};
                 }
                 else if(cate == "pingfen"){
-                    tmp = {cate:cate,bida:false,wtjtt:false,name:"请输入题目标题",sort:lastCount,items:[
+                    tmp = {cate:cate,bida:false,wtjtt:false,scores:0,name:"请输入题目标题",sort:lastCount,items:[
                         {name:"请输入问题内容",number:0,bz:false,sort:1}
                     ]};
                 }else{
-                    tmp = {cate:cate,bida:false,wtjtt:false,name:"请输入题目标题",sort:lastCount,items:[
+                    tmp = {cate:cate,bida:false,wtjtt:false,scores:0,name:"请输入题目标题",sort:lastCount,items:[
                         {name:"请输入问题标题",bz:false,sort:1}
                     ]};
                 }
@@ -494,6 +385,25 @@ angular.module('app')
 
         $scope.doSubmit = function(){
             console.log($scope.data);
+
+            var url = "";
+            if($stateParams.entity.tag == "edit"){
+                url = "/cmsapi/template/update";
+            }else{
+                url = "/cmsapi/template/add";
+            }
+            $http({
+                method:"POST",
+                url:url,
+                data:$scope.data
+            }).success(function(d){
+                if(d.status.code == "1"){
+                    alert("保存成功");
+                    $state.go("safeRoom.templateList");
+                }else{
+                    alert(d.status.message);
+                }
+            })
         }
 
         $scope.doHoldSubmit = function(){

@@ -1,10 +1,53 @@
 angular.module('app')
-    .controller('surveyAnalysisCtrl', function ($http,$rootScope,$scope,enume,$state) {
-        $scope.templateCates =  enume.templateCate;
-        $scope.templateTypes = enume.templateType;
-        $scope.selectCate = "";
-        $scope.selectType = "";
-        $scope.templateName = "";
+    .controller('surveyAnalysisListCtrl', function ($http,$scope,enume,$state) {
+
+        //初始化下拉框数据
+        $scope.kcxl = enume.kcxl;
+        $scope.kcxlNum = "";
+
+        $scope.kczt = enume.kczt;
+        $scope.kcztNum = "";
+
+        $scope.xn = enume.xn;
+        $scope.xnNum = "";
+
+        $scope.nj=enume.nj;
+        $scope.njNum ="";
+
+        $scope.bj = enume.bj;
+        $scope.bjNum = "";
+
+        $scope.skbh = enume.skbh;
+        $scope.skbhNum = "";
+
+        $scope.bDate ="";
+        $scope.eDate = "";
+        $scope.xsName="";
+
+        //查询模板
+        $scope.templateListSearch = function(){
+            $scope.$broadcast("searchByFilter");
+        }
+
+        $scope.createTemplate = function(){
+            $state.go("template.templateCreate");
+        }
+
+        $scope.getUrl = function(){
+            return "../../NMQ/data.json?=cate="+$scope.selectCate+"&selectType="+$scope.selectType + "&name="+$scope.templateName;
+        }
+
+        $scope.directiveCallBack = function(valueFromDirective){
+            $scope.goodsList = valueFromDirective;
+        }
+
+        $scope.goDetail = function(tag){
+            $state.go("survey.surveyAnalysisDetail",{id:tag});
+        }
+    })
+    .controller('surveyAnalysisDetailCtrl',function($http,$scope,enume,$stateParams){
+
+        $scope.id = $stateParams.id;
 
         $scope.data = {
             templateCategory: "1",
@@ -24,6 +67,8 @@ angular.module('app')
                             "wtjtt": false,
                             "name": "怕不怕老师尾随",
                             "sort": 2,
+                            bz:"A,B",
+                            scores:10,
                             "items": [
                                 {
                                     code:"1-2_1",
@@ -63,6 +108,8 @@ angular.module('app')
                             "cate": "radio",
                             "bida": false,
                             "wtjtt": false,
+                            bz:"A,C",
+                            scores:101,
                             code:"1-1",
                             "name": "教室安全关注过吗",
                             "sort": 1,
@@ -89,6 +136,8 @@ angular.module('app')
                             code:"1-3",
                             "cate": "textbox",
                             "bida": true,
+                            scores:0,
+                            bz:"",
                             "wtjtt": false,
                             "name": "基本信息",
                             "sort": 3,
@@ -133,6 +182,8 @@ angular.module('app')
                             "cate": "pingfen",
                             "bida": false,
                             "wtjtt": false,
+                            scores:10,
+                            bz:"A,b",
                             "name": "你对自己的长相打多少分?",
                             "sort": 2,
                             "items": [
@@ -169,6 +220,8 @@ angular.module('app')
                             code:"2_1",
                             "cate": "checkbox",
                             "bida": false,
+                            scores:30,
+                            bz:"A,C",
                             "wtjtt": false,
                             "name": "小伙子们，你们速度真是杠杠的啊",
                             "sort": 1,
@@ -204,6 +257,8 @@ angular.module('app')
                             code:"2_3",
                             "bida": false,
                             "wtjtt": false,
+                            scores:50,
+                            bz:"C",
                             "name": "我就问你，你是不是傻？",
                             "sort": 3,
                             "items": [
@@ -239,6 +294,12 @@ angular.module('app')
             ]
         };
 
+        if($scope.id == "1"){
+            $scope.scoresShow = false;
+        }else{
+            $scope.scoresShow = true;
+        }
+
         function getTotal(items){
             var t = 0;
             for(var i=0;i<items.length;i++){
@@ -253,7 +314,7 @@ angular.module('app')
             for(var i=0;i< d.length;i++){
                 var tmp = d[i].tms;
                 for(var k=0;k<tmp.length;k++){
-                    res.push({name:tmp[k].name,sort:tmp[k].sort,children:tmp[k].items,total:getTotal(tmp[k].items)});
+                    res.push({bz:tmp[k].bz,scores:tmp[k].scores,name:tmp[k].name,sort:tmp[k].sort,children:tmp[k].items,total:getTotal(tmp[k].items)});
                 }
             }
             return res;
@@ -262,16 +323,56 @@ angular.module('app')
         $scope.items = dealData();
 
     })
-    .controller('surveyDetailCtrl',function($http,$rootScope,$scope,enume,$state){
+    .controller('surveyInfoListCtrl',function($http,$scope,enume,$state){
 
-        $scope.templateCates =  enume.templateCate;
-        $scope.templateTypes = enume.templateType;
-        $scope.selectCate = "";
-        $scope.selectType = "";
-        $scope.templateName = "";
-        $scope.beginDate = "";
-        $scope.endDate = "";
+        //初始化下拉框数据
+        $scope.kcxl = enume.kcxl;
+        $scope.kcxlNum = "";
 
+        $scope.kczt = enume.kczt;
+        $scope.kcztNum = "";
+
+        $scope.xn = enume.xn;
+        $scope.xnNum = "";
+
+        $scope.nj=enume.nj;
+        $scope.njNum ="";
+
+        $scope.bj = enume.bj;
+        $scope.bjNum = "";
+
+        $scope.skbh = enume.skbh;
+        $scope.skbhNum = "";
+
+        $scope.bDate ="";
+        $scope.eDate = "";
+        $scope.xsName="";
+
+        //查询模板
+        $scope.templateListSearch = function(){
+            $scope.$broadcast("searchByFilter");
+        }
+
+        $scope.createTemplate = function(){
+            $state.go("template.templateCreate");
+        }
+
+        $scope.getUrl = function(){
+            return "../../NMQ/data.json?=cate="+$scope.selectCate+"&selectType="+$scope.selectType + "&name="+$scope.templateName;
+        }
+
+        $scope.directiveCallBack = function(valueFromDirective){
+            $scope.goodsList = valueFromDirective;
+        }
+
+        $scope.goDetail = function(tag){
+            $state.go("survey.surveyInfoDetail",{id:tag});
+        }
+
+    })
+    .controller('surveyInfoDetailCtrl',function($http,$scope,enume,$stateParams){
+
+        $scope.id = $stateParams.id;
 
         $scope.data = [
             {
@@ -350,7 +451,8 @@ angular.module('app')
                         ]
                     }
                 ]
-            },{
+            },
+            {
                 templateCategory: "1",
                 templateType: "2",
                 title: "安全问卷调查哟",
@@ -426,7 +528,8 @@ angular.module('app')
                         ]
                     },
                 ]
-            },{
+            },
+            {
                 templateCategory: "1",
                 templateType: "2",
                 title: "安全问卷调查哟",
@@ -514,16 +617,20 @@ angular.module('app')
 
                 var tmp = {name:d[i].title,colspan:0};
 
+                var count = 0;
+
                 var tms = d[i].tms;
                 for(var k=0;k<tms.length;k++){
                     if(tms[k].cate == "textbox"){
                         var items = tms[k].items;
                         for(var u=0;u<items.length;u++){
+                            count++;
                             tmp.colspan++;
-                            wtTitles.push(items[u].name);
+                            wtTitles.push({sort:count,name:items[u].name});
                         }
                     }else{
-                        wtTitles.push(tms[k].name);
+                        count++;
+                        wtTitles.push({sort:count,name:tms[k].name});
                         tmp.colspan++;
                     }
                 }
@@ -568,4 +675,93 @@ angular.module('app')
         }
 
         $scope.wentis = getAllWentis($scope.data);
-    });
+
+    })
+    .controller('lessonsListCtrl', function ($http,$scope,enume,$state) {
+
+        $scope.kcxl = enume.kcxl;
+        $scope.kcxlNum = "";
+
+        $scope.kczt = enume.kczt;
+        $scope.kcztNum = "";
+
+        $scope.xn = enume.xn;
+        $scope.xnNum = "";
+
+        $scope.nj=enume.nj;
+        $scope.njNum ="";
+
+        $scope.bj = enume.bj;
+        $scope.bjNum = "";
+
+        $scope.skbh = enume.skbh;
+        $scope.skbhNum = "";
+
+        $scope.bDate ="";
+        $scope.eDate = "";
+        $scope.xsName="";
+
+        //查询模板
+        $scope.templateListSearch = function(){
+            $scope.$broadcast("searchByFilter");
+        }
+
+        $scope.createTemplate = function(){
+            $state.go("template.templateCreate");
+        }
+
+        $scope.getUrl = function(){
+            return "../../NMQ/data.json?=cate=&selectType=&name=";
+        }
+
+        $scope.directiveCallBack = function(valueFromDirective){
+            $scope.goodsList = valueFromDirective;
+        }
+
+        $scope.goDetail = function(tag){
+            //$state.go("survey.surveyAnalysisDetail",{id:tag});
+        }
+    })
+    .controller('studentListCtrl', function ($http,$scope,enume,$state) {
+        $scope.kcxl = enume.kcxl;
+        $scope.kcxlNum = "";
+
+        $scope.kczt = enume.kczt;
+        $scope.kcztNum = "";
+
+        $scope.xn = enume.xn;
+        $scope.xnNum = "";
+
+        $scope.nj=enume.nj;
+        $scope.njNum ="";
+
+        $scope.bj = enume.bj;
+        $scope.bjNum = "";
+
+        $scope.skbh = enume.skbh;
+        $scope.skbhNum = "";
+
+        $scope.bDate ="";
+        $scope.eDate = "";
+        $scope.xsName="";
+
+        $scope.templateListSearch = function(){
+            $scope.$broadcast("searchByFilter");
+        }
+
+        $scope.createTemplate = function(){
+            $state.go("template.templateCreate");
+        }
+
+        $scope.getUrl = function(){
+            return "../../NMQ/data.json?=cate=&selectType=&name=";
+        }
+
+        $scope.directiveCallBack = function(valueFromDirective){
+            $scope.goodsList = valueFromDirective;
+        }
+
+        $scope.goDetail = function(tag){
+            //$state.go("survey.surveyAnalysisDetail",{id:tag});
+        }
+    })

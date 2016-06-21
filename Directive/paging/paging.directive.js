@@ -23,26 +23,26 @@ angular.module("app").directive("paging",function(){
             $scope.enterIndex = "1";
 
             function dealUrl(){
-                return $scope.getUrl() + "&curPage="+index+"&pageSize="+size+"&ran="+Math.random();
+                return $scope.getUrl() + "&pageIndex="+index+"&pageSize="+size+"&ran="+Math.random();
             }
 
             function getData(){
                 $http.get(dealUrl()).success(function(d){
 
-                    if(d.errorCode != "0"){
-                        alert(d.errors[0]);
-                        return;
-                    }
-                    for(var i=0;i< d.datas.length;i++){
-                        d.datas[i].ck = false;
-                        d.datas[i].trCls = "";
-                    }
+                    if(d.status.code == "1"){
+                        var tmp = d.data.datas;
+                        for(var i=0;i<tmp.length;i++){
+                            tmp[i].ck = false;
+                        }
 
-                    $scope.allPages = d.pageTotalNum;
-                    $scope.totalProCount = d.totalCount;
-                    $scope.currentIndex = index;
+                        $scope.allPages = d.data.totalIndex;
+                        $scope.totalProCount = d.data.totalCount;
+                        $scope.currentIndex = index;
 
-                    $scope.callbackFn(d.datas);
+                        $scope.callbackFn(tmp);
+                    }else{
+                        alert(d.status.message);
+                    }
                 })
             }
 
