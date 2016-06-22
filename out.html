@@ -8,6 +8,7 @@
 
     <link type="text/css" rel="stylesheet" href="app.css" />
     <script src="Resource/lib/jquery-1.11.2.min.js"></script>
+    <script src="Resource/js/core.js"></script>
 </head>
 
 <body>
@@ -181,7 +182,7 @@
         $.ajax({
             type:"post",
             url:"/api/questionnaire/answer",
-            data:{code:_code,leaseholderId:"t1001",studentId:"99",content:s},
+            data:{code:_code,leaseholderId:"t1001",studentId:"99",content:jsCoreMethod.convertStringJson(s)},
             success:function(d){
                 d = eval("("+d+")");
                 alert(d.status.message);
