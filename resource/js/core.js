@@ -23,7 +23,7 @@
 
         if(typeof this[0] == "object"){
             for(var i = 1; i < this.length; i++) {
-                if( this[i].equals(re[re.length-1]) == false) {
+                if(jsCoreMethod.equals(this[i],re[re.length-1])== false) {
                     re.push(this[i]);
                 }
             }
@@ -56,7 +56,7 @@
         }else{
             var _index = -1;
             for(var i=0;i<this.length;i++){
-                if(item.equals(this[i]) == true){
+                if(jsCoreMethod.equals(item,this[i]) == true){
                     _index = i;
                     break;
                 }
@@ -82,7 +82,7 @@
             var bl = false;
             for (var i = 0; i < this.length; i++) {
                 var currentObj = this[i];
-                if (currentObj[key].equals(value) == true) {
+                if (jsCoreMethod.equals(currentObj[key],value) == true) {
                     bl = true;
                     break;
                 }
@@ -116,7 +116,7 @@
         else{
             var bl = false;
             for(var i=0;i<this.length;i++){
-                if(this[i].equals(item)){
+                if(jsCoreMethod.equals(this[i],item)){
                     bl = true;
                     break;
                 }
@@ -136,7 +136,7 @@
             if(typeof this[i] != "object"){
                 res.push(this[i]);
             }else{
-                res.push(this[i].clone());
+                res.push(jsCoreMethod.cloneObj(this[i]));
             }
         }
 
@@ -148,7 +148,7 @@
     /// Object prototypes
     ///**********************************
     //对象的复制
-    Object.prototype.clone = function(){
+    Object.prototype.cloneObj = function(){
         var copy = this.constructor();
 
         for(var attr in this){
@@ -401,6 +401,49 @@
                 return
             }
             window.localStorage.setItem(key,val);
+        },
+        //对象的复制
+        cloneObj:function(source){
+            var copy = source.constructor();
+
+            for(var attr in source){
+                if (source.hasOwnProperty(attr)) {
+                    copy[attr] = source[attr];
+                }
+            }
+            return copy;
+        },
+        //比较2个对象是否相等
+        equals:function(source,target){
+            var p;
+            for (p in source) {
+                if (typeof (target[p]) == 'undefined') { return false; }
+            }
+
+            for (p in source) {
+                if (source[p]) {
+                    switch (typeof (source[p])) {
+                        case 'object':
+                            if (!source[p].equals(target[p])) { return false; } break;
+                        case 'function':
+                            if (typeof (target[p]) == 'undefined' ||
+                                (p != 'equals' && source[p].toString() != target[p].toString()))
+                                return false;
+                            break;
+                        default:
+                            if (source[p] != target[p]) { return false; }
+                    }
+                } else {
+                    if (target[p])
+                        return false;
+                }
+            }
+
+            for (p in target) {
+                if (typeof (source[p]) == 'undefined') { return false; }
+            }
+
+            return true;
         }
     }
 
