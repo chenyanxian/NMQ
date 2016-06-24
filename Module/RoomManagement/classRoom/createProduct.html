@@ -87,8 +87,8 @@
         <label>教师对课程评价问卷ID：</label>
         <input type="text" ng-model="templateName"/>
         <label>教师对课程评价问卷名称：</label>
-        <input type="text" class="width287" ng-model="templateName"/>
-        <input type="button" value="选择问卷" class="nextBtn" />
+        <input type="text" class="width287" ng-model="tmpCode1"/>
+        <input type="button" value="选择问卷" class="nextBtn" ng-click="showTmpDialog1();" />
     </div>
 </div>
 
@@ -97,8 +97,8 @@
         <label>学生对课程评价问卷ID：</label>
         <input type="text" ng-model="templateName"/>
         <label>教师对课程评价问卷名称：</label>
-        <input type="text" class="width287" ng-model="templateName"/>
-        <input type="button" value="选择问卷" class="nextBtn" />
+        <input type="text" class="width287" ng-model="tmpCode2"/>
+        <input type="button" value="选择问卷" class="nextBtn" ng-click="showTmpDialog2();" />
     </div>
 </div>
 
@@ -107,8 +107,8 @@
         <label>其他对课程评价问卷ID：</label>
         <input type="text" ng-model="templateName"/>
         <label>其他对课程评价问卷名称：</label>
-        <input type="text" class="width287" ng-model="templateName"/>
-        <input type="button" value="选择问卷" class="nextBtn" />
+        <input type="text" class="width287" ng-model="tmpCode3"/>
+        <input type="button" value="选择问卷" class="nextBtn" ng-click="showTmpDialog3();" />
     </div>
 </div>
 
@@ -117,8 +117,8 @@
         <label>课堂作业问卷ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</label>
         <input type="text" ng-model="templateName"/>
         <label>课堂作业问卷名称：</label>
-        <input type="text" class="width287" ng-model="templateName"/>
-        <input type="button" value="选择问卷" class="nextBtn" />
+        <input type="text" class="width287" ng-model="tmpCode4"/>
+        <input type="button" value="选择问卷" class="nextBtn" ng-click="showTmpDialog4();" />
     </div>
 </div>
 
@@ -136,4 +136,11 @@
     <button class="btnGreen" ng-click="templateListSearch();">预览商品</button>
     <button class="btnGreen" ng-click="createTemplate();">保存提交</button>
     <button class="btnGreen" ng-click="createTemplate();">取消</button>
+</div>
+
+<div class="mask" ng-if="showDialog">
+    <div class="mask_container">
+        <p class="close_mask">X</p>
+            <select-Template choose-callback="getChooseTmps"></select-Template>
+    </div>
 </div>
