@@ -11,6 +11,29 @@ angular.module("app").directive("navigation",function(){
         },
         link:function(){},
         controller:function($scope,$http,cooke,$state){
+
+            $scope.cls1 = "navbar_hover";
+            $scope.cls2 = "";
+            $scope.cls3 = "";
+
+            $scope.c1 = function(){
+                $scope.cls1 = "navbar_hover";
+                $scope.cls2 = "";
+                $scope.cls3 = "";
+            }
+
+            $scope.c2 = function(){
+                $scope.cls1 = "";
+                $scope.cls2 = "navbar_hover";
+                $scope.cls3 = "";
+            }
+
+            $scope.c3 = function(){
+                $scope.cls1 = "";
+                $scope.cls2 = "";
+                $scope.cls3 = "navbar_hover";
+            }
+
             var u = cooke.getUser();
 
             if(u){
