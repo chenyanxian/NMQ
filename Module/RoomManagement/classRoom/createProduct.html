@@ -67,8 +67,12 @@
 <div class="searchRow clearfix">
     <div class="left mr15">
         <label>商品缩略图：</label>
-        <input type="file" style="border: none;" ng-model="templateName"/>
-        <input type="button" value="上传" class="nextBtn" />
+        <button class="nextBtn mr15" style="position: relative">
+            上传文件
+            <input type="file" class="inputFile"/>
+        </button>
+       <!-- <input type="file" style="border: none;" ng-model="templateName"/>
+        <input type="button" value="上传" class="nextBtn" />-->
         <span>尺寸100*100, 大小100kb</span>
     </div>
 </div>
@@ -76,8 +80,13 @@
 <div class="searchRow clearfix">
     <div class="left mr15">
         <label>课件上传：</label>
-        <input type="file" style="border: none;" ng-model="templateName"/>
-        <input type="button" value="上传" class="nextBtn" />
+        <button class="nextBtn mr15 ml14" style="position: relative">
+            上传文件
+            <input type="file" class="inputFile"/>
+        </button>
+        <!--<button class="nextBtn">上传文件</button>
+        <input type="file" ng-model="templateName"/>
+        <input type="button" value="上传" class="nextBtn" />-->
         <span>要求：flv,swf等</span>
     </div>
 </div>
@@ -140,7 +149,7 @@
 
 <div class="mask" ng-if="showDialog">
     <div class="mask_container">
-        <p class="close_mask">X</p>
+        <p class="close_mask" ng-click="closeDialog();">X</p>
             <select-Template choose-callback="getChooseTmps"></select-Template>
     </div>
 </div>

@@ -47,4 +47,8 @@ angular.module('app')
             $scope.showDialog = true;
             openTag = 4;
         }
+
+        $scope.closeDialog = function(){
+            $scope.showDialog = false;
+        }
     })

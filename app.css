@@ -732,3 +732,11 @@ textarea{
 input[type=file]{
     border: none;
 }
+
+.inputFile{
+    width: 60px;height: 26px;position: absolute;top:0;left: 0;border: none;padding: 0;opacity: 0;
+}
+
+.ml14{
+    margin-left: 14px;
+}
