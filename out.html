@@ -3,222 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+
     <link type="text/css" rel="stylesheet" href="app.css" />
     <script src="Resource/lib/jquery-1.11.2.min.js"></script>
     <script src="Resource/js/core.js"></script>
-    <meta content="width=device-width,user-scalable=no" name="viewport">
-    <meta content="telephone=no" name="format-detection" />
-
 </head>
+
 <body>
     <div id="container"></div>
 
-    <button id="doSubmit">提交</button>
+    <input type="button" class="btnGreen" id="doSubmit" value="提交" />
 </body>
 </html>
 <script>
-    var data = {
-        templateCategory: "1",
-        templateType: "2",
-        title: "安全问卷调查哟",
-        random: "",
-        content: "一起来参与，赢大奖!",
-        "data": [
-            {
-                "title": "第一章节",
-                "code":"1",
-                "tms": [
-                    {
-                        "cate": "radio",
-                        "bida": false,
-                        "wtjtt": false,
-                        "scores":30,
-                        code:"1-1",
-                        "name": "教室安全关注过吗",
-                        "sort": 1,
-                        "items": [
-                            {
-                                code:"1_1_1",
-                                "name": "有",
-                                "bz": true,
-                                "sort": 1
-                            },
-                            {
-                                code:"1_1_2",
-                                "name": "没有",
-                                "bz": false,
-                                "sort": 2,
-                            }
-                        ]
-                    },
-                    {
-                        "cate": "checkbox",
-                        code:"1-2",
-                        "bida": true,
-                        "wtjtt": false,
-                        "scores":0,
-                        "name": "怕不怕老师尾随",
-                        "sort": 2,
-                        "items": [
-                            {
-                                code:"1-2_1",
-                                "name": "一点都不怕",
-                                "bz": false,
-                                "sort": 1
-                            },
-                            {
-                                code:"1-2_2",
-                                "name": "非常害怕",
-                                "bz": false,
-                                "sort": 2
-                            },
-                            {
-                                code:"1-2_3",
-                                "name": "我不信你不怕",
-                                "bz": false,
-                                "sort": 3
-                            },
-                            {
-                                code:"1-2_4",
-                                "name": "你是不是傻",
-                                "bz": false,
-                                "sort": 4
-                            }
-                        ]
-                    },
-                    {
-                        code:"1-3",
-                        "cate": "textbox",
-                        "bida": true,
-                        "wtjtt": false,
-                        "name": "自我评估",
-                        "scores":0,
-                        "sort": 3,
-                        "items": [
-                            {
-                                code:"1-3_1",
-                                "name": "",
-                                "title": "语文老师帅吗",
-                                "bz": false,
-                                "sort": 1
-                            },
-                            {
-                                code:"1-3_2",
-                                "name": "",
-                                "title": "数学老师帅吗",
-                                "bz": false,
-                                "sort": 2
-                            },
-                            {
-                                code:"1-3_3",
-                                "name": "",
-                                "title": "英语老师呢？",
-                                "bz": false,
-                                "sort": 3
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "title": "第二章节",
-                code:"2",
-                "tms": [
-                    {
-                        code:"2_1",
-                        "cate": "checkbox",
-                        "bida": false,
-                        "wtjtt": false,
-                        "scores":20,
-                        "name": "小伙子们，你们速度真是杠杠的啊",
-                        "sort": 1,
-                        "items": [
-                            {
-                                code:"2_1_1",
-                                "name": "是",
-                                "bz": true,
-                                "sort": 1
-                            },
-                            {
-                                code:"2_1_2",
-                                "name": "不是",
-                                "bz": false,
-                                "sort": 2
-                            },
-                            {
-                                code:"2_1_3",
-                                "name": "你猜",
-                                "bz": false,
-                                "sort": 3
-                            }
-                        ]
-                    },
-                    {
-                        code:"2_2",
-                        "cate": "pingfen",
-                        "bida": false,
-                        "scores":0,
-                        "wtjtt": false,
-                        "name": "你对自己的长相打多少分?",
-                        "sort": 2,
-                        "items": [
-                            {
-                                code:"2_2_1",
-                                "name": "小王",
-                                "number": "10",
-                                "bz": false,
-                                "sort": 1
-                            },
-                            {
-                                code:"2_2_2",
-                                "name": "渣渣",
-                                "number": "20",
-                                "bz": false,
-                                "sort": 2
-                            },
-                            {
-                                code:"2_2_3",
-                                "name": "山炮",
-                                "number": "30",
-                                "bz": false,
-                                "sort": 3
-                            }
-                        ]
-                    },
-                    {
-                        "cate": "checkbox",
-                        code:"2_3",
-                        "bida": false,
-                        "wtjtt": false,
-                        "scores":10,
-                        "name": "我就问你，你是不是傻？",
-                        "sort": 3,
-                        "items": [
-                            {
-                                code:"2_3_1",
-                                "name": "傻",
-                                "bz": false,
-                                "sort": 1
-                            },
-                            {
-                                code:"2_3_2",
-                                "name": "不傻",
-                                "bz": true,
-                                "sort": 2
-                            },
-                            {
 
-                                code:"2_3_3",
-                                "name": "傻你",
-                                "bz": true,
-                                "sort": 3
-                            }
-                        ]
-                    }
-                ]
+    var _code = "db3422f1-03d5-4191-b534-c842d591ede0";
+
+    var data = null;
+    $.ajax({
+        type:"get",
+        url:"/api/questionnaire/query?code="+_code,
+        success:function(d){
+            d = eval("("+d+")");
+            if(d.status.code == "1"){
+                data = d.data;
+                render($("#container"), data);
+            }else{
+                alert(d.status.message);
             }
-        ]
-    };
+        }
+    })
 
     function render(c,data){
         renderGaiyao(c,data);
@@ -280,7 +96,6 @@
 
         $(c).append($(html));
     }
-    render($("#container"),data);
 
     function getScores(data,selectedItems){
         var scores = 0;
@@ -360,6 +175,19 @@
 
     $("#doSubmit").click(function(){
         var s = getParams(data);
-        debugger
+
+        //code --- 模版编号
+        //leaseholderId -- 租户编码
+        //studentId -- 工号
+        $.ajax({
+            type:"post",
+            url:"/api/questionnaire/answer",
+            data:{code:_code,leaseholderId:"t1001",studentId:"99",content:jsCoreMethod.convertStringJson(s)},
+            success:function(d){
+                d = eval("("+d+")");
+                alert(d.status.message);
+            }
+        })
+
     })
 </script>

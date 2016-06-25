@@ -83,7 +83,11 @@ angular.module('app')
                     $scope.selectCate = d.data.templateCategory;
                     $scope.selectType = d.data.templateType;
 
-                    $scope.showScores = true;
+                    if($scope.selectType == "kaoti"){
+                        $scope.showScores = true;
+                    }else{
+                        $scope.showScores = false;
+                    }
                 }else{
                     alert(d.status.message);
                 }
@@ -134,7 +138,14 @@ angular.module('app')
         }
 
         $scope.addZj = function(){
-            var tmp = {title:"设置章节标题",tms:[]};
+            var sort = 0;
+            if($scope.data.data.length == 0){
+                sort = 0;
+            }else{
+                var items = jsCoreMethod.arraySortByField($scope.data.data,"sort",true,true);
+                sort = items[items.length-1].sort + 1;
+            }
+            var tmp = {title:"设置章节标题",tms:[],sort:sort};
             $scope.data.data.push(tmp);
         }
 
@@ -162,7 +173,7 @@ angular.module('app')
         function getPrevNextItem(item,data){
             var index = -1;
             for(var i=0;i<data.length;i++){
-                if(item.equals(data[i])){
+                if(jsCoreMethod.equals(item,data[i])){
                     index = i;
                     break;
                 }

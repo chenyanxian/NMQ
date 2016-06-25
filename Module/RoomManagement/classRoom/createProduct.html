@@ -6,11 +6,11 @@
         <span><input type="radio" name="procate" />教辅</span>
 
         <label>教辅分类：</label>
-        <select class="width200" ng-model="selectType" ng-options="m.val as m.name for m in templateTypes"></select>
+        <select class="width287" ng-model="selectType" ng-options="m.val as m.name for m in templateTypes"></select>
     </div>
     <div class="left">
         <label>适用教室版本号：</label>
-        <select class="width200" ng-model="selectType" ng-options="m.val as m.name for m in templateTypes"></select>
+        <select class="width287" ng-model="selectType" ng-options="m.val as m.name for m in templateTypes"></select>
     </div>
 </div>
 
@@ -19,56 +19,60 @@
         <span style="margin-right: 75px;"></span>
         <span><input type="radio" name="procate" />课程</span>
         <label>课程系列：</label>
-        <select class="width200" ng-model="selectType" ng-options="m.val as m.name for m in templateTypes"></select>
+        <select class="width287" ng-model="selectType" ng-options="m.val as m.name for m in templateTypes"></select>
     </div>
     <div class="left">
-        <label>当前版本号：</label>
-        <select class="width200" ng-model="selectType" ng-options="m.val as m.name for m in templateTypes"></select>
+        <label class="ml28">当前版本号：</label>
+        <select class="width287" ng-model="selectType" ng-options="m.val as m.name for m in templateTypes"></select>
     </div>
 </div>
 
 <div class="searchRow clearfix">
     <div class="left mr15">
         <label>商品编号：</label>
-        <input type="text" placeholder="请输入商品编号" class="width287" ng-model="templateName"/>
+        <input type="text" placeholder="请输入商品编号" class="width388" ng-model="templateName"/>
     </div>
     <div class="left">
-        <label>商品名称：</label>
-        <input type="text" placeholder="请输入商品名称" class="width287" ng-model="templateName"/>
+        <label class="ml40">商品名称：</label>
+        <input type="text" placeholder="请输入商品名称" class="width268" ng-model="templateName"/>
     </div>
 </div>
 
 <div class="searchRow clearfix">
-    <div class="left mr15">
+    <div class="left mr15 lh32">
         <label>商品状态：</label>
         <span><input type="radio" /><span>下架</span></span>
         <span><input type="radio" /><span>上架</span></span>
     </div>
     <div class="left">
-        <label>库存：</label>
-        <input type="text" placeholder="" class="width287" ng-model="templateName"/>个
+        <label class="ml24">库存：</label>
+        <input type="text" placeholder="" class="width220" ng-model="templateName"/>个
     </div>
 </div>
 
-<div class="searchRow clearfix" style="height: 100px;">
+<div class="searchRow clearfix height100">
     <div class="left mr15">
-        <label>商品简介：</label>
-        <textarea style="width: 700px;height: 100px;"></textarea>
+        <label class="left">商品简介：</label>
+        <textarea style="width: 826px;height: 100px;float: left"></textarea>
     </div>
 </div>
 
-<div class="searchRow clearfix" style="height: 100px;">
+<div class="searchRow clearfix height100">
     <div class="left mr15">
-        <label>商品内容：</label>
-        <textarea style="width: 700px;height: 100px;"></textarea>
+        <label class="left">商品内容：</label>
+        <textarea style="width: 826px;height: 100px;float: left"></textarea>
     </div>
 </div>
 
 <div class="searchRow clearfix">
     <div class="left mr15">
         <label>商品缩略图：</label>
-        <input type="file" style="border: none;" ng-model="templateName"/>
-        <input type="button" value="上传" class="nextBtn" />
+        <button class="nextBtn mr15" style="position: relative">
+            上传文件
+            <input type="file" class="inputFile"/>
+        </button>
+       <!-- <input type="file" style="border: none;" ng-model="templateName"/>
+        <input type="button" value="上传" class="nextBtn" />-->
         <span>尺寸100*100, 大小100kb</span>
     </div>
 </div>
@@ -76,8 +80,13 @@
 <div class="searchRow clearfix">
     <div class="left mr15">
         <label>课件上传：</label>
-        <input type="file" style="border: none;" ng-model="templateName"/>
-        <input type="button" value="上传" class="nextBtn" />
+        <button class="nextBtn mr15 ml14" style="position: relative">
+            上传文件
+            <input type="file" class="inputFile"/>
+        </button>
+        <!--<button class="nextBtn">上传文件</button>
+        <input type="file" ng-model="templateName"/>
+        <input type="button" value="上传" class="nextBtn" />-->
         <span>要求：flv,swf等</span>
     </div>
 </div>
@@ -85,49 +94,49 @@
 <div class="searchRow clearfix">
     <div class="left mr15">
         <label>教师对课程评价问卷ID：</label>
-        <input type="text" ng-model="templateName"/>
-        <label>教师对课程评价问卷名称：</label>
-        <input type="text" class="width287" ng-model="templateName"/>
-        <input type="button" value="选择问卷" class="nextBtn" />
+        <input type="text" ng-model="templateName" class="width200"/>
+        <label class="ml12">教师对课程评价问卷名称：</label>
+        <input type="text" class="width248" ng-model="tmpCode1"/>
+        <input type="button" value="选择问卷" class="nextBtn" ng-click="showTmpDialog1();" />
     </div>
 </div>
 
 <div class="searchRow clearfix">
     <div class="left mr15">
         <label>学生对课程评价问卷ID：</label>
-        <input type="text" ng-model="templateName"/>
-        <label>教师对课程评价问卷名称：</label>
-        <input type="text" class="width287" ng-model="templateName"/>
-        <input type="button" value="选择问卷" class="nextBtn" />
+        <input type="text" ng-model="templateName" class="width200"/>
+        <label class="ml12">教师对课程评价问卷名称：</label>
+        <input type="text" class="width248" ng-model="tmpCode2"/>
+        <input type="button" value="选择问卷" class="nextBtn" ng-click="showTmpDialog2();" />
     </div>
 </div>
 
 <div class="searchRow clearfix">
     <div class="left mr15">
         <label>其他对课程评价问卷ID：</label>
-        <input type="text" ng-model="templateName"/>
-        <label>其他对课程评价问卷名称：</label>
-        <input type="text" class="width287" ng-model="templateName"/>
-        <input type="button" value="选择问卷" class="nextBtn" />
+        <input type="text" ng-model="templateName" class="width200"/>
+        <label class="ml12">其他对课程评价问卷名称：</label>
+        <input type="text" class="width248" ng-model="tmpCode3"/>
+        <input type="button" value="选择问卷" class="nextBtn" ng-click="showTmpDialog3();" />
     </div>
 </div>
 
 <div class="searchRow clearfix">
     <div class="left mr15">
-        <label>课堂作业问卷ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</label>
-        <input type="text" ng-model="templateName"/>
-        <label>课堂作业问卷名称：</label>
-        <input type="text" class="width287" ng-model="templateName"/>
-        <input type="button" value="选择问卷" class="nextBtn" />
+        <label class="ml42">课堂作业问卷ID：</label>
+        <input type="text" ng-model="templateName" class="width200"/>
+        <label class="ml54">课堂作业问卷名称：</label>
+        <input type="text" class="width248" ng-model="tmpCode4"/>
+        <input type="button" value="选择问卷" class="nextBtn" ng-click="showTmpDialog4();" />
     </div>
 </div>
 
 <div class="searchRow clearfix">
     <div class="left mr15">
-        <label>课后作业问卷ID：</label>
-        <input type="text" ng-model="templateName"/>
-        <label>课后作业问卷名称：</label>
-        <input type="text" class="width287" ng-model="templateName"/>
+        <label class="ml42">课后作业问卷ID：</label>
+        <input type="text" ng-model="templateName" class="width200"/>
+        <label class="ml54">课后作业问卷名称：</label>
+        <input type="text" class="width248" ng-model="templateName"/>
         <input type="button" value="选择问卷" class="nextBtn" />
     </div>
 </div>
@@ -136,4 +145,11 @@
     <button class="btnGreen" ng-click="templateListSearch();">预览商品</button>
     <button class="btnGreen" ng-click="createTemplate();">保存提交</button>
     <button class="btnGreen" ng-click="createTemplate();">取消</button>
+</div>
+
+<div class="mask" ng-if="showDialog">
+    <div class="mask_container">
+        <p class="close_mask" ng-click="closeDialog();">X</p>
+            <select-Template choose-callback="getChooseTmps"></select-Template>
+    </div>
 </div>
