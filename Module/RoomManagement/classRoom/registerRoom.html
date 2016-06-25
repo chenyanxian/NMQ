@@ -1,10 +1,10 @@
 <div class="navigation">我的应用 > 人员管理 > 教室注册</div>
 
 
-<div style="margin-right: 230px;" class="clearfix">
+<div>
     <div class="searchRow clearfix">
         <div class="left mr15">
-            <label>租户号&nbsp;&nbsp;&nbsp;：</label>
+            <label class="ml28">租户号：</label>
             <input type="text" class="width200" ng-model="gh"/>
         </div>
 
@@ -21,7 +21,7 @@
 
     <div class="searchRow clearfix">
         <div class="left mr15">
-            <label>教室编号：</label>
+            <label class="ml14">教室编号：</label>
             <input type="text" class="width200" ng-model="gh"/>
         </div>
 
@@ -38,7 +38,7 @@
 
     <div class="searchRow clearfix">
         <div class="left mr15">
-            <label>授权账号：</label>
+            <label class="ml14">授权账号：</label>
             <input type="text" class="width200" ng-model="gh"/>
         </div>
 
@@ -54,120 +54,140 @@
         </div>
     </div>
 
-    <div class="searchRow clearfix">
-        <div class="left mr15">
-            <label>教室版本号：</label>
-            <input type="text" class="width200" ng-model="gh"/>
-        </div>
+    <div class="searchRow">
+        <label>教室版本号：</label>
+        <input type="text" class="width200" ng-model="gh"/>
     </div>
 
-    <div class="searchRow clearfix">
-        <div class="left mr15">
-            <label>备注说明：</label>
-            <textarea style="width: 510px;height: 147px;"></textarea>
-        </div>
+    <div class="searchRow clearfix" style="height: 100px;">
+        <label class="left ml14">备注说明：</label>
+        <textarea class="left" style="width: 835px;height: 100px;margin-left: 4px"></textarea>
     </div>
 
 
-    <div class="searchRow clearfix">
+    <div class="editRow clearfix">
         <div class="left mr15">
             <div>
                 <label>1:欢迎登陆安全教育平台：</label>
-                <input type="text" class="width140" ng-model="gh"/>
-                <input type="file" />
+                <input type="text" class="width200" ng-model="gh"/>
+                <button class="nextBtn mr15 ml14 pr">
+                    上传文件
+                    <input type="file" class="inputFile"/>
+                </button>
             </div>
-            <div>
+            <div class="mt10">
                 <label>2:登陆页背景图：</label>
-                <input type="text" class="width140" ng-model="gh"/>
-                <input type="file" />
+                <input type="text" class="width200" ng-model="gh"/>
+                <button class="nextBtn mr15 ml14 pr">
+                    上传文件
+                    <input type="file" class="inputFile"/>
+                </button>
             </div>
         </div>
-        <div class="left">
-            <img style="width:300px;height: 150px;" src="Resource/images/r1.jpg" />
+        <div class="ml600">
+            <img class="reg_room_img" src="Resource/images/r1.jpg" />
         </div>
     </div>
 
-    <div class="searchRow clearfix">
+    <div class="editRow clearfix">
         <div class="left mr15">
             <div>
                 <label>3:课前准备按钮图：</label>
-                <input type="text" class="width140" ng-model="gh"/>
-                <input type="file" />
+                <input type="text" class="width200" ng-model="gh"/>
+                <button class="nextBtn mr15 ml14 pr">
+                    上传文件
+                    <input type="file" class="inputFile"/>
+                </button>
             </div>
-            <div>
+            <div class="mt10">
                 <label>4:选择课程按钮图：</label>
-                <input type="text" class="width140" ng-model="gh"/>
-                <input type="file" />
+                <input type="text" class="width200" ng-model="gh"/>
+                <button class="nextBtn mr15 ml14 pr">
+                    上传文件
+                    <input type="file" class="inputFile"/>
+                </button>
             </div>
-            <div>
+            <div class="mt10">
                 <label>5:选课页背景图：</label>
-                <input type="text" class="width140" ng-model="gh"/>
-                <input type="file" />
+                <input type="text" class="width200" ng-model="gh"/>
+                <button class="nextBtn mr15 ml14 pr">
+                    上传文件
+                    <input type="file" class="inputFile"/>
+                </button>
             </div>
         </div>
-        <div class="left">
-            <img style="width:300px;height: 150px;" src="Resource/images/r2.jpg" />
+        <div class="ml600">
+            <img class="reg_room_img" src="Resource/images/r2.jpg" />
         </div>
     </div>
 
-    <div class="searchRow clearfix">
+    <div class="editRow clearfix">
         <div class="left mr15">
             <div>
                 <label>6:安全教育平台logo：</label>
-                <input type="text" class="width140" ng-model="gh"/>
-                <input type="file" />
+                <input type="text" class="width200" ng-model="gh"/>
+                <button class="nextBtn mr15 ml14 pr">
+                    上传文件
+                    <input type="file" class="inputFile"/>
+                </button>
             </div>
-            <div>
+            <div class="mt10">
                 <label>7:年级班级选择按钮图：</label>
-                <input type="text" class="width140" ng-model="gh"/>
-                <input type="file" />
+                <input type="text" class="width200" ng-model="gh"/>
+                <button class="nextBtn mr15 ml14 pr">
+                    上传文件
+                    <input type="file" class="inputFile"/>
+                </button>
             </div>
-            <div>
+            <div class="mt10">
                 <label>8:返回首页按钮图：</label>
-                <input type="text" class="width140" ng-model="gh"/>
-                <input type="file" />
+                <input type="text" class="width200" ng-model="gh"/>
+                <button class="nextBtn mr15 ml14 pr">
+                    上传文件
+                    <input type="file" class="inputFile"/>
+                </button>
             </div>
         </div>
-        <div class="left">
-            <img style="width:300px;height: 150px;" src="Resource/images/r3.jpg" />
+        <div class="ml600">
+            <img class="reg_room_img" src="Resource/images/r3.jpg" />
         </div>
     </div>
 
-    <div class="searchRow clearfix">
+    <div class="editRow clearfix">
         <div class="left mr15">
             <div>
                 <label>9:学生选择按钮图：</label>
-                <input type="text" class="width140" ng-model="gh"/>
+                <input type="text" class="width200" ng-model="gh"/>
             </div>
-            <div>
+            <div class="mt10">
                 <label>10:重新选择班级按钮图：</label>
-                <input type="text" class="width140" ng-model="gh"/>
+                <input type="text" class="width200" ng-model="gh"/>
             </div>
         </div>
-        <div class="left">
-            <img style="width:300px;height: 150px;" src="Resource/images/r4.jpg" />
+        <div class="ml600">
+            <img class="reg_room_img" src="Resource/images/r4.jpg" />
         </div>
     </div>
 
-    <div class="searchRow clearfix">
+    <div class="editRow clearfix">
         <div class="left mr15">
             <label>11:返回上一级：</label>
-            <input type="text" class="width140" ng-model="gh"/>
+            <input type="text" class="width200" ng-model="gh"/>
         </div>
-        <div class="left">
-            <img style="width:300px;height: 150px;" src="Resource/images/r5.jpg" />
+        <div class="ml600">
+            <img class="reg_room_img" src="Resource/images/r5.jpg" />
         </div>
     </div>
 
-    <div class="searchRow clearfix">
+    <div class="editRow clearfix">
         <div class="left mr15">
             <div class="searchRow">
                 <label>12:完成点名继续选课按钮图：</label>
-                <input type="text" class="width140" ng-model="gh"/>
+                <input type="text" class="width200" ng-model="gh"/>
             </div>
         </div>
-        <div class="left">
-            <img style="width:300px;height: 150px;" src="Resource/images/r6.jpg" />
+        <div class="ml600">
+            <img class="reg_room_img" src="Resource/images/r6.jpg" />
         </div>
     </div>
 </div>

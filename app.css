@@ -740,3 +740,21 @@ input[type=file]{
 .ml14{
     margin-left: 14px;
 }
+
+.editRow{
+    height: 100%;
+    margin-top: 10px;
+}
+
+
+.ml600{
+    margin-left: 600px;
+}
+
+.reg_room_img{
+    width:300px;height: 150px;
+}
+
+.pr{
+    position: relative;
+}
