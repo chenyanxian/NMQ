@@ -444,6 +444,20 @@
             }
 
             return true;
+        },
+        //wap端的滚动自动加载
+        autoScroll:function(cb){
+            window.onscroll = function(){
+                var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+
+                var windowHeight = window.screen.height;
+
+                var documentHeight = document.body.scrollHeight;
+
+                if(scrollTop + windowHeight >= documentHeight - 50){
+                    cb();
+                }
+            }
         }
     }
 
