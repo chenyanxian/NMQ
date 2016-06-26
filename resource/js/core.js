@@ -455,7 +455,9 @@
                 var documentHeight = document.body.scrollHeight;
 
                 if(scrollTop + windowHeight >= documentHeight - 50){
-                    cb();
+                    if(cb){
+                        cb();
+                    }
                 }
             }
         }
