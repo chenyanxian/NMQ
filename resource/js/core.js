@@ -450,8 +450,7 @@
             window.onscroll = function(){
                 var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
 
-                var windowHeight = window.screen.height;
-
+                var windowHeight = document.documentElement.clientHeight;
                 var documentHeight = document.body.scrollHeight;
 
                 if(scrollTop + windowHeight >= documentHeight - 50){
