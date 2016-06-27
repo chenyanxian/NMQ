@@ -37,7 +37,7 @@
 
         <div class="left ml24">
             <label>性别：</label>
-            <select class="width220" ng-model="sex" ng-options="m.val as m.name for m in useSex"></select>
+            <select class="width220" ng-model="sex" ng-options="m.code as m.name for m in useSex"></select>
         </div>
     </div>
 
@@ -49,42 +49,30 @@
 
         <div class="left ml24">
             <label>籍贯：</label>
-            <select class="width220" ng-model="placeNum" ng-options="m.val as m.name for m in place"></select>
+            <select class="width220" ng-model="placeNum" ng-options="m.code as m.name for m in place"></select>
         </div>
     </div>
 
     <div class="searchRow clearfix">
         <div class="left mr15 ml24">
             <label>国籍：</label>
-            <select class="width220" ng-model="nationalityNum" ng-options="m.val as m.name for m in nationality"></select>
+            <select class="width220" ng-model="nationalityNum" ng-options="m.code as m.name for m in nationality"></select>
         </div>
 
         <div class="left ml24">
             <label>民族：</label>
-            <select class="width220" ng-model="nationNum" ng-options="m.val as m.name for m in nation"></select>
+            <select class="width220" ng-model="nationNum" ng-options="m.code as m.name for m in nation"></select>
         </div>
     </div>
 
     <div class="searchRow clearfix">
         <div class="left">
             <label>出生地点：</label>
-            <select class="width152">
-                <option>北京</option>
-                <option>湖北</option>
-                <option>广东</option>
-            </select>
+            <select class="width152" ng-model="provincesNum" ng-change="selectProvinces();" ng-options="m.code as m.name for m in provinces"></select>
             <span> 省 </span>
-            <select class="width152">
-                <option>澳门同胞</option>
-                <option>台湾同胞</option>
-                <option>外国人</option>
-            </select>
+            <select class="width152" ng-model="citysNum" ng-change="selectCitys();" ng-options="m.code as m.name for m in citys"></select>
             <span> 市 </span>
-            <select class="width152">
-                <option>澳门同胞</option>
-                <option>台湾同胞</option>
-                <option>外国人</option>
-            </select>
+            <select class="width152" ng-model="downsNum" ng-options="m.code as m.name for m in downs"></select>
             <span> 区 </span>
         </div>
     </div>
@@ -92,23 +80,23 @@
     <div class="searchRow clearfix">
         <div class="left mr15">
             <label>证件类型：</label>
-            <select class="width220" ng-model="idTypeNum" ng-options="m.val as m.name for m in idType"></select>
+            <select class="width220" ng-model="idTypeNum" ng-options="m.code as m.name for m in idType"></select>
         </div>
         <div class="left mr15">
-            <label>身份证号：</label>
-            <input type="text" class="width200" placeholder="请输入身份证号"/>
+            <label>证件号码：</label>
+            <input type="text" class="width200" placeholder="请输入证件号码"/>
         </div>
     </div>
 
     <div class="searchRow clearfix">
         <div class="left mr15">
             <label>婚姻状况：</label>
-            <select class="width220" ng-model="maritalStatusNum" ng-options="m.val as m.name for m in maritalStatus"></select>
+            <select class="width220" ng-model="maritalStatusNum" ng-options="m.code as m.name for m in maritalStatus"></select>
         </div>
 
         <div class="left">
             <label>港澳台外：</label>
-            <select class="width220" ng-model="macaoNum" ng-options="m.val as m.name for m in macao"></select>
+            <select class="width220" ng-model="macaoNum" ng-options="m.code as m.name for m in macao"></select>
         </div>
     </div>
 </div>

@@ -28,8 +28,26 @@ angular.module('app')
         $scope.nation = enume.nation;
         $scope.nationNum = "1";
 
-        var dragEl = document.querySelector("#dragEl");
+        $scope.provinces = enume.provinces;
+        $scope.provincesNum = "";
 
+        $scope.citys = [];
+        $scope.citysNum = "";
+
+        $scope.downs = [];
+        $scope.downsNum = "";
+
+        $scope.selectProvinces = function(){
+            console.log($scope.provincesNum);
+            $scope.citys = enume.citys;
+        }
+
+        $scope.selectCitys = function(){
+            console.log($scope.citysNum);
+            $scope.downs = enume.downs;
+        }
+
+        var dragEl = document.querySelector("#dragEl");
         function drop(e){
             e.stopPropagation();
             e.preventDefault();
@@ -41,7 +59,6 @@ angular.module('app')
             render.onerror = function(){
                 alert("读取文件失败!");
             }
-
 
             render.onload = function(a){
                 oImg.src = this.result;
