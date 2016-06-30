@@ -1,7 +1,7 @@
 <div class="navigation">我的应用 > 人员管理 > 人员录入</div>
 
 <div id="dragEl" draggable="true" style="border: 1px solid #e0e0e0;height: 310px;width: 220px;line-height: 310px;float: right;margin-top: 10px;text-align: center">
-    请把图片拖到此区域
+    <input type="file" id="fileLoad" />
 </div>
 
 <div style="margin-right: 230px;">
@@ -44,7 +44,7 @@
     <div class="searchRow clearfix">
         <div class="left mr15">
             <label>出生日期：</label>
-            <input type="date" class="width200"/>
+            <input type="date" class="width200" ng-model="csrq"/>
         </div>
 
         <div class="left ml24">
@@ -84,7 +84,7 @@
         </div>
         <div class="left mr15">
             <label>证件号码：</label>
-            <input type="text" class="width200" placeholder="请输入证件号码"/>
+            <input type="text" class="width200" placeholder="请输入证件号码" ng-model="zjhm"/>
         </div>
     </div>
 
@@ -99,6 +99,12 @@
             <select class="width220" ng-model="macaoNum" ng-options="m.code as m.name for m in macao"></select>
         </div>
     </div>
+</div>
+
+
+<div class="mt10">
+    <button class="btnGreen ml65" ng-click="createUser();">保存</button>
+    <button class="btnGreen" ng-click="cancelUser();">取消</button>
 </div>
 
 
