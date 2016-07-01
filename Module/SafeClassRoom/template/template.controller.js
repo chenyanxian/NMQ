@@ -58,6 +58,9 @@ angular.module('app')
         //是否显示分数
         $scope.showScores = false;
 
+        //页头标题
+        $scope.t_title = "";
+
         //映射问题类型
         $scope.getTiXing = function(cate){
             if(cate == "checkbox"){
@@ -75,6 +78,7 @@ angular.module('app')
 
         $scope.data = null;
         if($stateParams.entity.tag == "edit"){
+            $scope.t_title = "修改模板";
             $http.get("/cmsapi/template/queryByCode?code="+$stateParams.entity.code).success(function(d){
                 if(d.status.code == "1"){
                     $scope.data = d.data;
@@ -93,6 +97,7 @@ angular.module('app')
                 }
             })
         }else{
+            $scope.t_title = "创建模板";
             $scope.data = {
                 code:"",
                 templateCategory: "",

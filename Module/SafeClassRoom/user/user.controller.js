@@ -34,9 +34,9 @@ angular.module('app')
         }
 
         $scope.deleteUser = function(item){
-            $http.get("/cmsapi/user/delete/"+item.studentId).success(function(d){
+            $http.get("/cmsapi/user/delete/"+item.id).success(function(d){
                 if(d.status.code == "1"){
-                    $scope.userList = $scope.userList.deleteByKey("studentId",item.studentId);
+                    $scope.userList = $scope.userList.deleteByKey("id",item.id);
                 }else{
                     alert(d.status.message);
                 }
@@ -67,8 +67,6 @@ angular.module('app')
         $scope.downs = [];
         $scope.downsNum = "";
 
-        $scope.zp = "";
-
         $scope.utitle = "";
 
         $scope.showImg = false;
@@ -86,7 +84,15 @@ angular.module('app')
                 $scope.provincesNum = tmp.provincesNum;
                 $scope.citysNum = tmp.citysNum;
                 $scope.downsNum = tmp.downsNum;
-                $scope.zp = tmp.zp;
+                $scope.gh = tmp.gh;
+                $scope.cym = tmp.cym;
+                $scope.xm = tmp.xm;
+                $scope.ywxm = tmp.ywxm;
+                $scope.xmpy = tmp.xmpy;
+                $scope.zjhm = tmp.zjhm;
+                $scope.csrq = tmp.csrq;
+
+                document.querySelector("#img1").setAttribute("src",tmp.zp);
             })
             $scope.showImg = true;
             $scope.utitle = "人员修改";
@@ -118,6 +124,9 @@ angular.module('app')
             var filereader = new FileReader();
             filereader.onload = function () {
                 fileContent = this.result;
+                document.querySelector("#img1").setAttribute("src",this.result);
+                $scope.showImg = true;
+                $scope.$apply();
             }
             filereader.readAsDataURL(file);
         },false);
@@ -130,7 +139,7 @@ angular.module('app')
                 ywxm:$scope.ywxm,   //英文姓名
                 xmpy:$scope.xmpy,   //姓名拼音
                 sex:$scope.sex,     //性别
-                csrq:$scope.csrq,   //出生日期
+                csrq:new Date($scope.csrq).format(),   //出生日期
                 placeNum:$scope.placeNum,  //籍贯
                 nationalityNum:$scope.nationalityNum,   //国籍
                 nationNum:$scope.nationNum,             //民族
@@ -140,16 +149,17 @@ angular.module('app')
                 idTypeNum:$scope.idTypeNum,             //证件类型
                 zjhm:$scope.zjhm,                       //证件号码
                 maritalStatusNum:$scope.maritalStatusNum,//婚姻状况
-                macaoNum:$scope.macaoNum,                //港澳台外
-                zp:fileContent                          //照片
+                macaoNum:$scope.macaoNum                 //港澳台外
             };
 
             var url = "";
             if($stateParams.entity.tag == "edit"){
-                url = "/cmsapi/user/edit";
+                url = "/cmsapi/user/update";
                 tmp.studentId = $stateParams.entity.studentId;
+                tmp.zp = document.querySelector("#img1").getAttribute("src");
             }else{
                 url = "/cmsapi/user/add";
+                tmp.zp = fileContent;
             }
 
             $http({
