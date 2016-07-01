@@ -1,7 +1,8 @@
-<div class="navigation">我的应用 > 人员管理 > 人员录入</div>
+<div class="navigation">我的应用 > 人员管理 > {{utitle}}</div>
 
 <div id="dragEl" draggable="true" style="border: 1px solid #e0e0e0;height: 310px;width: 220px;line-height: 310px;float: right;margin-top: 10px;text-align: center">
     <input type="file" id="fileLoad" />
+    <img ng-show="showImg" src="{{zp}}" />
 </div>
 
 <div style="margin-right: 230px;">
@@ -49,19 +50,19 @@
 
         <div class="left ml24">
             <label>籍贯：</label>
-            <select class="width220" ng-model="placeNum" ng-options="m.code as m.name for m in place"></select>
+            <input type="text" class="width200" ng-model="placeNum"/>
         </div>
     </div>
 
     <div class="searchRow clearfix">
         <div class="left mr15 ml24">
             <label>国籍：</label>
-            <select class="width220" ng-model="nationalityNum" ng-options="m.code as m.name for m in nationality"></select>
+            <input type="text" class="width200" ng-model="nationalityNum"/>
         </div>
 
         <div class="left ml24">
             <label>民族：</label>
-            <select class="width220" ng-model="nationNum" ng-options="m.code as m.name for m in nation"></select>
+            <input type="text" class="width200" ng-model="nationNum"/>
         </div>
     </div>
 
