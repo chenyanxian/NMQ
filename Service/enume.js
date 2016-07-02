@@ -10,8 +10,8 @@ angular.module('app').factory("enume",function($http){
 
         var that = this;
 
-        this.templateType = [{name:"全部",code:""}];          //模板分类
-        this.templateCate = [{name:"全部",code:""}];          //模板类型
+        this.templateType = [];          //模板分类
+        this.templateCate = [];          //模板类型
         this.userSex = [{name:"请选择",code:""}];                                  //性别
         this.idType = [{name:"请选择",code:""}];                                   //证件类型
         this.maritalStatus = [{name:"请选择",code:""}];                            //婚姻状态
@@ -31,6 +31,20 @@ angular.module('app').factory("enume",function($http){
                 if(d.status.code == "1"){
                     cb(d.data);
 
+                }else{
+                    alert(d.status.message);
+                }
+            })
+        }
+
+        this.postData = function(url,data,cb){
+            $http({
+                method:"POST",
+                url:url,
+                data:data
+            }).success(function(d){
+                if(d.status.code == "1"){
+                    cb(d.data);
                 }else{
                     alert(d.status.message);
                 }

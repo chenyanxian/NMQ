@@ -46,6 +46,42 @@ angular.module('app')
     })
     .controller('classManagementCtrl',function($http,$scope,$state,enume){
 
+        $scope.bjList = [];
+
+        $scope.getUrl = function(){
+            return "/cmsapi/user/query?studentId=&name=";
+        }
+
+        $scope.directiveCallBack = function(valueFromDirective){
+            $scope.bjList = valueFromDirective;
+        }
+
+        var ufile = document.querySelector("#fileLoad");
+        var fileContent = "";
+        ufile.addEventListener("change",function(e){
+            if(e.target.files.length == 0){
+                alert("请选择图片上传!");
+                return;
+            }
+            var file = e.target.files[0];
+            var filereader = new FileReader();
+            filereader.onload = function () {
+                fileContent = this.result;
+            }
+            filereader.readAsBinaryString(file);
+        },false);
+
+        $scope.uploadFile = function(){
+            enume.postData("/cmsapi/tclass/upload",{data:fileContent},function(d){
+                $scope.bjList = d;
+            })
+        }
+
+        $scope.seachBj = function(){
+            enume.getData("",function(d){
+                $scope.bjList = d;
+            })
+        }
     })
     .controller('createUserCtrl',function($http,$scope,$state,enume,$stateParams){
 
@@ -90,7 +126,7 @@ angular.module('app')
                 $scope.ywxm = tmp.ywxm;
                 $scope.xmpy = tmp.xmpy;
                 $scope.zjhm = tmp.zjhm;
-                $scope.csrq = tmp.csrq;
+                $scope.csrq = new Date(tmp.csrq);
 
                 document.querySelector("#img1").setAttribute("src",tmp.zp);
             })
@@ -99,6 +135,8 @@ angular.module('app')
         }else{
             $scope.showImg = false;
             $scope.utitle = "人员录入";
+
+            $scope.csrq = "2016-07-01";
         }
 
         $scope.selectProvinces = function(){
@@ -162,18 +200,22 @@ angular.module('app')
                 tmp.zp = fileContent;
             }
 
-            $http({
-                method:"POST",
-                url:url,
-                data:tmp
-            }).success(function(d){
-                if(d.status.code == "1"){
-                    alert("保存成功");
-                    $state.go("safeRoom.userManagement");
-                }else{
-                    alert(d.status.message);
-                }
+            enume.postData(url,tmp,function(d){
+                alert("保存成功");
+                $state.go("safeRoom.userManagement");
             })
+
+            //$http({
+            //    method:"POST",
+            //    url:url,
+            //    data:tmp
+            //}).success(function(d){
+            //    if(d.status.code == "1"){
+            //
+            //    }else{
+            //        alert(d.status.message);
+            //    }
+            //})
 
         }
 
@@ -183,5 +225,40 @@ angular.module('app')
 
     })
     .controller('stuManagementCtrl',function($http,$scope,$state){
+        $scope.uList = [];
 
+        $scope.getUrl = function(){
+            return "/cmsapi/user/query?studentId=&name=";
+        }
+
+        $scope.directiveCallBack = function(valueFromDirective){
+            $scope.uList = valueFromDirective;
+        }
+
+        var ufile = document.querySelector("#fileLoad");
+        var fileContent = "";
+        ufile.addEventListener("change",function(e){
+            if(e.target.files.length == 0){
+                alert("请选择图片上传!");
+                return;
+            }
+            var file = e.target.files[0];
+            var filereader = new FileReader();
+            filereader.onload = function () {
+                fileContent = this.result;
+            }
+            filereader.readAsBinaryString(file);
+        },false);
+
+        $scope.uploadFile = function(){
+            enume.postData("",{data:fileContent},function(d){
+                $scope.uList = d;
+            })
+        }
+
+        $scope.seachXs = function(){
+            enume.getData("",function(d){
+                $scope.uList = d;
+            })
+        }
     });
