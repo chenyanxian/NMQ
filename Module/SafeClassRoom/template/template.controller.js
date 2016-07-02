@@ -50,12 +50,11 @@ angular.module('app')
 angular.module('app')
     .controller('createTemplateCtrl', function ($http,$scope,enume,$state,$stateParams) {
 
-        $scope.templateCates =  enume.templateCate;
-
-        $scope.templateTypes = [{"name":"问卷调查",code:"wenjuan"}, {"name":"考试",code:"kaoti"}]
-        $scope.selectType = "wenjuan";
-        //$scope.templateTypes = enume.templateType;
+        $scope.templateCates =  enume.templateCateForAdd;
         $scope.selectCate = "";
+
+        $scope.templateTypes = enume.templateTypeForAdd;
+        $scope.selectType = "wenjuan";
 
         //是否显示分数
         $scope.showScores = false;
@@ -63,7 +62,8 @@ angular.module('app')
         //页头标题
         $scope.t_title = "";
 
-        $scope.addTmFlag = false;
+        //禁用默认标准答案
+        $scope.isBzFlag = true;
 
         //映射问题类型
         $scope.getTiXing = function(cate){
@@ -93,8 +93,10 @@ angular.module('app')
 
                     if($scope.selectType == "kaoti"){
                         $scope.showScores = true;
+                        $scope.isBzFlag = false;
                     }else{
                         $scope.showScores = false;
+                        $scope.isBzFlag = true;
                     }
                 }else{
                     alert(d.status.message);
@@ -193,10 +195,12 @@ angular.module('app')
                     $scope.selectType = "wenjuan";
                 }
             }
-            if(x == "kaoti"){
+            if($scope.selectType == "kaoti"){
                 $scope.showScores = true;
+                $scope.isBzFlag = false;
             }else{
                 $scope.showScores = false;
+                $scope.isBzFlag = true;
             }
         }
 

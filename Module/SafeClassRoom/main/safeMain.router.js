@@ -53,11 +53,6 @@ angular.module('app').config(function($stateProvider){
             templateUrl:'./Module/SafeClassRoom/analysis/lessonsList.html',
             controller:'lessonsListCtrl'
         })
-        .state('safeRoom.students',{
-            url:'/surveyStudentsList',
-            templateUrl:'./Module/SafeClassRoom/analysis/studentList.html',
-            controller:'studentListCtrl'
-        })
         //用户
         .state('safeRoom.userManagement',{
             url:'/userManagement',

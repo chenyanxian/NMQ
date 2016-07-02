@@ -68,7 +68,7 @@ angular.module('app')
             filereader.onload = function () {
                 fileContent = this.result;
             }
-            filereader.readAsBinaryString(file);
+            filereader.readAsDataURL(file);
         },false);
 
         $scope.uploadFile = function(){
@@ -135,8 +135,6 @@ angular.module('app')
         }else{
             $scope.showImg = false;
             $scope.utitle = "人员录入";
-
-            $scope.csrq = "2016-07-01";
         }
 
         $scope.selectProvinces = function(){

@@ -91,7 +91,7 @@
                         </div>
 
                         <div class="right mt10">
-                            <span><input type="checkbox" ng-model="x.bz" />是否标准答案</span>
+                            <span><input ng-disabled="isBzFlag" type="checkbox" ng-model="x.bz" />是否标准答案</span>
                             <img src="resource/images/add.png" ng-click="addDA(x,itemx.items,itemx.cate);" class="cT_topic_oper"/>
                             <img src="resource/images/delete.png" ng-click="deleteItem(x,itemx.items)" class="cT_topic_oper"/>
                             <img src="resource/images/up.png" ng-click="upTopDA(x,itemx.items,itemx);" class="cT_topic_oper"/>

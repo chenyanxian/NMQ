@@ -10,8 +10,12 @@ angular.module('app').factory("enume",function($http){
 
         var that = this;
 
-        this.templateType = [];          //模板分类
-        this.templateCate = [];          //模板类型
+        this.templateType = [{name:"全部",code:""}];          //模板分类
+        this.templateCate = [{name:"全部",code:""}];          //模板类型
+
+        this.templateTypeForAdd = [];          //模板分类
+        this.templateCateForAdd = [];          //模板类型
+
         this.userSex = [{name:"请选择",code:""}];                                  //性别
         this.idType = [{name:"请选择",code:""}];                                   //证件类型
         this.maritalStatus = [{name:"请选择",code:""}];                            //婚姻状态
@@ -44,7 +48,7 @@ angular.module('app').factory("enume",function($http){
                 data:data
             }).success(function(d){
                 if(d.status.code == "1"){
-                    cb(d.data);
+                    cb()
                 }else{
                     alert(d.status.message);
                 }
@@ -58,6 +62,7 @@ angular.module('app').factory("enume",function($http){
                 this.getData("/cmsapi/template/queryModelTypes",function(tmp){
                     for(var i=0;i<tmp.length;i++){
                         that.templateType.push({name: tmp[i].name,code: tmp[i].code});
+                        that.templateTypeForAdd.push({name: tmp[i].name,code: tmp[i].code});
                     }
                 })
             }else{
@@ -71,6 +76,7 @@ angular.module('app').factory("enume",function($http){
                 this.getData("/cmsapi/template/queryModelCategorys",function(tmp){
                     for(var i=0;i<tmp.length;i++){
                         that.templateCate.push({name: tmp[i].name,code: tmp[i].code});
+                        that.templateCateForAdd.push({name: tmp[i].name,code: tmp[i].code});
                     }
                 })
             }
