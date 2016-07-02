@@ -26,6 +26,7 @@ angular.module('app').config(function($stateProvider){
         //数据分析
         .state('safeRoom.surveyAnalysisList',{
             url:'/surveyAnalysisList',
+            params:{entity:{}},
             templateUrl:'./Module/SafeClassRoom/analysis/surveyAnalysisList.html',
             controller:'surveyAnalysisListCtrl'
         })
@@ -36,23 +37,21 @@ angular.module('app').config(function($stateProvider){
         })
         .state('safeRoom.surveyInfoList',{
             url:'/surveyInfoList',
+            params:{entity:{}},
             templateUrl:'./Module/SafeClassRoom/analysis/surveyInfoList.html',
             controller:'surveyInfoListCtrl'
         })
         .state('safeRoom.surveyInfoDetail',{
             url:'/surveyInfoList/:id',
+            params:{entity:{}},
             templateUrl:'./Module/SafeClassRoom/analysis/surveyInfoDetail.html',
             controller:'surveyInfoDetailCtrl'
         })
         .state('safeRoom.lessons',{
             url:'/surveyLessonsList',
+            params:{entity:{}},
             templateUrl:'./Module/SafeClassRoom/analysis/lessonsList.html',
             controller:'lessonsListCtrl'
-        })
-        .state('safeRoom.students',{
-            url:'/surveyStudentsList',
-            templateUrl:'./Module/SafeClassRoom/analysis/studentList.html',
-            controller:'studentListCtrl'
         })
         //用户
         .state('safeRoom.userManagement',{
@@ -62,21 +61,25 @@ angular.module('app').config(function($stateProvider){
         })
         .state('safeRoom.classManagement',{
             url:'/classManagement',
+            params:{entity:{}},
             templateUrl:'./Module/SafeClassRoom/user/classManagement.html',
             controller:'classManagementCtrl'
         })
         .state('safeRoom.createUser',{
             url:'/createUser',
+            params:{entity:{}},
             templateUrl:'./Module/SafeClassRoom/user/createUser.html',
             controller:'createUserCtrl'
         })
         .state('safeRoom.stuManagement',{
             url:'/stuManagement',
+            params:{entity:{}},
             templateUrl:'./Module/SafeClassRoom/user/stuManagement.html',
             controller:'stuManagementCtrl'
         })
         .state('safeRoom.dictionary',{
             url:'/dictionary',
+            params:{entity:{}},
             templateUrl:'./Module/SafeClassRoom/dictionary/dictionary.html',
             controller:'dictionaryCtrl'
         })

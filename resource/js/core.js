@@ -214,7 +214,18 @@
     }
 
     Date.prototype.format = function(){
-        return this.getFullYear() + "-" + (this.getMonth() + 1) + "-" + this.getDate();
+        var y =this.getFullYear();
+        var m = this.getMonth() + 1;
+        var d = this.getDate();
+
+        //if(m <10){
+        //    m = "0"+m;
+        //}
+        //if(d<10){
+        //    d = "0"+d;
+        //}
+
+        return  y+ "-" + m + "-" + d;
     }
 
 
@@ -424,7 +435,10 @@
                 if (source[p]) {
                     switch (typeof (source[p])) {
                         case 'object':
-                            if (!source[p].equals(target[p])) { return false; } break;
+                            if (!jsCoreMethod.equals(source[p],target[p])) {
+                                return false;
+                            }
+                            break;
                         case 'function':
                             if (typeof (target[p]) == 'undefined' ||
                                 (p != 'equals' && source[p].toString() != target[p].toString()))
@@ -444,6 +458,21 @@
             }
 
             return true;
+        },
+        //wap端的滚动自动加载
+        autoScroll:function(cb){
+            window.onscroll = function(){
+                var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+
+                var windowHeight = document.documentElement.clientHeight;
+                var documentHeight = document.body.scrollHeight;
+
+                if(scrollTop + windowHeight >= documentHeight - 50){
+                    if(cb){
+                        cb();
+                    }
+                }
+            }
         }
     }
 

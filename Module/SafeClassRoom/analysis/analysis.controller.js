@@ -42,7 +42,7 @@ angular.module('app')
         }
 
         $scope.goDetail = function(tag){
-            $state.go("survey.surveyAnalysisDetail",{id:tag});
+            $state.go("safeRoom.surveyAnalysisDetail",{id:tag});
         }
     })
     .controller('surveyAnalysisDetailCtrl',function($http,$scope,enume,$stateParams){
@@ -366,7 +366,7 @@ angular.module('app')
         }
 
         $scope.goDetail = function(tag){
-            $state.go("survey.surveyInfoDetail",{id:tag});
+            $state.go("safeRoom.surveyInfoDetail",{id:tag});
         }
 
     })

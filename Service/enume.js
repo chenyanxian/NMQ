@@ -12,13 +12,14 @@ angular.module('app').factory("enume",function($http){
 
         this.templateType = [{name:"全部",code:""}];          //模板分类
         this.templateCate = [{name:"全部",code:""}];          //模板类型
-        this.userSex = [];                                  //性别
-        this.nationality = [];                              //国籍
-        this.place = [];                                    //籍贯
-        this.idType = [];                                   //证件类型
-        this.maritalStatus = [];                            //婚姻状态
-        this.macao = [];                                    //港澳台外
-        this.nation = [];                                   //民族
+
+        this.templateTypeForAdd = [];          //模板分类
+        this.templateCateForAdd = [];          //模板类型
+
+        this.userSex = [{name:"请选择",code:""}];                                  //性别
+        this.idType = [{name:"请选择",code:""}];                                   //证件类型
+        this.maritalStatus = [{name:"请选择",code:""}];                            //婚姻状态
+        this.macao = [{name:"请选择",code:""}];                                    //港澳台外
 
         this.kcxl = [{name:"全部",code:""}];                  //课程系列
         this.kczt = [{name:"全部",code:""}];                  //课程主题
@@ -27,18 +28,41 @@ angular.module('app').factory("enume",function($http){
         this.bj = [{name:"全部",code:""}];                    //班级
         this.skbh = [{name:"全部",code:""}];                  //授课编号
 
+        this.provinces = [{name:"请选择",code:""}];            //省
+
+        this.getData = function(url,cb){
+            $http.get(url).success(function(d){
+                if(d.status.code == "1"){
+                    cb(d.data);
+
+                }else{
+                    alert(d.status.message);
+                }
+            })
+        }
+
+        this.postData = function(url,data,cb){
+            $http({
+                method:"POST",
+                url:url,
+                data:data
+            }).success(function(d){
+                if(d.status.code == "1"){
+                    cb()
+                }else{
+                    alert(d.status.message);
+                }
+            })
+        }
+
         //模板分类
         this.getTemplateType = function(){
             if(this.templateType.length <=1 ){
                 console.log("发送templateType请求!");
-                $http.get("/cmsapi/template/queryModelTypes").success(function(d){
-                    if(d.status.code == "1"){
-                        var tmp = d.data;
-                        for(var i=0;i<tmp.length;i++){
-                            that.templateType.push({name: tmp[i].name,code: tmp[i].code});
-                        }
-                    }else{
-                        alert(d.status.message);
+                this.getData("/cmsapi/template/queryModelTypes",function(tmp){
+                    for(var i=0;i<tmp.length;i++){
+                        that.templateType.push({name: tmp[i].name,code: tmp[i].code});
+                        that.templateTypeForAdd.push({name: tmp[i].name,code: tmp[i].code});
                     }
                 })
             }else{
@@ -49,14 +73,10 @@ angular.module('app').factory("enume",function($http){
         //模板类型
         this.getTemplateCate = function(){
             if(this.templateCate.length <= 1){
-                $http.get("/cmsapi/template/queryModelCategorys").success(function(d){
-                    if(d.status.code == "1"){
-                        var tmp = d.data;
-                        for(var i=0;i<tmp.length;i++){
-                            that.templateCate.push({name: tmp[i].name,code: tmp[i].code});
-                        }
-                    }else{
-                        alert(d.status.message);
+                this.getData("/cmsapi/template/queryModelCategorys",function(tmp){
+                    for(var i=0;i<tmp.length;i++){
+                        that.templateCate.push({name: tmp[i].name,code: tmp[i].code});
+                        that.templateCateForAdd.push({name: tmp[i].name,code: tmp[i].code});
                     }
                 })
             }
@@ -65,31 +85,9 @@ angular.module('app').factory("enume",function($http){
         //性别
         this.getUserSex = function(){
             if(this.userSex.length <= 1){
-                $http.get("../NMQ/data.json").success(function(d){
-                    for(var i=0;i< d.sex.length;i++){
-                        that.userSex.push({name: d.sex[i].name,val: d.sex[i].val});
-                    }
-                })
-            }
-        }
-
-        //国籍
-        this.getNationality = function(){
-            if(this.nationality.length <= 1){
-                $http.get("../NMQ/data.json").success(function(d){
-                    for(var i=0;i< d.nationality.length;i++){
-                        that.nationality.push({name: d.nationality[i].name,val: d.nationality[i].val});
-                    }
-                })
-            }
-        }
-
-        //籍贯
-        this.getPlace = function(){
-            if(this.place.length <= 1){
-                $http.get("../NMQ/data.json").success(function(d){
-                    for(var i=0;i< d.place.length;i++){
-                        that.place.push({name: d.place[i].name,val: d.place[i].val});
+                this.getData("/cmsapi/user/querySex",function(tmp){
+                    for(var i=0;i<tmp.length;i++){
+                        that.userSex.push({name: tmp[i].name,code: tmp[i].code});
                     }
                 })
             }
@@ -98,9 +96,9 @@ angular.module('app').factory("enume",function($http){
         //证件类型
         this.getIdType = function(){
             if(this.idType.length <= 1){
-                $http.get("../NMQ/data.json").success(function(d){
-                    for(var i=0;i< d.idType.length;i++){
-                        that.idType.push({name: d.idType[i].name,val: d.idType[i].val});
+                this.getData("/cmsapi/user/queryIdTypes",function(tmp){
+                    for(var i=0;i<tmp.length;i++){
+                        that.idType.push({name: tmp[i].name,code: tmp[i].code});
                     }
                 })
             }
@@ -109,9 +107,9 @@ angular.module('app').factory("enume",function($http){
         //婚姻状态
         this.getMaritalStatus = function(){
             if(this.maritalStatus.length <= 1){
-                $http.get("../NMQ/data.json").success(function(d){
-                    for(var i=0;i< d.maritalStatus.length;i++){
-                        that.maritalStatus.push({name: d.maritalStatus[i].name,val: d.maritalStatus[i].val});
+                this.getData("/cmsapi/user/queryMarry",function(tmp){
+                    for(var i=0;i<tmp.length;i++){
+                        that.maritalStatus.push({name: tmp[i].name,code: tmp[i].code});
                     }
                 })
             }
@@ -120,20 +118,9 @@ angular.module('app').factory("enume",function($http){
         //港澳台外
         this.getMacao = function(){
             if(this.macao.length <= 1){
-                $http.get("../NMQ/data.json").success(function(d){
-                    for(var i=0;i< d.macao.length;i++){
-                        that.macao.push({name: d.macao[i].name,val: d.macao[i].val});
-                    }
-                })
-            }
-        }
-
-        //民族
-        this.getNation = function(){
-            if(this.nation.length <= 1){
-                $http.get("../NMQ/data.json").success(function(d){
-                    for(var i=0;i< d.nation.length;i++){
-                        that.nation.push({name: d.nation[i].name,val: d.nation[i].val});
+                this.getData("/cmsapi/user/queryMacao",function(tmp){
+                    for(var i=0;i<tmp.length;i++){
+                        that.macao.push({name: tmp[i].name,code: tmp[i].code});
                     }
                 })
             }
@@ -142,9 +129,9 @@ angular.module('app').factory("enume",function($http){
         //课程系列
         this.getKcxl  = function(){
             if(this.kcxl.length <= 1){
-                $http.get("../NMQ/data.json").success(function(d){
-                    for(var i=0;i< d.kcxl.length;i++){
-                        that.kcxl.push({name: d.kcxl[i].name,val: d.kcxl[i].val});
+                this.getData("/cmsapi/user/kcxl",function(tmp){
+                    for(var i=0;i<tmp.length;i++){
+                        that.kcxl.push({name: tmp[i].name,code: tmp[i].code});
                     }
                 })
             }
@@ -153,9 +140,9 @@ angular.module('app').factory("enume",function($http){
         //课程主题
         this.getKczt  = function(){
             if(this.kczt.length <= 1){
-                $http.get("../NMQ/data.json").success(function(d){
-                    for(var i=0;i< d.kczt.length;i++){
-                        that.kczt.push({name: d.kczt[i].name,val: d.kczt[i].val});
+                this.getData("/cmsapi/user/kczt",function(tmp){
+                    for(var i=0;i<tmp.length;i++){
+                        that.kczt.push({name: tmp[i].name,code: tmp[i].code});
                     }
                 })
             }
@@ -164,9 +151,9 @@ angular.module('app').factory("enume",function($http){
         //学年
         this.getXn  = function(){
             if(this.xn.length <= 1){
-                $http.get("../NMQ/data.json").success(function(d){
-                    for(var i=0;i< d.xn.length;i++){
-                        that.xn.push({name: d.xn[i].name,val: d.xn[i].val});
+                this.getData("/cmsapi/user/xn",function(tmp){
+                    for(var i=0;i<tmp.length;i++){
+                        that.xn.push({name: tmp[i].name,code: tmp[i].code});
                     }
                 })
             }
@@ -175,9 +162,9 @@ angular.module('app').factory("enume",function($http){
         //年级
         this.getNj = function(){
             if(this.nj.length <= 1){
-                $http.get("../NMQ/data.json").success(function(d){
-                    for(var i=0;i< d.nj.length;i++){
-                        that.nj.push({name: d.nj[i].name,val: d.nj[i].val});
+                this.getData("/cmsapi/user/nj",function(tmp){
+                    for(var i=0;i<tmp.length;i++){
+                        that.nj.push({name: tmp[i].name,code: tmp[i].code});
                     }
                 })
             }
@@ -186,9 +173,9 @@ angular.module('app').factory("enume",function($http){
         //班级
         this.getBj = function(){
             if(this.bj.length <= 1){
-                $http.get("../NMQ/data.json").success(function(d){
-                    for(var i=0;i< d.bj.length;i++){
-                        that.bj.push({name: d.bj[i].name,val: d.bj[i].val});
+                this.getData("/cmsapi/user/bj",function(tmp){
+                    for(var i=0;i<tmp.length;i++){
+                        that.bj.push({name: tmp[i].name,code: tmp[i].code});
                     }
                 })
             }
@@ -197,29 +184,39 @@ angular.module('app').factory("enume",function($http){
         //授课编号
         this.getSkbh = function(){
             if(this.skbh.length <= 1){
-                $http.get("../NMQ/data.json").success(function(d){
-                    for(var i=0;i< d.skbh.length;i++){
-                        that.skbh.push({name: d.skbh[i].name,val: d.skbh[i].val});
+                this.getData("/cmsapi/user/skbh",function(tmp){
+                    for(var i=0;i<tmp.length;i++){
+                        that.skbh.push({name: tmp[i].name,code: tmp[i].code});
                     }
                 })
             }
         }
 
+        //获取省
+        this.getProvinces = function(){
+            if(this.provinces.length <= 1){
+                this.getData("/cmsapi/user/queryProvinces",function(tmp){
+                    for(var i=0;i<tmp.length;i++){
+                        that.provinces.push({name: tmp[i].name,code: tmp[i].code});
+                    }
+                })
+            }
+        }
+
+
         this.getTemplateCate();
         this.getTemplateType();
         this.getUserSex();
-        this.getNationality();
-        this.getPlace();
         this.getIdType();
         this.getMaritalStatus();
         this.getMacao();
-        this.getNation();
         this.getKcxl();
         this.getKczt();
         this.getXn();
         this.getNj();
         this.getBj();
         this.getSkbh();
+        this.getProvinces();
     }
 
     return new enumHelp();

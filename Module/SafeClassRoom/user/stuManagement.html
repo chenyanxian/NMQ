@@ -2,12 +2,25 @@
 <div class="searchRow clearfix">
     <div class="left mr15">
         <label>所属学校：</label>
-        <input type="text" placeholder="请输入人员名称" class="width200"/>
+        <input type="text" class="width200"/>
+    </div>
+</div>
+
+<div class="searchRow clearfix">
+
+    <div class="left mr15">
+        <label>学年：</label>
+        <select class="width140" ng-model="njNum" ng-options="m.code as m.name for m in njs"></select>
     </div>
 
     <div class="left">
-        <label>学年：</label>
-        <input type="date" class="width200"/>
+        <label>年级：</label>
+        <select class="width140" ng-model="njNum" ng-options="m.code as m.name for m in njs"></select>
+    </div>
+
+    <div class="left">
+        <label>班级：</label>
+        <select class="width140" ng-model="bjNum" ng-options="m.code as m.name for m in bjs"></select>
     </div>
 </div>
 
@@ -15,12 +28,51 @@
     <div class="mb">下载模板：<input type="text" class="downModuleInput"/></div>
     <div>
         上传数据：<input type="text" class="width200"/>
-        <button class="btnGreen ml65">选择文件</button>
-        <button class="btnGreen ml65">批量导入</button>
+        <input type="file" id="fileLoad">
+        <!--<button class="btnGreen ml65">选择文件</button>-->
+        <button class="btnGreen ml65" ng-click="uploadFile();">批量导入</button>
     </div>
-
 </div>
 
+<div class="mt10">
+    <button class="btnGreen ml65" ng-click="seachXs();">查询</button>
+</div>
 
+<div class="grayLine"></div>
+
+<!--<div class="mt10 tr">-->
+<!--<button class="nextBtn">上一页</button>-->
+<!--<button class="nextBtn">下一页</button>-->
+<!--</div>-->
+
+<table class="tableBox" border="1">
+    <thead>
+    <tr>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>人员类型</th>
+        <th>岗位</th>
+        <th>性别</th>
+        <th>备注</th>
+        <th>创建时间</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr ng-repeat="item in userList">
+        <td>{{item.studentId}}</td>
+        <td>{{item.name}}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>{{item.createTime}}</td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="pagingContainer clearfix">
+    <paging get-url="getUrl" callback-fn="directiveCallBack"></paging>
+</div>
 
 
