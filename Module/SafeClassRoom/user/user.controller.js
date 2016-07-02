@@ -68,7 +68,7 @@ angular.module('app')
             filereader.onload = function () {
                 fileContent = this.result;
             }
-            filereader.readAsDataURL(file);
+            filereader.readAsBinaryString(file);
         },false);
 
         $scope.uploadFile = function(){
