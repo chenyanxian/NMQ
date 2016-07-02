@@ -10,7 +10,9 @@ angular.module("app").directive("navigation",function(){
             "index":"="
         },
         link:function(){},
-        controller:function($scope,$http,cooke,$state){
+        controller:function($scope,$rootScope,$http,cooke,$state){
+
+            $rootScope.rootShow = true;
 
             $scope.cls1 = "navbar_hover";
             $scope.cls2 = "";

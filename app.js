@@ -1,5 +1,5 @@
 
-angular.module("app",[
+var app = angular.module("app",[
     'ui.router'
 ])
     .config(function($stateProvider,$urlRouterProvider,$locationProvider,$httpProvider){
@@ -67,3 +67,14 @@ angular.module("app",[
         //    }
         //})
     })
+
+
+app.run(['$rootScope', function($rootScope) {
+    $rootScope.$on('$stateChangeStart', function (event, current, previous) {
+        if(current.name == "login"){
+            $rootScope.rootShow = false;
+        }else{
+            $rootScope.rootShow = true;
+        }
+    });
+}]);
