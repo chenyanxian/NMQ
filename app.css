@@ -47,7 +47,7 @@ hr {
     clear:both;
 }
 
-input,select{
+input[type=text],input[type=date],select{
     border: 1px solid #e0e0e0;
     font-size: 12px;
     padding: 0 8px;
@@ -758,3 +758,37 @@ input[type=file]{
 .pr{
     position: relative;
 }
+
+.search_report{
+    height: 34px;width: 100%;background-color: #D7E5EE;margin-top: 15px;padding-left: 10px;line-height: 34px;
+}
+
+.search_report_item{
+    display: inline-block;text-align: center;cursor: pointer;
+}
+
+.search_report_item:hover{
+    background-color: #0085D7;
+    color: #fff;
+}
+
+.width65{
+    width: 65px;
+}
+
+.width35{
+    width: 35px;
+}
+
+.search_report_spe{
+    display: inline-block;
+
+}
+
+.search_report_spe input[type=date]{
+    border: 1px solid #e0e0e0;
+    font-size: 12px;
+    height: 24px;
+    padding: 0 8px;
+}
+

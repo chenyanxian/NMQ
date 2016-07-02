@@ -5,6 +5,7 @@ var app = angular.module("app",[
     .config(function($stateProvider,$urlRouterProvider,$locationProvider,$httpProvider){
         $urlRouterProvider.otherwise('/safeRoom/templateList');
 
+
         //$locationProvider.html5Mode(true);
 
         //$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
