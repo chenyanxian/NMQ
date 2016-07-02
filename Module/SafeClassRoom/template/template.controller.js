@@ -54,7 +54,7 @@ angular.module('app')
 angular.module('app')
     .controller('createTemplateCtrl', function ($http,$scope,enume,$state,$stateParams) {
 
-        $scope.templateCates =  enume.templateCateForAdd;
+        $scope.templateCates =  enume.templateCate;
         $scope.selectCate = "";
 
         $scope.templateTypes = enume.templateTypeForAdd;
