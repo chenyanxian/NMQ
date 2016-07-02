@@ -18,7 +18,7 @@
     <!--</div>-->
 <!--</div>-->
 
-<div class="searchRow clearfix">
+<div class="searchRow clearfix" ng-show="showButton">
     <div class="mt10">
         <button class="btnGreen ml65" ng-click="preview();">预览问卷</button>
         <button class="btnGreen" ng-click="doSubmit();">提交保存</button>
@@ -54,7 +54,7 @@
             <div class="cT_item_title"><input type="text" class="cT_input" ng-model="item.title"/></div>
             <div class="cT_chapter_oper">
                 <span><a ng-click="addTmByZj(item);">添加题目</a></span>
-                <span><a ng-click="deleteItem(item,data.data);">删除</a></span>
+                <span><a ng-click="deleteZjItem(item,data.data);">删除</a></span>
                 <span><a ng-click="moveUp(item,data.data);">上移</a></span>
                 <span><a ng-click="moveDown(item,data.data);">下移</a></span>
             </div>

@@ -30,11 +30,13 @@ angular.module('app').factory("enume",function($http){
 
         this.provinces = [{name:"请选择",code:""}];            //省
 
+        this.uRylxs = [{name:"全部",code:""}];                //人员类型
+        this.uGws = [{name:"全部",code:""}];                  //岗位
+
         this.getData = function(url,cb){
             $http.get(url).success(function(d){
                 if(d.status.code == "1"){
                     cb(d.data);
-
                 }else{
                     alert(d.status.message);
                 }
@@ -203,6 +205,27 @@ angular.module('app').factory("enume",function($http){
             }
         }
 
+        //获取人员类型
+        this.getuRylxs = function(){
+            if(this.uRylxs.length <= 1){
+                this.getData("/cmsapi/user/queryProvinces",function(tmp){
+                    for(var i=0;i<tmp.length;i++){
+                        that.uRylxs.push({name: tmp[i].name,code: tmp[i].code});
+                    }
+                })
+            }
+        }
+
+        //获取岗位
+        this.getuGws = function(){
+            if(this.uGws.length <= 1){
+                this.getData("/cmsapi/user/queryProvinces",function(tmp){
+                    for(var i=0;i<tmp.length;i++){
+                        that.uGws.push({name: tmp[i].name,code: tmp[i].code});
+                    }
+                })
+            }
+        }
 
         this.getTemplateCate();
         this.getTemplateType();
@@ -217,6 +240,8 @@ angular.module('app').factory("enume",function($http){
         this.getBj();
         this.getSkbh();
         this.getProvinces();
+        this.getuRylxs();
+        this.getuGws();
     }
 
     return new enumHelp();

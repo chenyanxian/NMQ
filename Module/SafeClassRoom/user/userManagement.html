@@ -54,7 +54,7 @@
     <tbody>
     <tr ng-repeat="item in userList">
         <td>{{item.studentId}}</td>
-        <td>{{item.name}}</td>
+        <td><a style="text-decoration: underline;" ng-click="goDetail(item);">{{item.name}}</a></td>
         <td></td>
         <td></td>
         <td></td>

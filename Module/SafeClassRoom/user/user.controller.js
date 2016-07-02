@@ -43,6 +43,10 @@ angular.module('app')
             })
         }
 
+        $scope.goDetail = function(item){
+            $state.go("safeRoom.createUser",{entity:{tag:"detail",studentId:item.studentId}});
+        }
+
     })
     .controller('classManagementCtrl',function($http,$scope,$state,enume){
 
@@ -66,6 +70,12 @@ angular.module('app')
             var file = e.target.files[0];
             var filereader = new FileReader();
             filereader.onload = function () {
+                //var workbook = XLSX.read(this.result, {type : 'binary'});
+                //workbook.SheetNames.forEach(function(sheetName){
+                //    var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+                //    var json_object = JSON.stringify(XL_row_object);
+                //    fileContent = json_object;
+                //})
                 fileContent = this.result;
             }
             filereader.readAsBinaryString(file);
@@ -103,12 +113,18 @@ angular.module('app')
         $scope.downs = [];
         $scope.downsNum = "";
 
-        $scope.utitle = "";
+        $scope.uRylxs = enume.uRylxs;
+        $scope.uRylxNum = "";
+        $scope.uGws = enume.uGws;
+        $scope.uGwNum = "";
 
+        $scope.utitle = "";
         $scope.showImg = false;
 
+        $scope.showButton = true;
 
-        if($stateParams.entity.tag == "edit"){
+        function getUserByStuId(){
+
             enume.getData("/cmsapi/user/queryById?studentId="+$stateParams.entity.studentId,function(tmp){
                 $scope.sex = tmp.sex;
                 $scope.nationalityNum = tmp.nationalityNum;
@@ -127,14 +143,29 @@ angular.module('app')
                 $scope.xmpy = tmp.xmpy;
                 $scope.zjhm = tmp.zjhm;
                 $scope.csrq = new Date(tmp.csrq);
+                $scope.uRylxNum = tmp.uRylxNum;
+                $scope.uGwNum = tmp.uGwNum;
 
                 document.querySelector("#img1").setAttribute("src",tmp.zp);
             })
+        }
+
+        if($stateParams.entity.tag == "edit"){
+            getUserByStuId();
             $scope.showImg = true;
             $scope.utitle = "人员修改";
-        }else{
+            $scope.showButton = true;
+        }
+        else if($stateParams.entity.tag == "detail"){
+            getUserByStuId();
+            $scope.showImg = true;
+            $scope.utitle = "人员详情";
+            $scope.showButton = false;
+        }
+        else{
             $scope.showImg = false;
             $scope.utitle = "人员录入";
+            $scope.showButton = true;
         }
 
         $scope.selectProvinces = function(){
@@ -185,7 +216,9 @@ angular.module('app')
                 idTypeNum:$scope.idTypeNum,             //证件类型
                 zjhm:$scope.zjhm,                       //证件号码
                 maritalStatusNum:$scope.maritalStatusNum,//婚姻状况
-                macaoNum:$scope.macaoNum                 //港澳台外
+                macaoNum:$scope.macaoNum,                //港澳台外
+                uGwNum:$scope.uGwNum,                   //岗位
+                uRylxNum:$scope.uRylxNum                //人员类型
             };
 
             var url = "";

@@ -52,7 +52,7 @@
         <tr ng-repeat="item in templateList">
             <td>{{item.templateType}}</td>
             <td>{{item.category}}</td>
-            <td>{{item.name}}</td>
+            <td><a style="text-decoration: underline;" ng-click="goDetail(item);">{{item.name}}</a></td>
             <td>{{item.remark}}</td>
             <td>{{item.showTime}}</td>
             <td>
