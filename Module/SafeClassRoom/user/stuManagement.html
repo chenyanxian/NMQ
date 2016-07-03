@@ -2,40 +2,38 @@
 <div class="searchRow clearfix">
     <div class="left mr15">
         <label>所属学校：</label>
-        <input type="text" class="width200"/>
+        <input type="text" class="width140" ng-model="schoolName"/>
     </div>
-</div>
-
-<div class="searchRow clearfix">
-
-    <div class="left mr15">
+    <div class="left">
         <label>学年：</label>
-        <select class="width140" ng-model="njNum" ng-options="m.code as m.name for m in njs"></select>
+        <!--<select class="width140" ng-model="njNum" ng-options="m.code as m.name for m in njs"></select>-->
+        <input type="text" class="width140" ng-model="xnmc"/>
     </div>
 
     <div class="left">
         <label>年级：</label>
-        <select class="width140" ng-model="njNum" ng-options="m.code as m.name for m in njs"></select>
+        <input type="text" class="width140" ng-model="njmc"/>
     </div>
 
     <div class="left">
         <label>班级：</label>
-        <select class="width140" ng-model="bjNum" ng-options="m.code as m.name for m in bjs"></select>
+        <input type="text" class="width140" ng-model="bjmc"/>
+    </div>
+
+    <div class="left">
+        <button class="btnGreen ml65" ng-click="seachBj();">查询</button>
     </div>
 </div>
 
 <div class="classDown">
-    <div class="mb">下载模板：<input type="text" class="downModuleInput"/></div>
+    <div class="mb">下载模板：<a href="/cmsapi/downloadfile/学校及班级信息导入模板.xlsx">模板</a></div>
+    <div ng-show="errorXsl" class="mb">错误信息：<a href="/file{{errorUrl}}">查看错误详情</a></div>
     <div>
         上传数据：<input type="text" class="width200"/>
         <input type="file" id="fileLoad">
         <!--<button class="btnGreen ml65">选择文件</button>-->
         <button class="btnGreen ml65" ng-click="uploadFile();">批量导入</button>
     </div>
-</div>
-
-<div class="mt10">
-    <button class="btnGreen ml65" ng-click="seachXs();">查询</button>
 </div>
 
 <div class="grayLine"></div>

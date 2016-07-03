@@ -52,21 +52,29 @@ angular.module('app')
 
         $scope.bjList = [];
 
+        $scope.xxmc = "";
+        $scope.xnmc = "";
+        $scope.njmc = "";
+        $scope.bjmc = "";
+        $scope.errorXsl = false;
+
         $scope.getUrl = function(){
-            return "/cmsapi/user/query?studentId=&name=";
+            return "/cmsapi/tclass/query?xxmc="+$scope.xxmc+"&xnmc="+$scope.xnmc+"&njmc="+$scope.njmc+"&bjmc="+$scope.bjmc;
         }
 
         $scope.directiveCallBack = function(valueFromDirective){
-            $scope.bjList = valueFromDirective;
+            if(valueFromDirective.error == 3){
+                $scope.errorXsl = true;
+                $scope.errorUrl = valueFromDirective.data;
+            }else{
+                $scope.bjList = valueFromDirective;
+                $scope.errorXsl = false;
+            }
         }
 
         var ufile = document.querySelector("#fileLoad");
         var fileContent = "";
         ufile.addEventListener("change",function(e){
-            if(e.target.files.length == 0){
-                alert("请选择图片上传!");
-                return;
-            }
             var file = e.target.files[0];
             var filereader = new FileReader();
             filereader.onload = function () {
@@ -82,15 +90,17 @@ angular.module('app')
         },false);
 
         $scope.uploadFile = function(){
+            if(fileContent){
+                alert("请选择excel文件上传!");
+                return;
+            }
             enume.postData("/cmsapi/tclass/upload",{data:fileContent},function(d){
-                $scope.bjList = d;
+                $scope.$broadcast("searchByFilter");
             })
         }
 
         $scope.seachBj = function(){
-            enume.getData("",function(d){
-                $scope.bjList = d;
-            })
+            $scope.$broadcast("searchByFilter");
         }
     })
     .controller('createUserCtrl',function($http,$scope,$state,enume,$stateParams){
@@ -255,24 +265,32 @@ angular.module('app')
         }
 
     })
-    .controller('stuManagementCtrl',function($http,$scope,$state){
+    .controller('stuManagementCtrl',function($http,$scope,$state,enume){
         $scope.uList = [];
 
+        $scope.xxmc = "";
+        $scope.xnmc = "";
+        $scope.njmc = "";
+        $scope.bjmc = "";
+        $scope.errorXsl = false;
+
         $scope.getUrl = function(){
-            return "/cmsapi/user/query?studentId=&name=";
+            return "/cmsapi/tclass//tclass/queryStudent?xxmc="+$scope.xxmc+"&xnmc="+$scope.xnmc+"&njmc="+$scope.njmc+"&bjmc="+$scope.bjmc;
         }
 
         $scope.directiveCallBack = function(valueFromDirective){
-            $scope.uList = valueFromDirective;
+            if(valueFromDirective.error == 3){
+                $scope.errorXsl = true;
+                $scope.errorUrl = valueFromDirective.data;
+            }else{
+                $scope.uList = valueFromDirective;
+                $scope.errorXsl = false;
+            }
         }
 
         var ufile = document.querySelector("#fileLoad");
         var fileContent = "";
         ufile.addEventListener("change",function(e){
-            if(e.target.files.length == 0){
-                alert("请选择图片上传!");
-                return;
-            }
             var file = e.target.files[0];
             var filereader = new FileReader();
             filereader.onload = function () {
@@ -282,14 +300,16 @@ angular.module('app')
         },false);
 
         $scope.uploadFile = function(){
-            enume.postData("",{data:fileContent},function(d){
-                $scope.uList = d;
+            if(fileContent){
+                alert("请选择excel文件上传!");
+                return;
+            }
+            enume.postData("/cmsapi/tclass/uploadStudent",{data:fileContent},function(d){
+                $scope.$broadcast("searchByFilter");
             })
         }
 
         $scope.seachXs = function(){
-            enume.getData("",function(d){
-                $scope.uList = d;
-            })
+            $scope.$broadcast("searchByFilter");
         }
     });
