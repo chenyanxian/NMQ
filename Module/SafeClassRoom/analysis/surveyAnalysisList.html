@@ -53,6 +53,7 @@
         <th>模板名称</th>
         <th>备注</th>
         <th>更新时间</th>
+        <th>操作</th>
     </tr>
     </thead>
 
@@ -63,6 +64,7 @@
         <td><a style="text-decoration: underline;" ng-click="goDetail(item);">{{item.name}}</a></td>
         <td>{{item.remark}}</td>
         <td>{{item.showTime}}</td>
+        <td><a ng-click="goDetail(item);">查看评价</a></td>
     </tr>
     </tbody>
 </table>

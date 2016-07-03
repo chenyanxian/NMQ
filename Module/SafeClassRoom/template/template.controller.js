@@ -45,8 +45,16 @@ angular.module('app')
             })
         }
 
+        $scope.preView = function (item) {
+            window.open("out.html?code="+item.code,"_blank","height=800,width=500");
+        }
+        
         $scope.goDetail = function(item){
             $state.go("safeRoom.templateCreate",{entity:{tag:"detail",code:item.code}});
+        }
+
+        $scope.getRemark = function(item){
+            return jsCoreMethod.cutString(item.remark,5);
         }
     });
 
@@ -125,7 +133,7 @@ angular.module('app')
                 content: "",
                 "data": []
             };
-            $scope.showScores = true;
+            $scope.showButton = true;
         }
 
         //当前选中的章节
@@ -204,7 +212,7 @@ angular.module('app')
             if(window.confirm("切换模板类型会导致已填写的数据丢失,你是否确定切换?")){
                 $scope.data.data  = [];
                 $scope.data.templateType = x;
-
+                $scope.selectType = x;
                 $scope.showGY = false;
                 $scope.data.title = "设置概要标题调查问卷";
                 $scope.data.content = "设置概要内容";
@@ -468,10 +476,6 @@ angular.module('app')
         }
 
         $scope.preview = function(){
-
-        }
-
-        $scope.doSubmit = function(){
             console.log($scope.data);
 
             var url = "";
@@ -480,17 +484,11 @@ angular.module('app')
             }else{
                 url = "/cmsapi/template/add";
             }
-            $http({
-                method:"POST",
-                url:url,
-                data:$scope.data
-            }).success(function(d){
-                if(d.status.code == "1"){
-                    alert("保存成功");
-                    $state.go("safeRoom.templateList");
-                }else{
-                    alert(d.status.message);
-                }
+
+            enume.postData(url,$scope.data,function(d){
+                alert("保存成功");
+                $state.go("safeRoom.templateList");
+                window.open("out.html?code="+ d.data.code,"_blank","height=800,width=500");
             })
         }
 

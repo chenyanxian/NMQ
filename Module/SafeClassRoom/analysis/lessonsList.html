@@ -42,10 +42,10 @@
         <input type="date" placeholder="请选择结束时间" class="width150" ng-model="eDate"/>
     </div>
 
-    <div class="left">
-        <label>学生姓名：</label>
-        <input type="text" placeholder="请输入模版名称" class="width220" ng-model="xsName"/>
-    </div>
+    <!--<div class="left">-->
+        <!--<label>学生姓名：</label>-->
+        <!--<input type="text" placeholder="请输入模版名称" class="width220" ng-model="xsName"/>-->
+    <!--</div>-->
 </div>
 
 <div class="mt10">
@@ -78,17 +78,17 @@
     </thead>
     <tbody>
         <tr ng-repeat="item in lessonsList">
-            <td>20160424-01</td>
-            <td>2016</td>
-            <td>一年级</td>
-            <td>二班</td>
-            <td>王老师</td>
-            <td>消防安全系列</td>
-            <td>常见消防器材</td>
-            <td>29</td>
-            <td>查看统计</td>
-            <td>查看统计</td>
-            <td>2016-4-24 22:34</td>
+            <td>{{item.skbh}}</td>
+            <td>{{item.xn}}</td>
+            <td>{{item.njmc}}</td>
+            <td>{{item.bjmc}}</td>
+            <td>{{item.xm}}</td>
+            <td>{{item.kcxlmc}}</td>
+            <td>{{item.kcztmc}}</td>
+            <td>{{item.stduentCount}}</td>
+            <td><a ng-click="goJsPingjia(item.teacherWenjuan);">查看评价</a></td>
+            <td><a ng-click="goXsPingjia(item.studentWenjuan);">查看评价</a></td>
+            <td>{{item.showTime}}</td>
         </tr>
     </tbody>
 </table>

@@ -50,7 +50,7 @@ angular.module('app').factory("enume",function($http){
                 data:data
             }).success(function(d){
                 if(d.status.code == "1"){
-                    cb()
+                    cb(d);
                 }else{
                     alert(d.status.message);
                 }

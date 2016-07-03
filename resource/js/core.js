@@ -341,7 +341,6 @@
 
             return res;
         },
-
         //overwrite -->没有这个参数表示不影响数据源
         arraySortByField:function(data,field,desc,overwrite){
             if(data == undefined || data.length == 0 ){
@@ -473,6 +472,12 @@
                     }
                 }
             }
+        },
+        cutString:function(str,num){
+            if(!str){
+                return "";
+            }
+            return str.substring(0,num) + "...";
         }
     }
 

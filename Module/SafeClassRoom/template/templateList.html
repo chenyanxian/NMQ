@@ -53,9 +53,10 @@
             <td>{{item.templateType}}</td>
             <td>{{item.category}}</td>
             <td><a style="text-decoration: underline;" ng-click="goDetail(item);">{{item.name}}</a></td>
-            <td>{{item.remark}}</td>
+            <td>{{getRemark(item)}}</td>
             <td>{{item.showTime}}</td>
             <td>
+                <button ng-click="preView(item);">预览</button>
                 <button ng-click="editTemplate(item);">修改</button>
                 <button ng-click="deleteTemplate(item);">删除</button>
             </td>
