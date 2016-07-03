@@ -22,6 +22,10 @@ angular.module('app')
 
         $scope.templateList = [];
 
+        $scope.getRemark = function(item){
+            return jsCoreMethod.cutString(item.remark,5);
+        }
+
         //查询模板
         $scope.templateListSearch = function(){
             $scope.$broadcast("searchByFilter");
@@ -49,7 +53,7 @@ angular.module('app')
 
         $scope.data = null;
         enume.getData("/cmsapi/template/statistics?code="+$scope.id,function(d){
-            if(d.templateType == "kaoshi"){
+            if(d.templateType == "kaoti"){
                 $scope.scoresShow = true;
             }else{
                 $scope.scoresShow = false;
@@ -306,9 +310,17 @@ angular.module('app')
         function getTotal(items){
             var t = 0;
             for(var i=0;i<items.length;i++){
-                t += items[i].pCount;
+                t += items[i].pcount;
             }
             return t;
+        }
+
+        $scope.getBz =function(bz){
+            if(bz){
+                return "(标准答案)";
+            }else{
+                return "";
+            }
         }
 
         function dealData(){
@@ -317,7 +329,7 @@ angular.module('app')
             for(var i=0;i< d.length;i++){
                 var tmp = d[i].tms;
                 for(var k=0;k<tmp.length;k++){
-                    res.push({bz:tmp[k].bz,scores:tmp[k].scores,name:tmp[k].name,sort:tmp[k].sort,children:tmp[k].items,total:getTotal(tmp[k].items)});
+                    res.push({scores:tmp[k].scores,name:tmp[k].name,sort:tmp[k].sort,children:tmp[k].items,total:getTotal(tmp[k].items)});
                 }
             }
             return res;
@@ -349,6 +361,10 @@ angular.module('app')
         //查询模板
         $scope.templateListSearch = function(){
             $scope.$broadcast("searchByFilter");
+        }
+
+        $scope.getRemark = function(item){
+            return jsCoreMethod.cutString(item.remark,5);
         }
 
         $scope.getUrl = function(){
