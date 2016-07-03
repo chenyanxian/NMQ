@@ -19,7 +19,7 @@ address, cite, dfn, em, var { font-style: normal; } /* 将斜体扶正 */
 ul, ol { list-style: none; }
 
 /* 重置文本格式元素 */
-a { text-decoration: none; }
+a { text-decoration: none; cursor: pointer; }
 a:hover { text-decoration: underline; }
 
 abbr[title], acronym[title] { /* 注：1.ie6 不支持 abbr; 2.这里用了属性选择符，ie6 下无效果 */
@@ -281,6 +281,7 @@ textarea{
 }
 
 .btnGreen{
+    display: inline-block;
     width: 100px;
     height: 30px;
     line-height: 30px;

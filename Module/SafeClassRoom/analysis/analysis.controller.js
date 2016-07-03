@@ -20,29 +20,23 @@ angular.module('app')
         $scope.skbh = enume.skbh;
         $scope.skbhNum = "";
 
-        $scope.bDate ="";
-        $scope.eDate = "";
-        $scope.xsName="";
+        $scope.templateList = [];
 
         //查询模板
         $scope.templateListSearch = function(){
             $scope.$broadcast("searchByFilter");
         }
 
-        $scope.createTemplate = function(){
-            $state.go("template.templateCreate");
-        }
-
         $scope.getUrl = function(){
-            return "../../NMQ/data.json?=cate="+$scope.selectCate+"&selectType="+$scope.selectType + "&name="+$scope.templateName;
+            return "/cmsapi/template/query?category=&type=&name=&begin=&end=";
         }
 
         $scope.directiveCallBack = function(valueFromDirective){
-            $scope.goodsList = valueFromDirective;
+            $scope.templateList = valueFromDirective;
         }
 
-        $scope.goDetail = function(tag){
-            $state.go("safeRoom.surveyAnalysisDetail",{id:tag});
+        $scope.goDetail = function(item){
+            $state.go("safeRoom.surveyAnalysisDetail",{id:item.templateType});
         }
     })
     .controller('surveyAnalysisDetailCtrl',function($http,$scope,enume,$stateParams){
@@ -344,28 +338,22 @@ angular.module('app')
         $scope.skbh = enume.skbh;
         $scope.skbhNum = "";
 
-        $scope.bDate ="";
-        $scope.eDate = "";
-        $scope.xsName="";
+        $scope.templateList = [];
 
         //查询模板
         $scope.templateListSearch = function(){
             $scope.$broadcast("searchByFilter");
         }
 
-        $scope.createTemplate = function(){
-            $state.go("template.templateCreate");
-        }
-
         $scope.getUrl = function(){
-            return "../../NMQ/data.json?=cate="+$scope.selectCate+"&selectType="+$scope.selectType + "&name="+$scope.templateName;
+            return "/cmsapi/template/query?category=&type=&name=&begin=&end=";
         }
 
         $scope.directiveCallBack = function(valueFromDirective){
-            $scope.goodsList = valueFromDirective;
+            $scope.templateList = valueFromDirective;
         }
 
-        $scope.goDetail = function(tag){
+        $scope.goDetail = function(item){
             $state.go("safeRoom.surveyInfoDetail",{id:tag});
         }
 
@@ -706,62 +694,15 @@ angular.module('app')
             $scope.$broadcast("searchByFilter");
         }
 
-        $scope.createTemplate = function(){
-            $state.go("template.templateCreate");
-        }
-
         $scope.getUrl = function(){
             return "../../NMQ/data.json?=cate=&selectType=&name=";
         }
 
         $scope.directiveCallBack = function(valueFromDirective){
-            $scope.goodsList = valueFromDirective;
+            $scope.lessonsList = valueFromDirective;
         }
 
-        $scope.goDetail = function(tag){
-            //$state.go("survey.surveyAnalysisDetail",{id:tag});
-        }
-    })
-    .controller('studentListCtrl', function ($http,$scope,enume,$state) {
-        $scope.kcxl = enume.kcxl;
-        $scope.kcxlNum = "";
-
-        $scope.kczt = enume.kczt;
-        $scope.kcztNum = "";
-
-        $scope.xn = enume.xn;
-        $scope.xnNum = "";
-
-        $scope.nj=enume.nj;
-        $scope.njNum ="";
-
-        $scope.bj = enume.bj;
-        $scope.bjNum = "";
-
-        $scope.skbh = enume.skbh;
-        $scope.skbhNum = "";
-
-        $scope.bDate ="";
-        $scope.eDate = "";
-        $scope.xsName="";
-
-        $scope.templateListSearch = function(){
+        $scope.search = function(){
             $scope.$broadcast("searchByFilter");
-        }
-
-        $scope.createTemplate = function(){
-            $state.go("template.templateCreate");
-        }
-
-        $scope.getUrl = function(){
-            return "../../NMQ/data.json?=cate=&selectType=&name=";
-        }
-
-        $scope.directiveCallBack = function(valueFromDirective){
-            $scope.goodsList = valueFromDirective;
-        }
-
-        $scope.goDetail = function(tag){
-            //$state.go("survey.surveyAnalysisDetail",{id:tag});
         }
     })

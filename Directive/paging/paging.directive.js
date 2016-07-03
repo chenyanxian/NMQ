@@ -41,9 +41,6 @@ angular.module("app").directive("paging",function(){
 
                         $scope.callbackFn(tmp);
                     }
-                    else if(d.status.code == "3"){
-                        $scope.callbackFn({error:3,data: d.data});
-                    }
                     else{
                         alert(d.status.message);
                     }

@@ -26,7 +26,7 @@
 </div>
 
 <div class="classDown">
-    <div class="mb">下载模板：<a href="/cmsapi/downloadfile/学校及班级信息导入模板.xlsx">模板</a></div>
+    <div class="mb">下载模板：<a href="/cmsapi/downloadfile/学生信息导入模板.xlsx">学生信息导入模板</a></div>
     <div ng-show="errorXsl" class="mb">错误信息：<a href="/file{{errorUrl}}">查看错误详情</a></div>
     <div>
         上传数据：<input type="text" class="width200"/>
@@ -45,26 +45,26 @@
 
 <table class="tableBox" border="1">
     <thead>
-    <tr>
-        <th>编号</th>
-        <th>姓名</th>
-        <th>人员类型</th>
-        <th>岗位</th>
-        <th>性别</th>
-        <th>备注</th>
-        <th>创建时间</th>
-    </tr>
+        <tr>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>人员类型</th>
+            <th>岗位</th>
+            <th>性别</th>
+            <th>备注</th>
+            <th>创建时间</th>
+        </tr>
     </thead>
 
     <tbody>
-    <tr ng-repeat="item in userList">
-        <td>{{item.studentId}}</td>
-        <td>{{item.name}}</td>
+    <tr ng-repeat="item in uList">
+        <td>{{item.lineid}}</td>
+        <td>{{item.xm}}</td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
-        <td>{{item.createTime}}</td>
+        <td>{{item.showTime}}</td>
     </tr>
     </tbody>
 </table>

@@ -34,16 +34,16 @@
 </div>
 
 <div class="mt10">
-    <button class="btnGreen ml65 mr15">查询</button>
-    <button class="btnGreen">下载(Excel格式)</button>
+    <button class="btnGreen ml65 mr15" ng-click="templateListSearch();">查询</button>
+    <a class="btnGreen">下载(Excel格式)</a>
 </div>
 
 <div class="grayLine"></div>
 
-<div class="mt10 tr">
-    <button class="nextBtn">上一页</button>
-    <button class="nextBtn">下一页</button>
-</div>
+<!--<div class="mt10 tr">-->
+    <!--<button class="nextBtn">上一页</button>-->
+    <!--<button class="nextBtn">下一页</button>-->
+<!--</div>-->
 
 <table class="tableBox" border="1">
     <thead>
@@ -53,60 +53,20 @@
         <th>模板名称</th>
         <th>备注</th>
         <th>更新时间</th>
-        <th>功能操作</th>
     </tr>
     </thead>
 
     <tbody>
-    <tr>
-        <td ng-click="goDetail(1);">调查问卷1</td>
-        <td>交通安全</td>
-        <td>交通知识调研</td>
-        <td>调查学生的交通知识</td>
-        <td>2016-3-24 22:34</td>
-        <td>
-            <button>修改</button>
-            <button>删除</button>
-        </td>
-    </tr>
-
-    <tr>
-        <td ng-click="goDetail(2);">调查问卷2</td>
-        <td>交通安全</td>
-        <td>交通知识调研</td>
-        <td>调查学生的交通知识</td>
-        <td>2016-3-24 22:34</td>
-        <td>
-            <button>修改</button>
-            <button>删除</button>
-        </td>
-    </tr>
-
-    <tr>
-        <td>调查问卷</td>
-        <td>交通安全</td>
-        <td>交通知识调研</td>
-        <td>调查学生的交通知识</td>
-        <td>2016-3-24 22:34</td>
-        <td>
-            <button>修改</button>
-            <button>删除</button>
-        </td>
-    </tr>
-
-    <tr>
-        <td>调查问卷</td>
-        <td>交通安全</td>
-        <td>交通知识调研</td>
-        <td>调查学生的交通知识</td>
-        <td>2016-3-24 22:34</td>
-        <td>
-            <button>修改</button>
-            <button>删除</button>
-        </td>
+    <tr ng-repeat="item in templateList">
+        <td>{{item.templateType}}</td>
+        <td>{{item.category}}</td>
+        <td><a style="text-decoration: underline;" ng-click="goDetail(item);">{{item.name}}</a></td>
+        <td>{{item.remark}}</td>
+        <td>{{item.showTime}}</td>
     </tr>
     </tbody>
 </table>
+
 
 <div class="pagingContainer clearfix">
     <paging get-url="getUrl" callback-fn="directiveCallBack"></paging>

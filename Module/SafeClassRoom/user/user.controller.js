@@ -63,13 +63,7 @@ angular.module('app')
         }
 
         $scope.directiveCallBack = function(valueFromDirective){
-            if(valueFromDirective.error == 3){
-                $scope.errorXsl = true;
-                $scope.errorUrl = valueFromDirective.data;
-            }else{
-                $scope.bjList = valueFromDirective;
-                $scope.errorXsl = false;
-            }
+            $scope.bjList = valueFromDirective;
         }
 
         var ufile = document.querySelector("#fileLoad");
@@ -90,12 +84,25 @@ angular.module('app')
         },false);
 
         $scope.uploadFile = function(){
-            if(fileContent){
+            if(!fileContent){
                 alert("请选择excel文件上传!");
                 return;
             }
-            enume.postData("/cmsapi/tclass/upload",{data:fileContent},function(d){
-                $scope.$broadcast("searchByFilter");
+            $http({
+                method:"POST",
+                url:"/cmsapi/tclass/upload",
+                data:{data:fileContent}
+            }).success(function(d){
+                if(d.status.code == "1"){
+                    $scope.$broadcast("searchByFilter");
+                    $scope.errorXsl = false;
+                }else if(d.status.code == "3"){
+                    $scope.errorXsl = true;
+                    $scope.errorUrl = d.data;
+                    alert("excel文件里有错误，请下载查看详情!");
+                }else{
+                    alert(d.status.message);
+                }
             })
         }
 
@@ -275,17 +282,11 @@ angular.module('app')
         $scope.errorXsl = false;
 
         $scope.getUrl = function(){
-            return "/cmsapi/tclass//tclass/queryStudent?xxmc="+$scope.xxmc+"&xnmc="+$scope.xnmc+"&njmc="+$scope.njmc+"&bjmc="+$scope.bjmc;
+            return "/cmsapi/tclass/queryStudent?xxmc="+$scope.xxmc+"&xnmc="+$scope.xnmc+"&njmc="+$scope.njmc+"&bjmc="+$scope.bjmc;
         }
 
         $scope.directiveCallBack = function(valueFromDirective){
-            if(valueFromDirective.error == 3){
-                $scope.errorXsl = true;
-                $scope.errorUrl = valueFromDirective.data;
-            }else{
-                $scope.uList = valueFromDirective;
-                $scope.errorXsl = false;
-            }
+            $scope.uList = valueFromDirective;
         }
 
         var ufile = document.querySelector("#fileLoad");
@@ -300,12 +301,25 @@ angular.module('app')
         },false);
 
         $scope.uploadFile = function(){
-            if(fileContent){
+            if(!fileContent){
                 alert("请选择excel文件上传!");
                 return;
             }
-            enume.postData("/cmsapi/tclass/uploadStudent",{data:fileContent},function(d){
-                $scope.$broadcast("searchByFilter");
+            $http({
+                method:"POST",
+                url:"/cmsapi/tclass/uploadStudent",
+                data:{data:fileContent}
+            }).success(function(d){
+                if(d.status.code == "1"){
+                    $scope.$broadcast("searchByFilter");
+                    $scope.errorXsl = false;
+                    alert("excel文件里有错误，请下载查看详情!");
+                }else if(d.status.code == "3"){
+                    $scope.errorXsl = true;
+                    $scope.errorUrl = d.data;
+                }else{
+                    alert(d.status.message);
+                }
             })
         }
 
