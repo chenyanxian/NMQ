@@ -4,14 +4,17 @@
 <div>
     <table class="tableBox" border="1">
         <thead>
-        <th colspan={{item.colspan}} ng-repeat="item in colSpan">{{item.name}}</th>
+            <th colspan={{item.colspan}} ng-repeat="item in colSpan">{{item.name}}</th>
         </thead>
         <tbody>
         <tr>
             <td ng-repeat="s in wtTitles">第{{s.sort}}题</td>
         </tr>
-        <tr ng-repeat="x in wentis">
-            <td ng-repeat="a in x.children">{{a}}</td>
+        <tr ng-show="scoresShow">
+            <td ng-repeat="s1 in wentis">答案({{s1.bz}})/分数{{s1.scores}}</td>
+        </tr>
+        <tr ng-repeat="x in details">
+            <td ng-repeat="a in x.children">{{a.name}}</td>
         </tr>
         </tbody>
     </table>
