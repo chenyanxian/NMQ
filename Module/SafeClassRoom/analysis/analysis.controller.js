@@ -380,9 +380,14 @@ angular.module('app')
         }
 
     })
-    .controller('surveyInfoDetailCtrl',function($http,$scope,enume,$stateParams){
+    .controller('surveyInfoDetailCtrl',function($http,$scope,$state,enume,$stateParams){
 
         $scope.id = $stateParams.id;
+        if(!$stateParams.id){
+            $state.go("safeRoom.surveyInfoList");
+            return;
+        }
+
 
         $scope.data = {
                 templateCategory: "1",
