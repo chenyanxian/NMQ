@@ -66,6 +66,7 @@ angular.module('app')
         $scope.selectCate = "";
 
         $scope.templateTypes = enume.templateTypeForAdd;
+        //$scope.templateTypes = [{name:'问卷',code:'wenjuan'},{name:'考题',code:'kaoti'}];
         $scope.selectType = "wenjuan";
 
         //是否显示分数
@@ -126,8 +127,8 @@ angular.module('app')
             $scope.t_title = "创建模板";
             $scope.data = {
                 code:"",
-                templateCategory: "",
-                templateType: "",
+                templateCategory: $scope.selectCate,
+                templateType: $scope.selectType,
                 title: "",
                 random: "",
                 content: "",
@@ -142,14 +143,27 @@ angular.module('app')
         //添加题目的开关
         var addFlag = false;
 
+        //考题的开关
+        var ktFlag = false;
+
         $scope.cls = "";
         $scope.cls1 = "red";
         $scope.cls2 = "red";
+        $scope.cls3 = "";
 
         $scope.showGY = false;
 
         $scope.addTmByZj = function(item){
-            $scope.cls = "red";
+
+            if($scope.selectType == "kaoti"){
+                $scope.cls = "red";
+                $scope.cls3 = "";
+                ktFlag = true;
+            }else{
+                $scope.cls = "red";
+                $scope.cls3 = "red";
+                ktFlag = false;
+            }
             addFlag = true;
             currentZj = item;
         }
@@ -216,8 +230,9 @@ angular.module('app')
                 $scope.showGY = false;
                 $scope.data.title = "设置概要标题调查问卷";
                 $scope.data.content = "设置概要内容";
-
                 $scope.cls1 = "red";
+                $scope.cls3 = "";
+                $scope.cls = "";
             }else{
                 if(x == "wenjuan"){
                     $scope.selectType = "kaoti";
@@ -228,9 +243,11 @@ angular.module('app')
             if($scope.selectType == "kaoti"){
                 $scope.showScores = true;
                 $scope.isBzFlag = false;
+                ktFlag = true;
             }else{
                 $scope.showScores = false;
                 $scope.isBzFlag = true;
+                ktFlag = false;
             }
         }
 
@@ -443,8 +460,10 @@ angular.module('app')
             }
             currentZj.tms.push(tmp);
             addFlag = false;
+            ktFlag = false;
 
-            $scope.cls = "black";
+            $scope.cls = "";
+            $scope.cls3 = "";
         }
 
         $scope.addDanx = function(){
@@ -462,14 +481,14 @@ angular.module('app')
         }
 
         $scope.addPf = function(){
-            if(addFlag == false){
+            if(addFlag == false || ktFlag){
                 return;
             }
             addTiMu("pingfen");
         }
 
         $scope.addTk = function(){
-            if(addFlag == false){
+            if(addFlag == false || ktFlag){
                 return;
             }
             addTiMu("textbox");
@@ -488,7 +507,7 @@ angular.module('app')
             enume.postData(url,$scope.data,function(d){
                 alert("保存成功");
                 $state.go("safeRoom.templateList");
-                window.open("out.html?code="+ d.data.code,"_blank","height=800,width=500");
+                window.open("out.html?code="+ d.data,"_blank","height=800,width=500");
             })
         }
 

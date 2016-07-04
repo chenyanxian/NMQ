@@ -179,10 +179,11 @@
         //code --- 模版编号
         //leaseholderId -- 租户编码
         //studentId -- 工号
+        var ran = Math.ceil(Math.random()*1000000);
         $.ajax({
             type:"post",
             url:"/api/questionnaire/answer",
-            data:{code:_code,leaseholderId:"t1001",studentId:"99",content:jsCoreMethod.convertStringJson(s)},
+            data:{code:_code,leaseholderId:"t1001",studentId:ran,content:jsCoreMethod.convertStringJson(s)},
             success:function(d){
                 d = eval("("+d+")");
                 alert(d.status.message);
