@@ -547,7 +547,6 @@ angular.module('app')
 
             return tmpRes;
         }
-
         enume.getData("/cmsapi/template/resultInfo?code="+$scope.id,function(d){
             if(d.templateType == "kaoti"){
                 $scope.scoresShow = true;
@@ -559,7 +558,8 @@ angular.module('app')
             var tmp = getHeadInfo($scope.data);
             $scope.colSpan = tmp.cols;
             $scope.wtTitles = tmp.wtTitles;
-            var res = getAllWentis(d);
+            var res = getAllWentis(d.data);
+
             $scope.details = res.res;
             $scope.wentis = res.wentis;
         })
