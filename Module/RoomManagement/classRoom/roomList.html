@@ -3,7 +3,7 @@
 <div class="searchRow clearfix">
     <div class="left mr15">
         <label>学校名称：</label>
-        <input type="text" placeholder="请输入学校名称" class="width287" ng-model="templateName"/>
+        <input type="text" placeholder="请输入学校名称" class="width287" ng-model="schoolName"/>
     </div>
     <div class="left">
         <label>教室建设时间：</label>
@@ -14,56 +14,33 @@
 </div>
 
 <div class="mt10">
-    <button class="btnGreen ml65" ng-click="templateListSearch();">查询</button>
-    <button class="btnGreen" ng-click="createTemplate();">注册教室</button>
+    <button class="btnGreen ml65" ng-click="searchRoom();">查询</button>
+    <button class="btnGreen" ng-click="createRoom();">注册教室</button>
 </div>
 
 <div class="grayLine"></div>
 
-<div class="mt10 tr">
-    <button class="nextBtn">上一页</button>
-    <button class="nextBtn">下一页</button>
-</div>
-
 <table class="tableBox" border="1">
     <thead>
-    <tr>
-        <th>租户号</th>
-        <th>学校名称</th>
-        <th>教室名称</th>
-        <th>教室地址</th>
-        <th>教室授权账号</th>
-        <th>创建时间</th>
-    </tr>
+        <tr>
+            <th>租户号</th>
+            <th>学校名称</th>
+            <th>教室名称</th>
+            <th>教室地址</th>
+            <th>教室授权账号</th>
+            <th>创建时间</th>
+        </tr>
     </thead>
 
     <tbody>
-    <tr>
-        <td>1001</td>
-        <td>二小</td>
-        <td>安全教室</td>
-        <td>西二旗软件园二期</td>
-        <td>JS1991</td>
-        <td>2016-06-14</td>
-    </tr>
-
-    <tr>
-        <td>1001</td>
-        <td>二小</td>
-        <td>安全教室</td>
-        <td>西二旗软件园二期</td>
-        <td>JS1991</td>
-        <td>2016-06-14</td>
-    </tr>
-
-    <tr>
-        <td>1001</td>
-        <td>二小</td>
-        <td>安全教室</td>
-        <td>西二旗软件园二期</td>
-        <td>JS1991</td>
-        <td>2016-06-14</td>
-    </tr>
+        <tr ng-repeat="item in roomList">
+            <td>{{item.aa}}</td>
+            <td>{{item.aa}}</td>
+            <td><a ng-click="goDetail(item);">{{item.aa}}</a></td>
+            <td>{{item.aa}}</td>
+            <td>{{item.aa}}</td>
+            <td>{{item.aa}}</td>
+        </tr>
     </tbody>
 </table>
 

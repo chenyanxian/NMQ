@@ -234,11 +234,11 @@
     ///**********************************
     var jsCoreMethod = {
         //获取当前元素的绝对left
-        getAbsoluteLeft:function(el){
+        getAbsoluteLeft: function (el) {
             var o = el;
             var oLeft = o.offsetLeft;
             var oParent = null;
-            while(o.offsetParent!=null) {
+            while (o.offsetParent != null) {
                 oParent = o.offsetParent;
                 oLeft += oParent.offsetLeft;
                 o = oParent;
@@ -246,10 +246,10 @@
             return oLeft;
         },
         //获取当前元素的绝对top
-        getAbsoluteTop:function(el){
+        getAbsoluteTop: function (el) {
             var o = el;
             var oTop = o.offsetTop;
-            while(o.offsetParent!=null) {
+            while (o.offsetParent != null) {
                 oParent = o.offsetParent;
                 oTop += oParent.offsetTop;
                 o = oParent;
@@ -257,48 +257,49 @@
             return oTop;
         },
         //获取当前url后面的参数
-        getQueryString:function(name) {
-            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        getQueryString: function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
             var r = window.location.search.substr(1).match(reg);
-            if(r!=null)return  decodeURIComponent(r[2]); return null;
+            if (r != null)return decodeURIComponent(r[2]);
+            return null;
         },
         /*
-        * 一个数组里面按照时间字段来排序的方法
-        * @data  数据源
-        * @field 排序日期字段
-        * @desc  升序为true 降序为true
-        * */
-        arraySortByDate:function(data,field,desc){
-            if(data == undefined || data.length == 0 ){
+         * 一个数组里面按照时间字段来排序的方法
+         * @data  数据源
+         * @field 排序日期字段
+         * @desc  升序为true 降序为true
+         * */
+        arraySortByDate: function (data, field, desc) {
+            if (data == undefined || data.length == 0) {
                 return null;
             }
 
-            var arr  =[];
-            if(typeof data[0][field] == "string"){
-                for(var i =0;i<data.length;i++){
-                    data[i]._tmpSortField = new Date(data[i][field].replace(/-/g,'/'));
+            var arr = [];
+            if (typeof data[0][field] == "string") {
+                for (var i = 0; i < data.length; i++) {
+                    data[i]._tmpSortField = new Date(data[i][field].replace(/-/g, '/'));
                     arr.push(data[i]);
                 }
-                if(desc){
-                    arr.sort(function(a,b){
+                if (desc) {
+                    arr.sort(function (a, b) {
                         return a._tmpSortField - b._tmpSortField;
                     })
-                }else{
-                    arr.sort(function(a,b){
+                } else {
+                    arr.sort(function (a, b) {
                         return b._tmpSortField - a._tmpSortField;
                     })
                 }
 
                 return arr;
             }
-            else{
+            else {
                 var res = data.cloneArray();
-                if(desc){
-                    res.sort(function(a,b){
+                if (desc) {
+                    res.sort(function (a, b) {
                         return a[field] - b[field];
                     })
-                }else{
-                    res.sort(function(a,b){
+                } else {
+                    res.sort(function (a, b) {
                         return b[field] - a[field];
                     })
                 }
@@ -306,35 +307,35 @@
                 return res;
             }
         },
-        arraySortByNumber:function(data,field,desc){
-            if(data == undefined || data.length == 0 ){
+        arraySortByNumber: function (data, field, desc) {
+            if (data == undefined || data.length == 0) {
                 return null;
             }
             var res = data.cloneArray();
-            if(desc){
-                res.sort(function(a,b){
+            if (desc) {
+                res.sort(function (a, b) {
                     return a[field] - b[field];
                 })
-            }else{
-                res.sort(function(a,b){
+            } else {
+                res.sort(function (a, b) {
                     return b[field] - a[field];
                 })
             }
 
             return res;
         },
-        arraySortByChar:function(data,field,desc){
+        arraySortByChar: function (data, field, desc) {
 
-            if(data == undefined || data.length == 0 ){
+            if (data == undefined || data.length == 0) {
                 return null;
             }
             var res = data.cloneArray();
-            if(desc){
-                res.sort(function(a,b){
+            if (desc) {
+                res.sort(function (a, b) {
                     return a[field].localeCompare(b[field]);
                 })
-            }else{
-                res.sort(function(a,b){
+            } else {
+                res.sort(function (a, b) {
                     return b[field].localeCompare(a[field]);
                 })
             }
@@ -342,40 +343,40 @@
             return res;
         },
         //overwrite -->没有这个参数表示不影响数据源
-        arraySortByField:function(data,field,desc,overwrite){
-            if(data == undefined || data.length == 0 ){
+        arraySortByField: function (data, field, desc, overwrite) {
+            if (data == undefined || data.length == 0) {
                 return null;
             }
 
             var res = null;
-            if(!overwrite){
+            if (!overwrite) {
                 res = data.cloneArray();
-            }else{
+            } else {
                 res = data;
             }
 
             var tmp = res[0][field];
             //除去日期对象,其他对象类型不排序
-            if(typeof tmp == "object" && tmp instanceof Date != true){
+            if (typeof tmp == "object" && tmp instanceof Date != true) {
                 return data;
             }
 
             //日期判断
-            if(typeof tmp == "object" && tmp instanceof Date){
-                res = this.arraySortByDate(res,field,desc);
-            }else{
+            if (typeof tmp == "object" && tmp instanceof Date) {
+                res = this.arraySortByDate(res, field, desc);
+            } else {
                 //数字判断
-                if(typeof tmp == "number"){
-                    res = this.arraySortByNumber(res,field,desc);
+                if (typeof tmp == "number") {
+                    res = this.arraySortByNumber(res, field, desc);
                 }
-                if(typeof tmp == "string"){
+                if (typeof tmp == "string") {
                     //date判断
-                    if(!/invalid/i.test(new Date(tmp))){
-                        res = this.arraySortByDate(res,field,desc);
+                    if (!/invalid/i.test(new Date(tmp))) {
+                        res = this.arraySortByDate(res, field, desc);
                     }
                     //字符串判断
-                    else{
-                        res = this.arraySortByChar(res,field,desc);
+                    else {
+                        res = this.arraySortByChar(res, field, desc);
                     }
                 }
             }
@@ -383,40 +384,40 @@
             return res;
         },
         //获取 num1 到 num2 的随机整数
-        getRandom:function(num1,num2){
+        getRandom: function (num1, num2) {
             var choices = num2 - num1 + 1;
             return Math.floor(Math.random() * choices + num1);
         },
-        convertStringJson:function(val){
-            if(!val){
+        convertStringJson: function (val) {
+            if (!val) {
                 return null;
             }
-            if(typeof val != "object"){
+            if (typeof val != "object") {
                 return JSON.parse(val);
             }
-            else{
+            else {
                 return JSON.stringify(val);
             }
         },
-        getLocalStorage:function(key){
-            if(!window.localStorage){
+        getLocalStorage: function (key) {
+            if (!window.localStorage) {
                 alert("您的浏览器不支持localStorage");
                 return
             }
             return window.localStorage.getItem(key);
         },
-        setLocalStorage:function(key,val){
-            if(!window.localStorage){
+        setLocalStorage: function (key, val) {
+            if (!window.localStorage) {
                 alert("您的浏览器不支持localStorage");
                 return
             }
-            window.localStorage.setItem(key,val);
+            window.localStorage.setItem(key, val);
         },
         //对象的复制
-        cloneObj:function(source){
+        cloneObj: function (source) {
             var copy = source.constructor();
 
-            for(var attr in source){
+            for (var attr in source) {
                 if (source.hasOwnProperty(attr)) {
                     copy[attr] = source[attr];
                 }
@@ -424,17 +425,19 @@
             return copy;
         },
         //比较2个对象是否相等
-        equals:function(source,target){
+        equals: function (source, target) {
             var p;
             for (p in source) {
-                if (typeof (target[p]) == 'undefined') { return false; }
+                if (typeof (target[p]) == 'undefined') {
+                    return false;
+                }
             }
 
             for (p in source) {
                 if (source[p]) {
                     switch (typeof (source[p])) {
                         case 'object':
-                            if (!jsCoreMethod.equals(source[p],target[p])) {
+                            if (!jsCoreMethod.equals(source[p], target[p])) {
                                 return false;
                             }
                             break;
@@ -444,7 +447,9 @@
                                 return false;
                             break;
                         default:
-                            if (source[p] != target[p]) { return false; }
+                            if (source[p] != target[p]) {
+                                return false;
+                            }
                     }
                 } else {
                     if (target[p])
@@ -453,31 +458,51 @@
             }
 
             for (p in target) {
-                if (typeof (source[p]) == 'undefined') { return false; }
+                if (typeof (source[p]) == 'undefined') {
+                    return false;
+                }
             }
 
             return true;
         },
         //wap端的滚动自动加载
-        autoScroll:function(cb){
-            window.onscroll = function(){
+        autoScroll: function (cb) {
+            window.onscroll = function () {
                 var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
 
                 var windowHeight = document.documentElement.clientHeight;
                 var documentHeight = document.body.scrollHeight;
 
-                if(scrollTop + windowHeight >= documentHeight - 50){
-                    if(cb){
+                if (scrollTop + windowHeight >= documentHeight - 50) {
+                    if (cb) {
                         cb();
                     }
                 }
             }
         },
-        cutString:function(str,num){
-            if(!str){
+        cutString: function (str, num) {
+            if (!str) {
                 return "";
             }
-            return str.substring(0,num) + "...";
+            return str.substring(0, num) + "...";
+        },
+        /*
+         * tag:默认是转换为图片
+         * 传值代表转换成二进制流
+         * */
+        fileReader: function (id, cb, tag) {
+            var imgEl = document.querySelector("#" + id);
+            imgEl.addEventListener("change", function (e) {
+                var file = e.target.files[0];
+                var filereader = new FileReader();
+                filereader.onload = function () {
+                    cb(this.result, file);
+                }
+                if (!tag) {
+                    filereader.readAsDataURL(file);
+                } else {
+                    filereader.readAsBinaryString(file);
+                }
+            }, false)
         }
     }
-

@@ -66,22 +66,10 @@ angular.module('app')
             $scope.bjList = valueFromDirective;
         }
 
-        var ufile = document.querySelector("#fileLoad");
         var fileContent = "";
-        ufile.addEventListener("change",function(e){
-            var file = e.target.files[0];
-            var filereader = new FileReader();
-            filereader.onload = function () {
-                //var workbook = XLSX.read(this.result, {type : 'binary'});
-                //workbook.SheetNames.forEach(function(sheetName){
-                //    var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
-                //    var json_object = JSON.stringify(XL_row_object);
-                //    fileContent = json_object;
-                //})
-                fileContent = this.result;
-            }
-            filereader.readAsBinaryString(file);
-        },false);
+        jsCoreMethod.fileReader("fileLoad",function(d){
+            fileContent = d;
+        },"file")
 
         $scope.uploadFile = function(){
             if(!fileContent){
@@ -198,22 +186,12 @@ angular.module('app')
         }
 
         var fileContent = "";
-        var dragEl = document.querySelector("#fileLoad");
-        dragEl.addEventListener("change",function(e){
-            if(e.target.files.length == 0){
-                alert("请选择图片上传!");
-                return;
-            }
-            var file = e.target.files[0];
-            var filereader = new FileReader();
-            filereader.onload = function () {
-                fileContent = this.result;
-                document.querySelector("#img1").setAttribute("src",this.result);
-                $scope.showImg = true;
-                $scope.$apply();
-            }
-            filereader.readAsDataURL(file);
-        },false);
+        jsCoreMethod.fileReader("fileLoad",function(d){
+            fileContent = d;
+            document.querySelector("#img1").setAttribute("src",d);
+            $scope.showImg = true;
+            $scope.$apply();
+        })
 
         $scope.createUser = function(){
             var tmp = {
@@ -289,16 +267,11 @@ angular.module('app')
             $scope.uList = valueFromDirective;
         }
 
-        var ufile = document.querySelector("#fileLoad");
         var fileContent = "";
-        ufile.addEventListener("change",function(e){
-            var file = e.target.files[0];
-            var filereader = new FileReader();
-            filereader.onload = function () {
-                fileContent = this.result;
-            }
-            filereader.readAsBinaryString(file);
-        },false);
+
+        jsCoreMethod.fileReader("fileLoad",function(d){
+            fileContent = d;
+        },"file")
 
         $scope.uploadFile = function(){
             if(!fileContent){

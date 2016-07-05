@@ -38,7 +38,6 @@
 <table class="tableBox" border="1">
     <thead>
     <tr>
-        <th><input type="checkbox" ng-model="ckAll" /></th>
         <th>模板分类</th>
         <th>模板类型</th>
         <th>模板名称</th>
@@ -50,13 +49,13 @@
 
     <tbody>
     <tr ng-repeat="item in templateList">
-        <td><input type="checkbox" ng-model="item.ck" /></td>
         <td>{{item.templateType}}</td>
         <td>{{item.category}}</td>
-        <td>{{item.name}}</td>
-        <td>{{item.remark}}</td>
-        <td>{{item.createTime}}</td>
+        <td><a style="text-decoration: underline;" ng-click="goDetail(item);">{{item.name}}</a></td>
+        <td>{{getRemark(item)}}</td>
+        <td>{{item.showTime}}</td>
         <td>
+            <button ng-click="preView(item);">预览</button>
             <button ng-click="editTemplate(item);">修改</button>
             <button ng-click="deleteTemplate(item);">删除</button>
         </td>

@@ -21,13 +21,7 @@ angular.module("app").directive("selectTemplate",function(){
             $scope.beginDate = "";
             $scope.endDate = "";
 
-            $scope.templateList = [
-                {ck:false,templateType:11,category:"aa",name:"aaa",remark:"aaa",createTime:"aaaa"},
-                {ck:false,templateType:11,category:"aa",name:"aaa",remark:"aaa",createTime:"aaaa"},
-                {ck:false,templateType:11,category:"aa",name:"aaa",remark:"aaa",createTime:"aaaa"},
-                {ck:false,templateType:11,category:"aa",name:"aaa",remark:"aaa",createTime:"aaaa"},
-                {ck:false,templateType:11,category:"aa",name:"aaa",remark:"aaa",createTime:"aaaa"}
-            ];
+            $scope.templateList = [];
 
             //查询模板
             $scope.templateListSearch = function(){
@@ -42,18 +36,8 @@ angular.module("app").directive("selectTemplate",function(){
                 $scope.templateList = valueFromDirective;
             }
 
-            $scope.editTemplate = function(item){
-                $state.go("safeRoom.templateCreate",{entity:{tag:"edit",code:item.code}});
-            }
-
-            $scope.deleteTemplate = function(item){
-                $http.get("/cmsapi/template/delete/"+item.id).success(function(d){
-                    if(d.status.code == "1"){
-                        $scope.templateList = $scope.templateList.deleteByKey("id",item.id);
-                    }else{
-                        alert(d.status.message);
-                    }
-                })
+            $scope.getRemark = function(item){
+                return jsCoreMethod.cutString(item.remark,5);
             }
 
             $scope.getTemplates = function(){
