@@ -14,9 +14,8 @@ angular.module("app").directive("navigation",function(){
 
             $rootScope.rootShow = true;
 
-            $scope.cls1 = "navbar_hover";
-            $scope.cls2 = "";
-            $scope.cls3 = "";
+            $rootScope.cls1 = "navbar_hover";
+            $rootScope.cls3 = "";
 
             $scope.c1 = function(){
                 $scope.cls1 = "navbar_hover";

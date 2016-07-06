@@ -38,6 +38,7 @@
 <table class="tableBox" border="1">
     <thead>
     <tr>
+        <th><input type="checkbox" /></th>
         <th>模板分类</th>
         <th>模板类型</th>
         <th>模板名称</th>
@@ -49,6 +50,7 @@
 
     <tbody>
     <tr ng-repeat="item in templateList">
+        <td><input type="checkbox" ng-model="item.ck"/></td>
         <td>{{item.templateType}}</td>
         <td>{{item.category}}</td>
         <td><a style="text-decoration: underline;" ng-click="goDetail(item);">{{item.name}}</a></td>

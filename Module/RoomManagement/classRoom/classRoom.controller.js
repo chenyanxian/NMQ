@@ -5,7 +5,7 @@
 'use strict';
 
 angular.module('app')
-    .controller('createProductCtl',function ($http,$scope,enume,$state) {
+    .controller('createProductCtl',function ($http,$scope,enume,$state,$stateParams) {
         $scope.proCate = "jf";
         $scope.jfs = [];
         $scope.jfNum = "";
@@ -24,9 +24,6 @@ angular.module('app')
         $scope.spjj = "";
         $scope.spnr = "";
 
-        var proImg = "";
-        var keVideo = "";
-
         $scope.tmpId1 = "";
         $scope.tmpName1 = "";
         $scope.tmpId2 = "";
@@ -38,21 +35,28 @@ angular.module('app')
         $scope.tmpId5 = "";
         $scope.tmpName5 = "";
 
+        $scope.file1 = "";
+        $scope.file2 = "";
+
         $scope.showDialog = false;
 
-
         jsCoreMethod.fileReader("btn1",function(d,f){
-            proImg = d;
-            document.querySelector("#file1").innerHTML = f.name;
-        })
+            enume.postData("/cmsapi/image/upload",d,function(data){
+                $scope.file1 = "/file"+data.data;
+                //$scope.$apply();
+            })
+        },"file")
 
         jsCoreMethod.fileReader("btn2",function(d,f){
-            keVideo = d;
-            document.querySelector("#file2").innerHTML = f.name;
+            enume.postData("/cmsapi/image/upload?suffix="+ f.name.substring(f.name.lastIndexOf('.')+1),d,function(data){
+                $scope.file2 = "/file"+data.data;
+                //$scope.$apply();
+            })
         },"file")
 
         var openTag = 0;
         $scope.getChooseTmps = function(d){
+            d = d[0];
             if(openTag == 1){
                 $scope.tmpId1 = d.code;
                 $scope.tmpName1 = d.name;
@@ -88,35 +92,58 @@ angular.module('app')
             $state.go("roomManage.productList");
         }
 
+        function getNameById(id,arr){
+            var res = "";
+            for(var i=0;i<arr.length;i++){
+                if(id == arr[i].code){
+                    res = arr[i].name;
+                    break;
+                }
+            }
+            return res;
+        }
+
         $scope.savePro = function(){
             var tmp = {
-                proCate:$scope.proCate,
-                jfNum:$scope.jfNum,
-                syjsbbh:$scope.syjsbbh,
-                kcxlsNum:$scope.kcxlsNum,
-                ddbbh:$scope.ddbbh,
-                spbh:$scope.spbh,
-                ssmc:$scope.ssmc,
-                proStatus:$scope.proStatus,
-                spkc:$scope.spkc,
-                spjj:$scope.spjj,
-                spnr:$scope.spnr,
-                proImg:proImg,
-                keVideo:keVideo,
-                tmpId1:$scope.tmpId1,
-                tmpName1:$scope.tmpName1,
-                tmpId2:$scope.tmpId2,
-                tmpName2:$scope.tmpName2,
-                tmpId3:$scope.tmpId3,
-                tmpName3:$scope.tmpName3,
-                tmpId4:$scope.tmpId4,
-                tmpName4:$scope.tmpName4,
-                tmpId5:$scope.tmpId5,
-                tmpName5:$scope.tmpName5,
+                proCate:$scope.proCate,         //商品类别
+                jfNum:$scope.jfNum,             //选择的教辅id
+                jfmc:getNameById($scope.jfs,$scope.jfNum),
+                syjsbbh:$scope.syjsbbh,          //适用教室版本号
+                kcxlsNum:$scope.kcxlsNum,       //课程系列id
+                kcxlmc:getNameById($scope.kcxlsNum,$scope.kcxls),
+                ddbbh:$scope.ddbbh,             //当前版本号
+                spbh:$scope.spbh,               //商品编号
+                ssmc:$scope.ssmc,               //商品名称
+                proStatus:$scope.proStatus,     //商品状态
+                spkc:$scope.spkc,               //商品库存
+                spjj:$scope.spjj,               //商品简介
+                spnr:$scope.spnr,               //商品内容
+                proImg:$scope.file1,            //商品缩略图
+                keVideo:$scope.file2,           //课件视频
+                tmpId1:$scope.tmpId1,           //教师对课程评价问卷ID
+                tmpName1:$scope.tmpName1,       //教师对课程评价问卷Name
+                tmpId2:$scope.tmpId2,           //学生对课程评价问卷ID
+                tmpName2:$scope.tmpName2,       //学生对课程评价问卷Mame
+                tmpId3:$scope.tmpId3,           //其他对课程评价问卷ID
+                tmpName3:$scope.tmpName3,       //其他对课程评价问卷Name
+                tmpId4:$scope.tmpId4,           //课堂作业问卷ID
+                tmpName4:$scope.tmpName4,       //课堂作业问卷Name
+                tmpId5:$scope.tmpId5,           //课后作业问卷ID
+                tmpName5:$scope.tmpName5        //课后作业问卷Name
             };
-            enume.postData("",tmp,function(d){
 
+            var url = "";
+            if($stateParams.entity.tag == "edit"){
+                url = "/cmsapi/course/update";
+                tmp.lineid = $stateParams.entity.lineid;
+            }else{
+                url = "/cmsapi/course/register";
+            }
+
+            enume.postData(url,tmp,function(d){
+                $state.go("roomManage.productList");
             })
+
         }
 
         $scope.previewPro = function(){
@@ -155,7 +182,7 @@ angular.module('app')
                     enume.postData("/cmsapi/image/upload",d,function(data){
                         //document.querySelector("#sp"+(index+1)).innerHTML = f.name;
                         $scope["sp"+(index+1)] = "/file"+data.data;
-                        $scope.$apply();
+                        //$scope.$apply();
                     })
                 },"file")
             })(i);
@@ -290,3 +317,49 @@ angular.module('app')
         }
     })
 
+    .controller('productListCtl',function ($http,$scope,enume,$state) {
+
+        $scope.proCate = "jf";
+        $scope.jfs = [];
+        $scope.jfNum = "";
+
+        $scope.syjsbbh = "";
+        $scope.kcxls = [];
+        $scope.kcxlsNum = "";
+
+        $scope.proList = [];
+
+        $scope.seachPros = function(){
+            $scope.$broadcast("searchByFilter");
+        }
+
+        $scope.createPro = function(){
+            $state.go("roomManage.createProduct",{entity:{tag:"add"}});
+        }
+
+        $scope.getUrl = function(){
+            return "/cmsapi/course/query?cate="+$scope.proCate+"&syjsbbh="+$scope.syjsbbh + "&jfNum="+$scope.jfNum + "&kcxlsNum="+$scope.kcxlsNum;
+        }
+
+        $scope.directiveCallBack = function(valueFromDirective){
+            $scope.proList = valueFromDirective;
+        }
+
+        $scope.editRoom = function(item){
+            $state.go("roomManage.register",{entity:{tag:"edit",lineid:item.lineid}});
+        }
+
+        $scope.deleteRoom = function(item){
+            enume.getData("xxxxx",function(d){
+                $scope.roomList = $scope.roomList.deleteByKey("id",item.lineid);
+            })
+        }
+
+        $scope.goDetail = function(item){
+            $state.go("roomManage.register",{entity:{tag:"detail",lineid:item.lineid}});
+        }
+
+        $scope.getRemark = function(item){
+            return jsCoreMethod.cutString(item.remark,5);
+        }
+    })
