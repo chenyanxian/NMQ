@@ -40,7 +40,7 @@ angular.module("app").directive("selectTemplate",function(){
                 return jsCoreMethod.cutString(item.remark,5);
             }
 
-            $scope.getTemplates = function(){
+            $scope.getSelectedPros = function(){
                 var d = $scope.templateList;
 
                 var res = [];

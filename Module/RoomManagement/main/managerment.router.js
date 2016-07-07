@@ -34,11 +34,11 @@ angular.module('app').config(function($stateProvider){
             templateUrl: "./Module/RoomManagement/classRoom/createProduct.html",
             controller: 'createProductCtl'
         })
-        .state('roomManage.schoolTeaching', {
-            url: '/schoolTeaching',
+        .state('roomManage.warrant', {
+            url: '/warrant',
             params:{entity:{}},
-            templateUrl: "./Module/RoomManagement/classRoom/schoolTeaching.html",
-            controller: 'schoolTeachingCtl'
+            templateUrl: "./Module/RoomManagement/classRoom/warrant.html",
+            controller: 'warrantCtl'
         })
         .state('roomManage.pushBullet',{
             url:'/pushBullet',
