@@ -149,6 +149,10 @@ angular.module('app')
         $scope.previewPro = function(){
 
         }
+
+        $scope.selectTemplates = function(){
+            $scope.$broadcast("getCkTemplates");
+        }
     })
 
     .controller('registerRoomCtl',function ($http,$scope,enume,$state,$stateParams) {

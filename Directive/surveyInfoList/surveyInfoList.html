@@ -1,0 +1,69 @@
+<div class="searchRow clearfix">
+    <div class="left mr15">
+        <label>课程系列：</label>
+        <select class="width220" ng-model="kcxlNum" ng-options="m.val as m.name for m in kcxl"></select>
+    </div>
+
+    <!--<div class="left mr15">-->
+        <!--<label>课程主题：</label>-->
+        <!--<select class="width220" ng-model="kcztNum" ng-options="m.val as m.name for m in kczt"></select>-->
+    <!--</div>-->
+
+    <!--<div class="left mr15">-->
+        <!--<label>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年：</label>-->
+        <!--<select class="width220" ng-model="xnNum" ng-options="m.val as m.name for m in xn"></select>-->
+    <!--</div>-->
+</div>
+
+<div class="searchRow clearfix">
+    <div class="left mr15">
+        <label>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级：</label>
+        <select class="width220" ng-model="njNum" ng-options="m.val as m.name for m in nj"></select>
+    </div>
+
+    <div class="left mr15">
+        <label>班&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级：</label>
+        <select class="width220" ng-model="bjNum" ng-options="m.val as m.name for m in bj"></select>
+    </div>
+
+    <div class="left mr15">
+        <label>授课编号：</label>
+        <select class="width220" ng-model="skbhNum" ng-options="m.val as m.name for m in skbh"></select>
+    </div>
+</div>
+
+<div class="mt10">
+    <button class="btnGreen ml65 mr15" ng-click="templateListSearch();">查询</button>
+</div>
+
+<div class="grayLine"></div>
+
+<table class="tableBox" border="1">
+    <thead>
+    <tr>
+        <th ng-show="showCk.show"><input type="checkbox" ng-model="ckAll" /></th>
+        <th>模板分类</th>
+        <th>模板类型</th>
+        <th>模板名称</th>
+        <th>备注</th>
+        <th>更新时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr ng-repeat="item in templateList">
+        <td ng-show="showCk.show"><input type="checkbox" ng-model="item.ck" /></td>
+        <td>{{item.templateType}}</td>
+        <td>{{item.category}}</td>
+        <td><a style="text-decoration: underline;" ng-click="goDetail(item);">{{item.name}}</a></td>
+        <td>{{getRemark(item)}}</td>
+        <td>{{item.showTime}}</td>
+        <td><a ng-click="goDetail(item);">查看评价</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="pagingContainer clearfix">
+    <paging get-url="getUrl" callback-fn="directiveCallBack"></paging>
+</div>

@@ -84,4 +84,16 @@ angular.module('app').config(function($stateProvider){
             templateUrl:"./Module/RoomManagement/analyse/productSort.html",
             controller:"productSortCtl"
         })
+        .state('roomManage.dictionary',{
+            url:'/dictionary',
+            params:{entity:{}},
+            templateUrl:'./Module/RoomManagement/other/dictionary.html',
+            controller:'dictionaryCtrl'
+        })
+        .state('roomManage.report',{
+            url:'/reports',
+            params:{entity:{}},
+            templateUrl:'./Module/RoomManagement/other/reports.html',
+            controller:'reportsCtrl'
+        })
 });

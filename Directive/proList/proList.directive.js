@@ -9,7 +9,7 @@ angular.module("app").directive("proList",function(){
         restrict:"EA",
         scope:{
             "chooseCallback":"=",
-            "showProBtn":"=",
+            "showAddBtn":"=",
             "showCk":"="
         },
         link:function(){},

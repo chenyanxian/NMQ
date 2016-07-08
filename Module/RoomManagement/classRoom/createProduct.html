@@ -147,6 +147,7 @@
 <div class="mask" ng-if="showDialog">
     <div class="mask_container">
         <p class="close_mask" ng-click="closeDialog();">X</p>
-            <select-Template choose-callback="getChooseTmps"></select-Template>
+            <template-list show-add-btn="{show:false}" show-ck="{show:true}" choose-callback="getChooseTmps"></template-list>
+        <button class="btnGreen" ng-click="selectTemplates();">确定</button>
     </div>
 </div>

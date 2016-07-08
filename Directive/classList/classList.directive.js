@@ -9,7 +9,7 @@ angular.module("app").directive("classList",function(){
         restrict:"EA",
         scope:{
             "chooseCallback":"=",
-            "showClassBtn":"=",
+            "showAddBtn":"=",
             "showCk":"="
         },
         link:function(){},

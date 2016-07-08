@@ -110,19 +110,9 @@ angular.module('app')
         }
 
         queryChildByCate($scope.searchSelectCate);
-    });
+    })
 
-
-angular.module('app')
     .controller('reportsCtrl', function ($http,$scope) {
-
-        $scope.getUrl = function(){
-            return "";
-        }
-
-        $scope.directiveCallBack = function(valueFromDirective){
-            $scope.templateList = valueFromDirective;
-        }
 
     });
 

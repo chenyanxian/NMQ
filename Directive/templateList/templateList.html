@@ -1,4 +1,3 @@
-<div class="navigation">我的应用 > 选择问卷</div>
 <div class="searchRow clearfix">
     <div class="left mr15">
         <label>模版分类：</label>
@@ -26,6 +25,7 @@
 
 <div class="mt10">
     <button class="btnGreen ml65" ng-click="templateListSearch();">查询</button>
+    <button ng-show="showAddBtn.show" class="btnGreen" ng-click="createTemplate();">创建模版</button>
 </div>
 
 <div class="grayLine"></div>
@@ -38,7 +38,7 @@
 <table class="tableBox" border="1">
     <thead>
     <tr>
-        <th><input type="checkbox" /></th>
+        <th ng-show="showCk.show"><input type="checkbox" ng-model="ckAll" /></th>
         <th>模板分类</th>
         <th>模板类型</th>
         <th>模板名称</th>
@@ -50,7 +50,7 @@
 
     <tbody>
     <tr ng-repeat="item in templateList">
-        <td><input type="checkbox" ng-model="item.ck"/></td>
+        <td ng-show="showCk.show"><input type="checkbox" ng-model="item.ck" /></td>
         <td>{{item.templateType}}</td>
         <td>{{item.category}}</td>
         <td><a style="text-decoration: underline;" ng-click="goDetail(item);">{{item.name}}</a></td>
@@ -67,8 +67,4 @@
 
 <div class="pagingContainer clearfix">
     <paging get-url="getUrl" callback-fn="directiveCallBack"></paging>
-</div>
-
-<div class="searchRow clearfix">
-    <button class="btnGreen ml65" ng-click="getTemplates();">确定</button>
 </div>
