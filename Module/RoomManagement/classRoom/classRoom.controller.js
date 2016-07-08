@@ -396,6 +396,10 @@ angular.module('app')
                 begin:$scope.beginDate,
                 end:$scope.endDate
             };
+
+            enume.postData("/cmsapi/tclassRegister/auth",tmp,function(d){
+                alert("授权成功!");
+            })
         }
 
     })
