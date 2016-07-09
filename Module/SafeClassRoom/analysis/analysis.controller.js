@@ -7,7 +7,7 @@ angular.module('app')
     .controller('surveyInfoDetailCtrl',function($http,$scope,$state,enume,$stateParams){
         $scope.entity = {id:$stateParams.id};
     })
-    .controller('lessonsListCtrl', function ($http,$scope,enume,$state,$timeout) {
+    .controller('lessonsListCtrl', function ($http,$scope,enume,$state) {
 
         $scope.kcxl = enume.kcxl;
         $scope.kcxlNum = "";
@@ -32,20 +32,14 @@ angular.module('app')
 
         $scope.downLink = "";
         $scope.btnCls = "btnGray";
-        $scope.isDisabled = false;
+        $scope.isDisabled = true;
 
         function downFile(){
             enume.getData("/cmsapi/teaching/log/download",function(d){
                 $scope.btnCls = "btnGreen";
-                $scope.downLink = d;
-                $scope.isDisabled = true;
+                $scope.downLink = "/file/"+d;
+                $scope.isDisabled = false;
             })
-
-            $timeout(function(){
-                $scope.btnCls = "btnGreen";
-                $scope.downLink = "http://www.baidu.com";
-                $scope.isDisabled = true;
-            },3000)
         }
 
         downFile();

@@ -11,13 +11,20 @@
         <select class="width220" ng-model="kcztNum" ng-options="m.val as m.name for m in kczt"></select>
     </div>
 
-    <div class="left mr15">
-        <label>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年：</label>
-        <select class="width220" ng-model="xnNum" ng-options="m.val as m.name for m in xn"></select>
+    <div class="left">
+        <label>授课时间：</label>
+        <input type="date" placeholder="请选择开始时间" class="width150" ng-model="bDate"/>
+        <span> 到 </span>
+        <input type="date" placeholder="请选择结束时间" class="width150" ng-model="eDate"/>
     </div>
 </div>
 
 <div class="searchRow clearfix">
+    <div class="left mr15">
+        <label>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年：</label>
+        <select class="width220" ng-model="xnNum" ng-options="m.val as m.name for m in xn"></select>
+    </div>
+
     <div class="left mr15">
         <label>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级：</label>
         <select class="width220" ng-model="njNum" ng-options="m.val as m.name for m in nj"></select>
@@ -27,25 +34,6 @@
         <label>班&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级：</label>
         <select class="width220" ng-model="bjNum" ng-options="m.val as m.name for m in bj"></select>
     </div>
-
-    <div class="left mr15">
-        <label>授课编号：</label>
-        <select class="width220" ng-model="skbhNum" ng-options="m.val as m.name for m in skbh"></select>
-    </div>
-</div>
-
-<div class="searchRow clearfix">
-    <div class="left">
-        <label>授课时间：</label>
-        <input type="date" placeholder="请选择开始时间" class="width150" ng-model="bDate"/>
-        <span> 到 </span>
-        <input type="date" placeholder="请选择结束时间" class="width150" ng-model="eDate"/>
-    </div>
-
-    <!--<div class="left">-->
-        <!--<label>学生姓名：</label>-->
-        <!--<input type="text" placeholder="请输入模版名称" class="width220" ng-model="xsName"/>-->
-    <!--</div>-->
 </div>
 
 <div class="mt10">
