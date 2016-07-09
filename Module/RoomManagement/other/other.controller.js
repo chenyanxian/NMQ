@@ -14,19 +14,19 @@ angular.module('app')
             $scope.showAddChild = true;
         }
 
-        $scope.cates = [{name:"请选择",code:""}];
-        $scope.searchSelectCate = "";
+        $scope.cates = [{name:'请选择',code:''}];
+        $scope.searchSelectCate = '';
         $scope.children = [];
-        $scope.selectCate = "";
+        $scope.selectCate = '';
 
-        $scope.cateName = "";
-        $scope.cateCode = "";
-        $scope.childName = "";
-        $scope.childCode = "";
+        $scope.cateName = '';
+        $scope.cateCode = '';
+        $scope.childName = '';
+        $scope.childCode = '';
         $scope.showEditChild = false;
 
-        $http.get("/cmsapi/dictionary/queryRoot?code=&name=&pageIndex=1&pageSize=10").success(function(d){
-            if(d.status.code == "1"){
+        $http.get('/cmsapi/dictionary/queryRoot?code=&name=&pageIndex=1&pageSize=10').success(function(d){
+            if(d.status.code == '1'){
                 var tmp = d.data;
                 for(var i=0;i<tmp.length;i++){
                     $scope.cates.push(tmp[i]);
@@ -37,8 +37,8 @@ angular.module('app')
         })
 
         $scope.addCate = function(){
-            $http.get("/cmsapi/dictionary/add?code="+encodeURIComponent($scope.cateCode)+"&parentCode=&name="+encodeURIComponent($scope.cateName)).success(function(d){
-                if(d.status.code == "1"){
+            $http.get('/cmsapi/dictionary/add?code='+encodeURIComponent($scope.cateCode)+'&parentCode=&name='+encodeURIComponent($scope.cateName)).success(function(d){
+                if(d.status.code == '1'){
                     $scope.cates.push(d.data);
                 }else{
                     alert(d.status.message);
@@ -47,8 +47,8 @@ angular.module('app')
         }
 
         $scope.addChild = function(){
-            $http.get("/cmsapi/dictionary/add?code="+encodeURIComponent($scope.childCode)+"&parentCode="+$scope.selectCate+"&name="+encodeURIComponent($scope.childName)).success(function(d){
-                if(d.status.code == "1"){
+            $http.get('/cmsapi/dictionary/add?code='+encodeURIComponent($scope.childCode)+'&parentCode='+$scope.selectCate+'&name='+encodeURIComponent($scope.childName)).success(function(d){
+                if(d.status.code == '1'){
                     $scope.children.push(d.data);
                 }else{
                     alert(d.status.message);
@@ -58,8 +58,8 @@ angular.module('app')
 
         function queryChildByCate(cate){
             $scope.children.length = 0;
-            $http.get("/cmsapi/dictionary/queryByParentCode?parentCode="+cate).success(function(d){
-                if(d.status.code == "1"){
+            $http.get('/cmsapi/dictionary/queryByParentCode?parentCode='+cate).success(function(d){
+                if(d.status.code == '1'){
                     var tmp = d.data;
                     for(var i=0;i<tmp.length;i++){
                         $scope.children.push(tmp[i]);
@@ -84,14 +84,14 @@ angular.module('app')
 
         $scope.editChild = function(){
             var item = currentItem;
-            $http.get("/cmsapi/dictionary/update?id="+currentItem.id+"&code="+encodeURIComponent($scope.editChildCode)+"&parentCode="+currentItem.parentCode+"&name="+encodeURIComponent($scope.editChildName)).success(function(d){
-                if(d.status.code == "1"){
+            $http.get('/cmsapi/dictionary/update?id='+currentItem.id+'&code='+encodeURIComponent($scope.editChildCode)+'&parentCode='+currentItem.parentCode+'&name='+encodeURIComponent($scope.editChildName)).success(function(d){
+                if(d.status.code == '1'){
                     $scope.showEditChild = false;
 
                     currentItem.name = $scope.editChildName;
                     currentItem.code = $scope.editChildCode;
 
-                    alert("修改成功!");
+                    alert('修改成功!');
                 }else{
                     alert(d.status.message);
                 }
@@ -99,10 +99,10 @@ angular.module('app')
         }
 
         $scope.del = function(item){
-            $http.get("/cmsapi/dictionary/delete/"+item.id).success(function(d){
-                if(d.status.code == "1"){
-                    alert("删除成功!");
-                    $scope.children = $scope.children.deleteByKey("id",item.id);
+            $http.get('/cmsapi/dictionary/delete/'+item.id).success(function(d){
+                if(d.status.code == '1'){
+                    alert('删除成功!');
+                    $scope.children = $scope.children.deleteByKey('id',item.id);
                 }else{
                     alert(d.status.message);
                 }
@@ -114,54 +114,64 @@ angular.module('app')
 
     .controller('reportsCtrl', function ($http,$scope) {
 
-        var tmp = ["今天","昨天","上周同期"];
+        var tmp = ['今天','昨天','上周同期'];
         var chartsData = null;
 
         $scope.pvs = [];
+        $scope.tData = [];
         $scope.bdate = new Date();
         $scope.edata = new Date();
 
-        $scope.bgc1 = "reportBlue";
-        $scope.bgc2 = "";
-        $scope.bgc3 = "";
+        $scope.bgc1 = 'reportBlue';
+        $scope.bgc2 = '';
+        $scope.bgc3 = '';
 
-        $http.get("/overview",function(d){
-            var d = d.data.datas;
-
+        $http.get('/overview').success(function(d){
+            if(d.status != '200'){
+                alert('服务器异常!');
+                return;
+            }
+            var d = d.data;
             for(var i=0;i< d.length;i++){
                 d[i].time = tmp[i];
             }
+
+            $scope.pvs = d;
         })
 
-        var _type = "h";
+        var _type = 'h';
         $scope.getType = function(tag){
-            if(tag == "h"){
-                $scope.bgc1 = "reportBlue";
-                $scope.bgc2 = "";
-                $scope.bgc3 = "";
+            if(tag == 'h'){
+                $scope.bgc1 = 'reportBlue';
+                $scope.bgc2 = '';
+                $scope.bgc3 = '';
             }
-            if(tag == "d"){
-                $scope.bgc1 = "";
-                $scope.bgc2 = "reportBlue";
-                $scope.bgc3 = "";
+            if(tag == 'd'){
+                $scope.bgc1 = '';
+                $scope.bgc2 = 'reportBlue';
+                $scope.bgc3 = '';
             }
-            if(tag == "m"){
-                $scope.bgc1 = "";
-                $scope.bgc2 = "";
-                $scope.bgc3 = "reportBlue";
+            if(tag == 'm'){
+                $scope.bgc1 = '';
+                $scope.bgc2 = '';
+                $scope.bgc3 = 'reportBlue';
             }
             _type = tag;
             getData();
         }
 
-        function getData(){
+        var getData =function(){
             var bd = new Date($scope.bdate).format();
             var ed = new Date($scope.edata).format();
-            $http.get("getcharts?ft="+bd+"&tt="+ed+"&td="+_type+"&dt=pv",function(d){
-                if(d.status != "200"){
-                    alert("服务器异常!");
+            $http.get('/getcharts?ft='+bd+'&tt='+ed+'&td='+_type+'&dt=pv').success(function(d){
+                if(d.status != '200'){
+                    alert('服务器异常!');
                     return;
                 }
+                $scope.tData = d.data.datas;
+
+                $scope.tData = [{"id":"12","ips":1,"name":"12","pv":1,"uv":1},{"id":"13","ips":1,"name":"13","pv":1,"uv":1},{"id":"14","ips":1,"name":"14","pv":1,"uv":1}]
+
                 chartsData = {
                     title: {
                         text: 'PV/UV Display',
@@ -172,7 +182,7 @@ angular.module('app')
                         x: -20
                     },
                     xAxis: {
-                        title: { text : "hours" },
+                        title: { text : 'hours' },
                         categories: d.data.xray
                     },
                     yAxis: {

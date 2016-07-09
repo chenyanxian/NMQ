@@ -32,20 +32,20 @@
 
 <table class="tableBox" border="1" >
     <thead>
-    <tr>
-        <th>时间</th>
-        <th>浏览量（PV）</th>
-        <th>访客数（UV）</th>
-        <th>IP数</th>
-    </tr>
+        <tr>
+            <th>时间</th>
+            <th>浏览量（PV）</th>
+            <th>访客数（UV）</th>
+            <th>IP数</th>
+        </tr>
     </thead>
 
     <tbody>
-    <tr ng-repeat="x in items">
-        <td>{{x.name}}</td>
-        <td>{{x.pv}}</td>
-        <td>{{x.uv}}</td>
-        <td>{{x.ips}}</td>
-    </tr>
+        <tr ng-repeat="x in tData">
+            <td>{{x.name}}</td>
+            <td>{{x.pv}}</td>
+            <td>{{x.uv}}</td>
+            <td>{{x.ips}}</td>
+        </tr>
     </tbody>
 </table>
