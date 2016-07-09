@@ -157,6 +157,9 @@ angular.module('app')
                 $scope.bgc3 = 'reportBlue';
             }
             _type = tag;
+        }
+
+        $scope.getReportData = function(){
             getData();
         }
 
@@ -170,7 +173,7 @@ angular.module('app')
                 }
                 chartsData = {
                     title: {
-                        text: 'PV/UV Display',
+                        text: 'PV/UV 详情',
                         x: -20
                     },
                     subtitle: {
