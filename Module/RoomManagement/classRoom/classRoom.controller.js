@@ -56,6 +56,10 @@ angular.module('app')
 
         var openTag = 0;
         $scope.getChooseTmps = function(d){
+            if(d.length == 0){
+                alert("请选择一个模板!");
+                return;
+            }
             d = d[0];
             if(openTag == 1){
                 $scope.tmpId1 = d.code;

@@ -14,12 +14,6 @@ angular.module("app").directive("surveyInfoList",function(){
         link:function(){},
         controller:function($http,$scope,enume,$state){
             //初始化下拉框数据
-            $scope.kcxl = enume.kcxl;
-            $scope.kcxlNum = "";
-
-            $scope.kczt = enume.kczt;
-            $scope.kcztNum = "";
-
             $scope.xn = enume.xn;
             $scope.xnNum = "";
 
@@ -28,9 +22,6 @@ angular.module("app").directive("surveyInfoList",function(){
 
             $scope.bj = enume.bj;
             $scope.bjNum = "";
-
-            $scope.skbh = enume.skbh;
-            $scope.skbhNum = "";
 
             $scope.templateList = [];
 

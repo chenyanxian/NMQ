@@ -1,40 +1,24 @@
 
 <div class="searchRow clearfix">
-    <!--<div class="left mr15">-->
-    <!--<label>课程系列：</label>-->
-    <!--<select class="width220" ng-model="kcxlNum" ng-options="m.val as m.name for m in kcxl"></select>-->
-    <!--</div>-->
-
-    <!--<div class="left mr15">-->
-    <!--<label>课程主题：</label>-->
-    <!--<select class="width220" ng-model="kcztNum" ng-options="m.val as m.name for m in kczt"></select>-->
-    <!--</div>-->
 
     <div class="left mr15">
         <label>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年：</label>
-        <select class="width220" ng-model="xnNum" ng-options="m.val as m.name for m in xn"></select>
+        <select class="width140" ng-model="xnNum" ng-options="m.val as m.name for m in xn"></select>
     </div>
-</div>
 
-<div class="searchRow clearfix">
     <div class="left mr15">
         <label>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级：</label>
-        <select class="width220" ng-model="njNum" ng-options="m.val as m.name for m in nj"></select>
+        <select class="width140" ng-model="njNum" ng-options="m.val as m.name for m in nj"></select>
     </div>
 
     <div class="left mr15">
         <label>班&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级：</label>
-        <select class="width220" ng-model="bjNum" ng-options="m.val as m.name for m in bj"></select>
+        <select class="width140" ng-model="bjNum" ng-options="m.val as m.name for m in bj"></select>
     </div>
 
     <div class="left mr15">
-        <label>授课编号：</label>
-        <select class="width220" ng-model="skbhNum" ng-options="m.val as m.name for m in skbh"></select>
+        <button class="btnGreen ml65 mr15" ng-click="templateListSearch();">查询</button>
     </div>
-</div>
-
-<div class="mt10">
-    <button class="btnGreen ml65 mr15" ng-click="templateListSearch();">查询</button>
 </div>
 
 <div class="grayLine"></div>

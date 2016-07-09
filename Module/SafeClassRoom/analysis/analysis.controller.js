@@ -30,6 +30,16 @@ angular.module('app')
         $scope.bDate ="";
         $scope.eDate = "";
 
+        $scope.downLink = "";
+
+        $scope.downFile = function(){
+            if($scope.downLink == ""){
+                enume.getData("/cmsapi/teaching/log/download",function(d){
+
+                })
+            }
+        }
+
         //查询模板
         $scope.templateListSearch = function(){
             $scope.$broadcast("searchByFilter");
