@@ -7,7 +7,7 @@ angular.module('app')
     .controller('surveyInfoDetailCtrl',function($http,$scope,$state,enume,$stateParams){
         $scope.entity = {id:$stateParams.id};
     })
-    .controller('lessonsListCtrl', function ($http,$scope,enume,$state) {
+    .controller('lessonsListCtrl', function ($http,$scope,enume,$state,$timeout) {
 
         $scope.kcxl = enume.kcxl;
         $scope.kcxlNum = "";
@@ -31,16 +31,24 @@ angular.module('app')
         $scope.eDate = "";
 
         $scope.downLink = "";
+        $scope.btnCls = "btnGray";
+        $scope.isDisabled = false;
 
-        $scope.downFile = function(){
-            if($scope.downLink == ""){
-                enume.getData("/cmsapi/teaching/log/download",function(d){
+        function downFile(){
+            enume.getData("/cmsapi/teaching/log/download",function(d){
+                $scope.btnCls = "btnGreen";
+                $scope.downLink = d;
+                $scope.isDisabled = true;
+            })
 
-                })
-            }else{
-
-            }
+            $timeout(function(){
+                $scope.btnCls = "btnGreen";
+                $scope.downLink = "http://www.baidu.com";
+                $scope.isDisabled = true;
+            },3000)
         }
+
+        downFile();
 
         //查询模板
         $scope.templateListSearch = function(){
