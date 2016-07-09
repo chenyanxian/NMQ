@@ -168,10 +168,6 @@ angular.module('app')
                     alert('服务器异常!');
                     return;
                 }
-                $scope.tData = d.data.datas;
-
-                $scope.tData = [{"id":"12","ips":1,"name":"12","pv":1,"uv":1},{"id":"13","ips":1,"name":"13","pv":1,"uv":1},{"id":"14","ips":1,"name":"14","pv":1,"uv":1}]
-
                 chartsData = {
                     title: {
                         text: 'PV/UV Display',
@@ -216,6 +212,8 @@ angular.module('app')
                     }]
                 }
                 $('#container').highcharts(chartsData);
+
+                $scope.tData = d.data.datas;
             })
         }
         getData();
