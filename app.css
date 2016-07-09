@@ -829,15 +829,15 @@ input[type=file]{
 }
 
 .yl_center_right{
-    width: 180px;
+    width: 221px;
 }
 
 .yl_qr_box{
-    width: 180px;height: 210px;border-radius: 15px;border: 1px dashed #c34710;
+    width: 220px;height: 220px;border-radius: 15px;border: 1px dashed #c34710;margin-bottom: 27px;
 }
 
 .yl_qr{
-    margin:12px 10px;background-color: #dbdad9;width: 160px;height: 160px;
+    margin:12px 10px;background-color: #dbdad9;width: 200px;height: 200px;
 }
 
 .yl_qr img{
