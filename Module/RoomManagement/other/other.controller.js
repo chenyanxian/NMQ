@@ -114,6 +114,101 @@ angular.module('app')
 
     .controller('reportsCtrl', function ($http,$scope) {
 
+        var tmp = ["今天","昨天","上周同期"];
+        var chartsData = null;
+
+        $scope.pvs = [];
+        $scope.bdate = new Date();
+        $scope.edata = new Date();
+
+        $scope.bgc1 = "reportBlue";
+        $scope.bgc2 = "";
+        $scope.bgc3 = "";
+
+        $http.get("/overview",function(d){
+            var d = d.data.datas;
+
+            for(var i=0;i< d.length;i++){
+                d[i].time = tmp[i];
+            }
+        })
+
+        var _type = "h";
+        $scope.getType = function(tag){
+            if(tag == "h"){
+                $scope.bgc1 = "reportBlue";
+                $scope.bgc2 = "";
+                $scope.bgc3 = "";
+            }
+            if(tag == "d"){
+                $scope.bgc1 = "";
+                $scope.bgc2 = "reportBlue";
+                $scope.bgc3 = "";
+            }
+            if(tag == "m"){
+                $scope.bgc1 = "";
+                $scope.bgc2 = "";
+                $scope.bgc3 = "reportBlue";
+            }
+            _type = tag;
+            getData();
+        }
+
+        function getData(){
+            var bd = new Date($scope.bdate).format();
+            var ed = new Date($scope.edata).format();
+            $http.get("getcharts?ft="+bd+"&tt="+ed+"&td="+_type+"&dt=pv",function(d){
+                if(d.status != "200"){
+                    alert("服务器异常!");
+                    return;
+                }
+                chartsData = {
+                    title: {
+                        text: 'PV/UV Display',
+                        x: -20
+                    },
+                    subtitle: {
+                        text: '',
+                        x: -20
+                    },
+                    xAxis: {
+                        title: { text : "hours" },
+                        categories: d.data.xray
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'times'
+                        },
+                        plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }]
+                    },
+                    tooltip: {
+                        valueSuffix: ''
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        borderWidth: 0
+                    },
+                    series: [{
+                        name: '浏览量',
+                        data: d.data.pvs
+                    }, {
+                        name: '访客数',
+                        data: d.data.uvs
+                    }, {
+                        name: 'Ip数',
+                        data: d.data.ips
+                    }]
+                }
+                $('#container').highcharts(chartsData);
+            })
+        }
+        getData();
     });
 
 

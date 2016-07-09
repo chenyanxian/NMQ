@@ -885,3 +885,7 @@ input[type=file]{
 .yl_content_r_item ul li{
     font-size: 14px;line-height: 20px;
 }
+
+.reportBlue{
+    background-color: #a9c1d0;
+}

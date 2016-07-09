@@ -77,12 +77,6 @@ angular.module('app').config(function($stateProvider){
             templateUrl:"./Module/RoomManagement/analyse/statisticsDetail.html",
             controller:"statisticsDetail"
         })
-        .state('roomManage.PvUvList', {
-            url: '/statisticsList',
-            params:{entity:{}},
-            templateUrl: "./Module/RoomManagement/analyse/PvUvList.html",
-            controller: 'PvUvListCtl'
-        })
         .state('roomManage.productSort',{
             url:'/statisticsDetail',
             params:{entity:{}},
