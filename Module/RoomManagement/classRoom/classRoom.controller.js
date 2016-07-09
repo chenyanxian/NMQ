@@ -151,7 +151,7 @@ angular.module('app')
         }
 
         $scope.previewPro = function(){
-
+            $state.go("roomManage.productPreview",{id:1});
         }
 
         $scope.selectTemplates = function(){
@@ -282,95 +282,9 @@ angular.module('app')
         }
     })
 
-    .controller('roomListCtl',function ($http,$scope,enume,$state) {
+    .controller('roomListCtl',function ($http,$scope,enume,$state) {})
 
-        //$scope.schoolName = "";
-        //$scope.beginDate = "";
-        //$scope.endDate = "";
-        //
-        //$scope.roomList = [];
-        //
-        //$scope.searchRoom = function(){
-        //    $scope.$broadcast("searchByFilter");
-        //}
-        //
-        //$scope.createRoom = function(){
-        //    $state.go("roomManage.register",{entity:{tag:"add"}});
-        //}
-        //
-        //$scope.getUrl = function(){
-        //    return "/cmsapi/tclassRegister/query?name="+$scope.schoolName+"&begin="+$scope.beginDate + "&end="+$scope.endDate;
-        //}
-        //
-        //$scope.directiveCallBack = function(valueFromDirective){
-        //    $scope.roomList = valueFromDirective;
-        //}
-        //
-        //$scope.editRoom = function(item){
-        //    $state.go("roomManage.register",{entity:{tag:"edit",lineid:item.lineid}});
-        //}
-        //
-        //$scope.deleteRoom = function(item){
-        //    enume.getData("xxxxx",function(d){
-        //        $scope.roomList = $scope.roomList.deleteByKey("id",item.lineid);
-        //    })
-        //}
-        //
-        //$scope.goDetail = function(item){
-        //    $state.go("roomManage.register",{entity:{tag:"detail",lineid:item.lineid}});
-        //}
-        //
-        //$scope.getRemark = function(item){
-        //    return jsCoreMethod.cutString(item.remark,5);
-        //}
-    })
-
-    .controller('productListCtl',function ($http,$scope,enume,$state) {
-
-        //$scope.proCate = "jf";
-        //$scope.jfs = [];
-        //$scope.jfNum = "";
-        //
-        //$scope.syjsbbh = "";
-        //$scope.kcxls = [];
-        //$scope.kcxlsNum = "";
-        //
-        //$scope.proList = [];
-        //
-        //$scope.seachPros = function(){
-        //    $scope.$broadcast("searchByFilter");
-        //}
-        //
-        //$scope.createPro = function(){
-        //    $state.go("roomManage.createProduct",{entity:{tag:"add"}});
-        //}
-        //
-        //$scope.getUrl = function(){
-        //    return "/cmsapi/course/query?cate="+$scope.proCate+"&syjsbbh="+$scope.syjsbbh + "&jfNum="+$scope.jfNum + "&kcxlsNum="+$scope.kcxlsNum;
-        //}
-        //
-        //$scope.directiveCallBack = function(valueFromDirective){
-        //    $scope.proList = valueFromDirective;
-        //}
-        //
-        //$scope.editRoom = function(item){
-        //    $state.go("roomManage.register",{entity:{tag:"edit",lineid:item.lineid}});
-        //}
-        //
-        //$scope.deleteRoom = function(item){
-        //    enume.getData("xxxxx",function(d){
-        //        $scope.roomList = $scope.roomList.deleteByKey("id",item.lineid);
-        //    })
-        //}
-        //
-        //$scope.goDetail = function(item){
-        //    $state.go("roomManage.register",{entity:{tag:"detail",lineid:item.lineid}});
-        //}
-        //
-        //$scope.getRemark = function(item){
-        //    return jsCoreMethod.cutString(item.remark,5);
-        //}
-    })
+    .controller('productListCtl',function ($http,$scope,enume,$state) {})
 
     .controller('warrantCtl',function ($http,$scope,enume,$state) {
 
@@ -411,3 +325,8 @@ angular.module('app')
         }
 
     })
+
+    .controller('productPreviewCtl',function ($http,$scope,enume,$state,$stateParams) {
+        var id = $stateParams.id;
+    })
+
