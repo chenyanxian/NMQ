@@ -37,6 +37,8 @@ angular.module('app')
                 enume.getData("/cmsapi/teaching/log/download",function(d){
 
                 })
+            }else{
+
             }
         }
 
