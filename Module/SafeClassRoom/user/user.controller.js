@@ -43,44 +43,59 @@ angular.module('app')
             })
         }
 
+        $scope.goDetail = function(item){
+            $state.go("safeRoom.createUser",{entity:{tag:"detail",studentId:item.studentId}});
+        }
+
     })
     .controller('classManagementCtrl',function($http,$scope,$state,enume){
 
         $scope.bjList = [];
 
+        $scope.xxmc = "";
+        $scope.xnmc = "";
+        $scope.njmc = "";
+        $scope.bjmc = "";
+        $scope.errorXsl = false;
+
         $scope.getUrl = function(){
-            return "/cmsapi/user/query?studentId=&name=";
+            return "/cmsapi/tclass/query?xxmc="+$scope.xxmc+"&xnmc="+$scope.xnmc+"&njmc="+$scope.njmc+"&bjmc="+$scope.bjmc;
         }
 
         $scope.directiveCallBack = function(valueFromDirective){
             $scope.bjList = valueFromDirective;
         }
 
-        var ufile = document.querySelector("#fileLoad");
         var fileContent = "";
-        ufile.addEventListener("change",function(e){
-            if(e.target.files.length == 0){
-                alert("请选择图片上传!");
-                return;
-            }
-            var file = e.target.files[0];
-            var filereader = new FileReader();
-            filereader.onload = function () {
-                fileContent = this.result;
-            }
-            filereader.readAsBinaryString(file);
-        },false);
+        jsCoreMethod.fileReader("fileLoad",function(d){
+            fileContent = d;
+        },"file")
 
         $scope.uploadFile = function(){
-            enume.postData("/cmsapi/tclass/upload",{data:fileContent},function(d){
-                $scope.bjList = d;
+            if(!fileContent){
+                alert("请选择excel文件上传!");
+                return;
+            }
+            $http({
+                method:"POST",
+                url:"/cmsapi/tclass/upload",
+                data:{data:fileContent}
+            }).success(function(d){
+                if(d.status.code == "1"){
+                    $scope.$broadcast("searchByFilter");
+                    $scope.errorXsl = false;
+                }else if(d.status.code == "3"){
+                    $scope.errorXsl = true;
+                    $scope.errorUrl = d.data;
+                    alert("excel文件里有错误，请下载查看详情!");
+                }else{
+                    alert(d.status.message);
+                }
             })
         }
 
         $scope.seachBj = function(){
-            enume.getData("",function(d){
-                $scope.bjList = d;
-            })
+            $scope.$broadcast("searchByFilter");
         }
     })
     .controller('createUserCtrl',function($http,$scope,$state,enume,$stateParams){
@@ -103,12 +118,18 @@ angular.module('app')
         $scope.downs = [];
         $scope.downsNum = "";
 
-        $scope.utitle = "";
+        $scope.uRylxs = enume.uRylxs;
+        $scope.uRylxNum = "";
+        $scope.uGws = enume.uGws;
+        $scope.uGwNum = "";
 
+        $scope.utitle = "";
         $scope.showImg = false;
 
+        $scope.showButton = true;
 
-        if($stateParams.entity.tag == "edit"){
+        function getUserByStuId(){
+
             enume.getData("/cmsapi/user/queryById?studentId="+$stateParams.entity.studentId,function(tmp){
                 $scope.sex = tmp.sex;
                 $scope.nationalityNum = tmp.nationalityNum;
@@ -127,14 +148,29 @@ angular.module('app')
                 $scope.xmpy = tmp.xmpy;
                 $scope.zjhm = tmp.zjhm;
                 $scope.csrq = new Date(tmp.csrq);
+                $scope.uRylxNum = tmp.uRylxNum;
+                $scope.uGwNum = tmp.uGwNum;
 
                 document.querySelector("#img1").setAttribute("src",tmp.zp);
             })
+        }
+
+        if($stateParams.entity.tag == "edit"){
+            getUserByStuId();
             $scope.showImg = true;
             $scope.utitle = "人员修改";
-        }else{
+            $scope.showButton = true;
+        }
+        else if($stateParams.entity.tag == "detail"){
+            getUserByStuId();
+            $scope.showImg = true;
+            $scope.utitle = "人员详情";
+            $scope.showButton = false;
+        }
+        else{
             $scope.showImg = false;
             $scope.utitle = "人员录入";
+            $scope.showButton = true;
         }
 
         $scope.selectProvinces = function(){
@@ -150,22 +186,12 @@ angular.module('app')
         }
 
         var fileContent = "";
-        var dragEl = document.querySelector("#fileLoad");
-        dragEl.addEventListener("change",function(e){
-            if(e.target.files.length == 0){
-                alert("请选择图片上传!");
-                return;
-            }
-            var file = e.target.files[0];
-            var filereader = new FileReader();
-            filereader.onload = function () {
-                fileContent = this.result;
-                document.querySelector("#img1").setAttribute("src",this.result);
-                $scope.showImg = true;
-                $scope.$apply();
-            }
-            filereader.readAsDataURL(file);
-        },false);
+        jsCoreMethod.fileReader("fileLoad",function(d){
+            fileContent = d;
+            document.querySelector("#img1").setAttribute("src",d);
+            $scope.showImg = true;
+            $scope.$apply();
+        })
 
         $scope.createUser = function(){
             var tmp = {
@@ -185,7 +211,9 @@ angular.module('app')
                 idTypeNum:$scope.idTypeNum,             //证件类型
                 zjhm:$scope.zjhm,                       //证件号码
                 maritalStatusNum:$scope.maritalStatusNum,//婚姻状况
-                macaoNum:$scope.macaoNum                 //港澳台外
+                macaoNum:$scope.macaoNum,                //港澳台外
+                uGwNum:$scope.uGwNum,                   //岗位
+                uRylxNum:$scope.uRylxNum                //人员类型
             };
 
             var url = "";
@@ -222,41 +250,53 @@ angular.module('app')
         }
 
     })
-    .controller('stuManagementCtrl',function($http,$scope,$state){
+    .controller('stuManagementCtrl',function($http,$scope,$state,enume){
         $scope.uList = [];
 
+        $scope.xxmc = "";
+        $scope.xnmc = "";
+        $scope.njmc = "";
+        $scope.bjmc = "";
+        $scope.errorXsl = false;
+
         $scope.getUrl = function(){
-            return "/cmsapi/user/query?studentId=&name=";
+            return "/cmsapi/tclass/queryStudent?xxmc="+$scope.xxmc+"&xnmc="+$scope.xnmc+"&njmc="+$scope.njmc+"&bjmc="+$scope.bjmc;
         }
 
         $scope.directiveCallBack = function(valueFromDirective){
             $scope.uList = valueFromDirective;
         }
 
-        var ufile = document.querySelector("#fileLoad");
         var fileContent = "";
-        ufile.addEventListener("change",function(e){
-            if(e.target.files.length == 0){
-                alert("请选择图片上传!");
-                return;
-            }
-            var file = e.target.files[0];
-            var filereader = new FileReader();
-            filereader.onload = function () {
-                fileContent = this.result;
-            }
-            filereader.readAsBinaryString(file);
-        },false);
+
+        jsCoreMethod.fileReader("fileLoad",function(d){
+            fileContent = d;
+        },"file")
 
         $scope.uploadFile = function(){
-            enume.postData("",{data:fileContent},function(d){
-                $scope.uList = d;
+            if(!fileContent){
+                alert("请选择excel文件上传!");
+                return;
+            }
+            $http({
+                method:"POST",
+                url:"/cmsapi/tclass/uploadStudent",
+                data:{data:fileContent}
+            }).success(function(d){
+                if(d.status.code == "1"){
+                    $scope.$broadcast("searchByFilter");
+                    $scope.errorXsl = false;
+                    alert("excel文件里有错误，请下载查看详情!");
+                }else if(d.status.code == "3"){
+                    $scope.errorXsl = true;
+                    $scope.errorUrl = d.data;
+                }else{
+                    alert(d.status.message);
+                }
             })
         }
 
         $scope.seachXs = function(){
-            enume.getData("",function(d){
-                $scope.uList = d;
-            })
+            $scope.$broadcast("searchByFilter");
         }
     });

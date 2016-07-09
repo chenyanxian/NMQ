@@ -42,15 +42,15 @@
         <input type="date" placeholder="请选择结束时间" class="width150" ng-model="eDate"/>
     </div>
 
-    <div class="left">
-        <label>学生姓名：</label>
-        <input type="text" placeholder="请输入模版名称" class="width220" ng-model="xsName"/>
-    </div>
+    <!--<div class="left">-->
+        <!--<label>学生姓名：</label>-->
+        <!--<input type="text" placeholder="请输入模版名称" class="width220" ng-model="xsName"/>-->
+    <!--</div>-->
 </div>
 
 <div class="mt10">
-    <button class="btnGreen ml65 mr15">查询</button>
-    <button class="btnGreen">下载(Excel格式)</button>
+    <button class="btnGreen ml65 mr15" ng-click="search();">查询</button>
+    <a class="btnGreen" href="{{downLink}}" ng-click="downFile();">下载(Excel格式)</a>
 </div>
 
 <div class="grayLine"></div>
@@ -62,48 +62,34 @@
 
 <table class="tableBox" border="1">
     <thead>
-    <tr>
-        <th>授课编号</th>
-        <th>学年</th>
-        <th>年级</th>
-        <th>班级</th>
-        <th>班主任</th>
-        <th>课程系列</th>
-        <th>课程主题</th>
-        <th>上课学生人数</th>
-        <th>教师对课程评价</th>
-        <th>学生对课程评价</th>
-        <th>授课时间</th>
-    </tr>
+        <tr>
+            <th>授课编号</th>
+            <th>学年</th>
+            <th>年级</th>
+            <th>班级</th>
+            <th>班主任</th>
+            <th>课程系列</th>
+            <th>课程主题</th>
+            <th>上课学生人数</th>
+            <th>教师对课程评价</th>
+            <th>学生对课程评价</th>
+            <th>授课时间</th>
+        </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>20160424-01</td>
-        <td>2016</td>
-        <td>一年级</td>
-        <td>二班</td>
-        <td>王老师</td>
-        <td>消防安全系列</td>
-        <td>常见消防器材</td>
-        <td>29</td>
-        <td>查看统计</td>
-        <td>查看统计</td>
-        <td>2016-4-24 22:34</td>
-    </tr>
-
-    <tr>
-        <td>20160424-01</td>
-        <td>2016</td>
-        <td>一年级</td>
-        <td>二班</td>
-        <td>王老师</td>
-        <td>消防安全系列</td>
-        <td>常见消防器材</td>
-        <td>29</td>
-        <td>查看统计</td>
-        <td>查看统计</td>
-        <td>2016-4-24 22:34</td>
-    </tr>
+        <tr ng-repeat="item in lessonsList">
+            <td>{{item.skbh}}</td>
+            <td>{{item.xn}}</td>
+            <td>{{item.njmc}}</td>
+            <td>{{item.bjmc}}</td>
+            <td>{{item.xm}}</td>
+            <td>{{item.kcxlmc}}</td>
+            <td>{{item.kcztmc}}</td>
+            <td>{{item.stduentCount}}</td>
+            <td><a ng-click="goJsPingjia(item.teacherWenjuan);">查看评价</a></td>
+            <td><a ng-click="goXsPingjia(item.studentWenjuan);">查看评价</a></td>
+            <td>{{item.showTime}}</td>
+        </tr>
     </tbody>
 </table>
 

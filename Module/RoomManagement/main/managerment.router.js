@@ -34,11 +34,11 @@ angular.module('app').config(function($stateProvider){
             templateUrl: "./Module/RoomManagement/classRoom/createProduct.html",
             controller: 'createProductCtl'
         })
-        .state('roomManage.schoolTeaching', {
-            url: '/schoolTeaching',
+        .state('roomManage.warrant', {
+            url: '/warrant',
             params:{entity:{}},
-            templateUrl: "./Module/RoomManagement/classRoom/schoolTeaching.html",
-            controller: 'schoolTeachingCtl'
+            templateUrl: "./Module/RoomManagement/classRoom/warrant.html",
+            controller: 'warrantCtl'
         })
         .state('roomManage.pushBullet',{
             url:'/pushBullet',
@@ -54,7 +54,7 @@ angular.module('app').config(function($stateProvider){
             controller:"evaluateListCtl"
         })
         .state('roomManage.evaluateDetail', {
-            url: '/evaluateDetail/:id',
+            url: '/evaluateList/:id',
             params:{entity:{}},
             templateUrl: "./Module/RoomManagement/analyse/evaluateDetail.html",
             controller: 'evaluateDetailCtl'
@@ -62,12 +62,11 @@ angular.module('app').config(function($stateProvider){
         .state('roomManage.statisticsList', {
             url: '/statisticsList',
             params:{entity:{}},
-            cache:false,
             templateUrl: "./Module/RoomManagement/analyse/statisticsList.html",
             controller: 'statisticsListCtl'
         })
         .state('roomManage.statisticsDetail',{
-            url:'/statisticsDetail/:id',
+            url:'/statisticsList/:id',
             params:{entity:{}},
             templateUrl:"./Module/RoomManagement/analyse/statisticsDetail.html",
             controller:"statisticsDetail"
@@ -83,5 +82,17 @@ angular.module('app').config(function($stateProvider){
             params:{entity:{}},
             templateUrl:"./Module/RoomManagement/analyse/productSort.html",
             controller:"productSortCtl"
+        })
+        .state('roomManage.dictionary',{
+            url:'/dictionary',
+            params:{entity:{}},
+            templateUrl:'./Module/RoomManagement/other/dictionary.html',
+            controller:'dictionaryCtrl'
+        })
+        .state('roomManage.report',{
+            url:'/reports',
+            params:{entity:{}},
+            templateUrl:'./Module/RoomManagement/other/reports.html',
+            controller:'reportsCtrl'
         })
 });

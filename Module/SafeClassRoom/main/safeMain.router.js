@@ -77,10 +77,4 @@ angular.module('app').config(function($stateProvider){
             templateUrl:'./Module/SafeClassRoom/user/stuManagement.html',
             controller:'stuManagementCtrl'
         })
-        .state('safeRoom.dictionary',{
-            url:'/dictionary',
-            params:{entity:{}},
-            templateUrl:'./Module/SafeClassRoom/dictionary/dictionary.html',
-            controller:'dictionaryCtrl'
-        })
 });

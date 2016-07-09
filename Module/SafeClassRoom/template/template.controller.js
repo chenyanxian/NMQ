@@ -1,59 +1,15 @@
 'use strict';
 
 angular.module('app')
-    .controller('templateListCtrl',function ($http,$scope,enume,cooke,$state) {
+    .controller('templateListCtrl',function ($http,$scope,enume,cooke,$state) {})
 
-        //初始化下拉框数据  模板分类,模板类型
-        $scope.templateCates =  enume.templateCate;
-        $scope.templateTypes = enume.templateType;
-        $scope.selectCate = "";
-        $scope.selectType = "";
-        $scope.templateName = "";
-        $scope.beginDate = "";
-        $scope.endDate = "";
-
-        $scope.templateList = [];
-
-        //查询模板
-        $scope.templateListSearch = function(){
-            $scope.$broadcast("searchByFilter");
-        }
-
-        $scope.createTemplate = function(){
-            $state.go("safeRoom.templateCreate",{entity:{tag:"add"}});
-        }
-
-        $scope.getUrl = function(){
-            return "/cmsapi/template/query?category="+$scope.selectCate+"&type="+$scope.selectType + "&name="+$scope.templateName+"&begin="+$scope.beginDate + "&end="+$scope.endDate;
-        }
-
-        $scope.directiveCallBack = function(valueFromDirective){
-            $scope.templateList = valueFromDirective;
-        }
-
-        $scope.editTemplate = function(item){
-            $state.go("safeRoom.templateCreate",{entity:{tag:"edit",code:item.code}});
-        }
-
-        $scope.deleteTemplate = function(item){
-            $http.get("/cmsapi/template/delete/"+item.id).success(function(d){
-                if(d.status.code == "1"){
-                    $scope.templateList = $scope.templateList.deleteByKey("id",item.id);
-                }else{
-                    alert(d.status.message);
-                }
-            })
-        }
-    });
-
-
-angular.module('app')
     .controller('createTemplateCtrl', function ($http,$scope,enume,$state,$stateParams) {
 
-        $scope.templateCates =  enume.templateCateForAdd;
+        $scope.templateCates =  enume.templateCate;
         $scope.selectCate = "";
 
         $scope.templateTypes = enume.templateTypeForAdd;
+        //$scope.templateTypes = [{name:'问卷',code:'wenjuan'},{name:'考题',code:'kaoti'}];
         $scope.selectType = "wenjuan";
 
         //是否显示分数
@@ -80,40 +36,48 @@ angular.module('app')
             }
         }
 
+        function getInfoByCode(){
+            enume.getData("/cmsapi/template/queryByCode?code="+$stateParams.entity.code,function(d){
+                $scope.data = d;
+                $scope.showGY = true;
+                $scope.selectCate = d.templateCategory;
+                $scope.selectType = d.templateType;
+
+                if($scope.selectType == "kaoti"){
+                    $scope.showScores = true;
+                    $scope.isBzFlag = false;
+                }else{
+                    $scope.showScores = false;
+                    $scope.isBzFlag = true;
+                }
+            })
+        }
+
+        $scope.showButton = true;
+
         $scope.data = null;
         if($stateParams.entity.tag == "edit"){
             $scope.t_title = "修改模板";
-            $http.get("/cmsapi/template/queryByCode?code="+$stateParams.entity.code).success(function(d){
-                if(d.status.code == "1"){
-                    $scope.data = d.data;
-                    $scope.showGY = true;
-
-                    $scope.selectCate = d.data.templateCategory;
-                    $scope.selectType = d.data.templateType;
-
-                    if($scope.selectType == "kaoti"){
-                        $scope.showScores = true;
-                        $scope.isBzFlag = false;
-                    }else{
-                        $scope.showScores = false;
-                        $scope.isBzFlag = true;
-                    }
-                }else{
-                    alert(d.status.message);
-                }
-            })
-        }else{
+            getInfoByCode();
+            $scope.showButton = true;
+        }
+        else if($stateParams.entity.tag == "detail"){
+            $scope.t_title = "模板详情";
+            getInfoByCode();
+            $scope.showButton = false;
+        }
+        else{
             $scope.t_title = "创建模板";
             $scope.data = {
                 code:"",
-                templateCategory: "",
-                templateType: "",
+                templateCategory: $scope.selectCate,
+                templateType: $scope.selectType,
                 title: "",
                 random: "",
                 content: "",
                 "data": []
             };
-            $scope.showScores = false;
+            $scope.showButton = true;
         }
 
         //当前选中的章节
@@ -122,16 +86,39 @@ angular.module('app')
         //添加题目的开关
         var addFlag = false;
 
+        //考题的开关
+        var ktFlag = false;
+
         $scope.cls = "";
         $scope.cls1 = "red";
         $scope.cls2 = "red";
+        $scope.cls3 = "";
 
         $scope.showGY = false;
 
         $scope.addTmByZj = function(item){
-            $scope.cls = "red";
+
+            if($scope.selectType == "kaoti"){
+                $scope.cls = "red";
+                $scope.cls3 = "";
+                ktFlag = true;
+            }else{
+                $scope.cls = "red";
+                $scope.cls3 = "red";
+                ktFlag = false;
+            }
             addFlag = true;
             currentZj = item;
+        }
+
+        $scope.deleteZjItem = function(item,data){
+            if(window.confirm("是否要删除章节?")){
+                data.remove(item);
+                //数组重新排序
+                for(var i=0;i<data.length;i++){
+                    data[i].sort = i+1;
+                }
+            }
         }
 
         $scope.deleteItem = function(item,data){
@@ -182,12 +169,13 @@ angular.module('app')
             if(window.confirm("切换模板类型会导致已填写的数据丢失,你是否确定切换?")){
                 $scope.data.data  = [];
                 $scope.data.templateType = x;
-
+                $scope.selectType = x;
                 $scope.showGY = false;
                 $scope.data.title = "设置概要标题调查问卷";
                 $scope.data.content = "设置概要内容";
-
                 $scope.cls1 = "red";
+                $scope.cls3 = "";
+                $scope.cls = "";
             }else{
                 if(x == "wenjuan"){
                     $scope.selectType = "kaoti";
@@ -198,9 +186,11 @@ angular.module('app')
             if($scope.selectType == "kaoti"){
                 $scope.showScores = true;
                 $scope.isBzFlag = false;
+                ktFlag = true;
             }else{
                 $scope.showScores = false;
                 $scope.isBzFlag = true;
+                ktFlag = false;
             }
         }
 
@@ -413,8 +403,10 @@ angular.module('app')
             }
             currentZj.tms.push(tmp);
             addFlag = false;
+            ktFlag = false;
 
-            $scope.cls = "black";
+            $scope.cls = "";
+            $scope.cls3 = "";
         }
 
         $scope.addDanx = function(){
@@ -432,24 +424,20 @@ angular.module('app')
         }
 
         $scope.addPf = function(){
-            if(addFlag == false){
+            if(addFlag == false || ktFlag){
                 return;
             }
             addTiMu("pingfen");
         }
 
         $scope.addTk = function(){
-            if(addFlag == false){
+            if(addFlag == false || ktFlag){
                 return;
             }
             addTiMu("textbox");
         }
 
         $scope.preview = function(){
-
-        }
-
-        $scope.doSubmit = function(){
             console.log($scope.data);
 
             var url = "";
@@ -458,17 +446,11 @@ angular.module('app')
             }else{
                 url = "/cmsapi/template/add";
             }
-            $http({
-                method:"POST",
-                url:url,
-                data:$scope.data
-            }).success(function(d){
-                if(d.status.code == "1"){
-                    alert("保存成功");
-                    $state.go("safeRoom.templateList");
-                }else{
-                    alert(d.status.message);
-                }
+
+            enume.postData(url,$scope.data,function(d){
+                alert("保存成功");
+                $state.go("safeRoom.templateList");
+                window.open("out.html?code="+ d.data,"_blank","height=800,width=500");
             })
         }
 

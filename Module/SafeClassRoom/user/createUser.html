@@ -32,6 +32,18 @@
 
     <div class="searchRow clearfix">
         <div class="left mr15">
+            <label>人员类型：</label>
+            <select class="width220" ng-model="uRylxNum" ng-options="m.code as m.name for m in uRylxs"></select>
+        </div>
+
+        <div class="left">
+            <label>岗位：</label>
+            <select class="width220" ng-model="uGwNum" ng-options="m.code as m.name for m in uGws"></select>
+        </div>
+    </div>
+
+    <div class="searchRow clearfix">
+        <div class="left mr15">
             <label>姓名拼音：</label>
             <input type="text" placeholder="请输入姓名拼音" class="width200" ng-model="xmpy"/>
         </div>
@@ -103,7 +115,7 @@
 </div>
 
 
-<div class="mt10">
+<div class="mt10" ng-show="showButton">
     <button class="btnGreen ml65" ng-click="createUser();">保存</button>
     <button class="btnGreen" ng-click="cancelUser();">取消</button>
 </div>

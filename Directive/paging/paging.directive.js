@@ -40,7 +40,8 @@ angular.module("app").directive("paging",function(){
                         $scope.currentIndex = index;
 
                         $scope.callbackFn(tmp);
-                    }else{
+                    }
+                    else{
                         alert(d.status.message);
                     }
                 })

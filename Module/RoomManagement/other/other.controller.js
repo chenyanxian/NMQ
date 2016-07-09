@@ -110,4 +110,10 @@ angular.module('app')
         }
 
         queryChildByCate($scope.searchSelectCate);
+    })
+
+    .controller('reportsCtrl', function ($http,$scope) {
+
     });
+
+
