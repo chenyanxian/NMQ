@@ -28,6 +28,12 @@ angular.module('app').config(function($stateProvider){
             templateUrl:"./Module/RoomManagement/classRoom/productList.html",
             controller:"productListCtl"
         })
+        .state('roomManage.productPreview',{
+            url:'/productPreview/:id',
+            params:{entity:{}},
+            templateUrl:"./Module/RoomManagement/classRoom/productPreview.html",
+            controller:"productPreviewCtl"
+        })
         .state('roomManage.createProduct', {
             url: '/createProduct',
             params:{entity:{}},
