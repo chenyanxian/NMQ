@@ -54,7 +54,7 @@ angular.module('app').config(function($stateProvider){
             controller:"evaluateListCtl"
         })
         .state('roomManage.evaluateDetail', {
-            url: '/evaluateDetail/:id',
+            url: '/evaluateList/:id',
             params:{entity:{}},
             templateUrl: "./Module/RoomManagement/analyse/evaluateDetail.html",
             controller: 'evaluateDetailCtl'
@@ -62,12 +62,11 @@ angular.module('app').config(function($stateProvider){
         .state('roomManage.statisticsList', {
             url: '/statisticsList',
             params:{entity:{}},
-            cache:false,
             templateUrl: "./Module/RoomManagement/analyse/statisticsList.html",
             controller: 'statisticsListCtl'
         })
         .state('roomManage.statisticsDetail',{
-            url:'/statisticsDetail/:id',
+            url:'/statisticsList/:id',
             params:{entity:{}},
             templateUrl:"./Module/RoomManagement/analyse/statisticsDetail.html",
             controller:"statisticsDetail"

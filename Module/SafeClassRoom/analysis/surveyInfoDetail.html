@@ -1,21 +1,4 @@
 <div class="navigation">我的应用 > 数据分析 > 调研明细详情</div>
 
 
-<div>
-    <table class="tableBox" border="1">
-        <thead>
-            <th colspan={{item.colspan}} ng-repeat="item in colSpan">{{item.name}}</th>
-        </thead>
-        <tbody>
-        <tr>
-            <td ng-repeat="s in wtTitles">第{{s.sort}}题</td>
-        </tr>
-        <tr ng-show="scoresShow">
-            <td ng-repeat="s1 in wentis">答案({{s1.bz}})/分数{{s1.scores}}</td>
-        </tr>
-        <tr ng-repeat="x in details">
-            <td ng-repeat="a in x.children">{{a.name}}</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+<survey-info-detail entity="entity"></survey-info-detail>
