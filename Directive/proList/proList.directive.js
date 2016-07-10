@@ -40,18 +40,18 @@ angular.module("app").directive("proList",function(){
                 $scope.proList = valueFromDirective;
             }
 
-            $scope.editRoom = function(item){
-                $state.go("roomManage.register",{entity:{tag:"edit",lineid:item.lineid}});
+            $scope.editPro = function(item){
+                $state.go("roomManage.createProduct",{entity:{tag:"edit",item:item}});
             }
 
-            $scope.deleteRoom = function(item){
+            $scope.deletePro = function(item){
                 enume.getData("xxxxx",function(d){
                     $scope.roomList = $scope.roomList.deleteByKey("id",item.lineid);
                 })
             }
 
             $scope.goDetail = function(item){
-                $state.go("roomManage.register",{entity:{tag:"detail",lineid:item.lineid}});
+                $state.go("roomManage.createProduct",{entity:{tag:"detail",item:item}});
             }
 
             $scope.getRemark = function(item){

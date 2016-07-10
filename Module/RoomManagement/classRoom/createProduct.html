@@ -1,4 +1,4 @@
-<div class="navigation">我的应用 > 教室管理 > 创建商品</div>
+<div class="navigation">我的应用 > 教室管理 > {{t_title}}</div>
 
 <div class="searchRow clearfix">
     <div class="left mr15">
@@ -71,7 +71,8 @@
             上传文件
             <input type="file" class="inputFile"/>
         </button>
-        <span style="color:red;" ng-bind="file1"></span>
+        <span class="red1" ng-bind="r1"></span>
+        <span ng-show="false" ng-bind="file1"></span>
         <span>尺寸100*100, 大小100kb</span>
     </div>
 </div>
@@ -83,7 +84,8 @@
             上传文件
             <input type="file" class="inputFile"/>
         </button>
-        <span style="color:red;" ng-bind="file2"></span>
+        <span class="red1" ng-bind="r2"></span>
+        <span ng-show="false" ng-bind="file2"></span>
         <span>要求：flv,swf等</span>
     </div>
 </div>

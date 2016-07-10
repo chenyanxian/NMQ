@@ -38,7 +38,7 @@ angular.module("app").directive("classList",function(){
             }
 
             $scope.editRoom = function(item){
-                $state.go("roomManage.register",{entity:{tag:"edit",lineid:item.lineid}});
+                $state.go("roomManage.register",{entity:{tag:"edit",item:item}});
             }
 
             $scope.deleteRoom = function(item){
