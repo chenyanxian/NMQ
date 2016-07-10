@@ -43,16 +43,45 @@ angular.module('app')
         jsCoreMethod.fileReader("btn1",function(d,f){
             enume.postData("/cmsapi/image/upload",d,function(data){
                 $scope.file1 = "/file"+data.data;
-                //$scope.$apply();
+                $scope.r1 = "上传成功";
             })
-        },"file")
+        },"file");
 
         jsCoreMethod.fileReader("btn2",function(d,f){
             enume.postData("/cmsapi/image/upload?suffix="+ f.name.substring(f.name.lastIndexOf('.')+1),d,function(data){
                 $scope.file2 = "/file"+data.data;
-                //$scope.$apply();
+                $scope.r2 = "上传成功";
             })
-        },"file")
+        },"file");
+
+        if($stateParams.entity.tag == "edit"){
+            var spbh = $stateParams.entity.item.spbh;
+            enume.getData("/cmsapi/tclassRegister/detail?code="+spbh,function(d){
+                    $scope.proCate=d.proCate,         //商品类别
+                    $scope.jfNum=d.jfNum,             //选择的教辅id
+                    $scope.syjsbbh=d.syjsbbh,          //适用教室版本号
+                    $scope.kcxlsNum=d.kcxlsNum,       //课程系列id
+                    $scope.ddbbh=d.ddbbh,             //当前版本号
+                    $scope.spbh=d.spbh,               //商品编号
+                    $scope.ssmc=d.ssmc,               //商品名称
+                    $scope.proStatus=d.proStatus,     //商品状态
+                    $scope.spkc=d.spkc,               //商品库存
+                    $scope.spjj=d.spjj,               //商品简介
+                    $scope.spnr=d.spnr,               //商品内容
+                    $scope.proImg=d.file1,            //商品缩略图
+                    $scope.keVideo=d.file2,           //课件视频
+                    $scope.tmpId1=d.tmpId1,           //教师对课程评价问卷ID
+                    $scope.tmpName1=d.tmpName1,       //教师对课程评价问卷Name
+                    $scope.tmpId2=d.tmpId2,           //学生对课程评价问卷ID
+                    $scope.tmpName2=d.tmpName2,       //学生对课程评价问卷Mame
+                    $scope.tmpId3=d.tmpId3,           //其他对课程评价问卷ID
+                    $scope.tmpName3=d.tmpName3,       //其他对课程评价问卷Name
+                    $scope.tmpId4=d.tmpId4,           //课堂作业问卷ID
+                    $scope.tmpName4=d.tmpName4,       //课堂作业问卷Name
+                    $scope.tmpId5=d.tmpId5,           //课后作业问卷ID
+                    $scope.tmpName5=d.tmpName5        //课后作业问卷Name
+            })
+        }
 
         var openTag = 0;
         $scope.getChooseTmps = function(d){
@@ -111,10 +140,10 @@ angular.module('app')
             var tmp = {
                 proCate:$scope.proCate,         //商品类别
                 jfNum:$scope.jfNum,             //选择的教辅id
-                jfmc:getNameById($scope.jfs,$scope.jfNum),
+                jfmc:getNameById($scope.jfs,$scope.jfNum),  //教辅名称
                 syjsbbh:$scope.syjsbbh,          //适用教室版本号
                 kcxlsNum:$scope.kcxlsNum,       //课程系列id
-                kcxlmc:getNameById($scope.kcxlsNum,$scope.kcxls),
+                kcxlmc:getNameById($scope.kcxlsNum,$scope.kcxls),   //课程系列名称
                 ddbbh:$scope.ddbbh,             //当前版本号
                 spbh:$scope.spbh,               //商品编号
                 ssmc:$scope.ssmc,               //商品名称
@@ -139,15 +168,14 @@ angular.module('app')
             var url = "";
             if($stateParams.entity.tag == "edit"){
                 url = "/cmsapi/course/update";
-                tmp.lineid = $stateParams.entity.lineid;
+                tmp.tanentId = $stateParams.entity.item.tanentId;
             }else{
-                url = "/cmsapi/course/register";
+                url = "/cmsapi/course/add";
             }
 
             enume.postData(url,tmp,function(d){
                 $state.go("roomManage.productList");
             })
-
         }
 
         $scope.previewPro = function(){
@@ -184,12 +212,26 @@ angular.module('app')
         $scope.sp11 ="";
         $scope.sp12 ="";
 
+        $scope.r1 = "";
+        $scope.r2 = "";
+        $scope.r3 = "";
+        $scope.r4 = "";
+        $scope.r5 = "";
+        $scope.r6 = "";
+        $scope.r7 = "";
+        $scope.r8 = "";
+        $scope.r9 = "";
+        $scope.r10 = "";
+        $scope.r11 = "";
+        $scope.r12 = "";
+
         for(var i=0;i<12;i++){
             (function(index){
                 jsCoreMethod.fileReader("b"+(index+1),function(d,f){
                     enume.postData("/cmsapi/image/upload",d,function(data){
                         //document.querySelector("#sp"+(index+1)).innerHTML = f.name;
                         $scope["sp"+(index+1)] = "/file"+data.data;
+                        $scope["r"+(index+1)] = "上传成功";
                         //$scope.$apply();
                     })
                 },"file")
@@ -197,30 +239,32 @@ angular.module('app')
         }
 
         function getInfoByCode(){
-            enume.getData("",function(d){
-                $scope.zhh = "";
-                $scope.xxbh = "";
-                $scope.xxmc = "";
-                $scope.jsbh = "";
-                $scope.jsmc = "";
-                $scope.jsdz = "";
-                $scope.sqzh = "";
-                $scope.sqmm = "";
-                $scope.jsbbh = "";
-                $scope.cStatus = "y";
-                $scope.bz = "";
-                $scope.sp1 = "/file"+data.data;
-                $scope.sp2 = "/file"+data.data;
-                $scope.sp3 = "/file"+data.data;
-                $scope.sp4 = "/file"+data.data;
-                $scope.sp5 = "/file"+data.data;
-                $scope.sp6 = "/file"+data.data;
-                $scope.sp7 = "/file"+data.data;
-                $scope.sp8 = "/file"+data.data;
-                $scope.sp9 = "/file"+data.data;
-                $scope.sp10 = "/file"+data.data;
-                $scope.sp11 = "/file"+data.data;
-                $scope.sp12 = "/file"+data.data;
+            var tanentId = $stateParams.entity.item.oldTanentId;
+            var jsbh = $stateParams.entity.item.jsbh;
+            enume.getData("/cmsapi/tclassRegister/detail?tanentId="+tanentId+"&jsbh="+jsbh,function(d){
+                $scope.zhh = d.zhh;
+                $scope.xxbh = d.xxbh;
+                $scope.xxmc = d.xxmc;
+                $scope.jsbh = d.jsbh;
+                $scope.jsmc = d.jsmc;
+                $scope.jsdz = d.jsdz;
+                $scope.sqzh = d.sqzh;
+                $scope.sqmm = d.sqmm;
+                $scope.jsbbh = d.jsbbh;
+                $scope.cStatus = d.cstatus;
+                $scope.bz = d.bz;
+                $scope.sp1 = d.b1Src;
+                $scope.sp2 = d.b2Src;
+                $scope.sp3 = d.b3Src;
+                $scope.sp4 = d.b4Src;
+                $scope.sp5 = d.b5Src;
+                $scope.sp6 = d.b5Src;
+                $scope.sp7 = d.b5Src;
+                $scope.sp8 = d.b5Src;
+                $scope.sp9 = d.b5Src;
+                $scope.sp10 = d.b5Src;
+                $scope.sp11 = d.b5Src;
+                $scope.sp12 = d.b5Src;
             })
         }
 
@@ -271,7 +315,7 @@ angular.module('app')
             var url = "";
             if($stateParams.entity.tag == "edit"){
                 url = "/cmsapi/tclassRegister/update";
-                tmp.lineid = $stateParams.entity.lineid;
+                tmp.tanentId = $stateParams.entity.item.oldTanentId;
             }else{
                 url = "/cmsapi/tclassRegister/register";
             }
