@@ -328,5 +328,37 @@ angular.module('app')
 
     .controller('productPreviewCtl',function ($http,$scope,enume,$state,$stateParams) {
         var id = $stateParams.id;
+
+        $("#code1").qrcode({
+            render: "table",
+            width: 200, //宽度
+            height:200, //高度
+            text: "http://www.baidu.com" //任意内容
+        });
+
+        $("#code2").qrcode({
+            render: "table",
+            width: 200, //宽度
+            height:200, //高度
+            text: "http://www.baidu.com" //任意内容
+        });
     })
+    .controller('decorationCtl',function ($http,$scope,enume,$state,$stateParams) {
+        var id = $stateParams.id;
+
+        $("#code1").qrcode({
+            render: "table",
+            width: 200, //宽度
+            height:200, //高度
+            text: "http://www.baidu.com" //任意内容
+        });
+
+        $("#code2").qrcode({
+            render: "table",
+            width: 200, //宽度
+            height:200, //高度
+            text: "http://www.baidu.com" //任意内容
+        });
+    })
+
 

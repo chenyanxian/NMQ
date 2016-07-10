@@ -31,16 +31,18 @@ angular.module('app')
         $scope.eDate = "";
 
         $scope.downLink = "";
+        $scope.btnCls = "btnGray";
+        $scope.isDisabled = true;
 
-        $scope.downFile = function(){
-            if($scope.downLink == ""){
-                enume.getData("/cmsapi/teaching/log/download",function(d){
-
-                })
-            }else{
-
-            }
+        function downFile(){
+            enume.getData("/cmsapi/teaching/log/download",function(d){
+                $scope.btnCls = "btnGreen";
+                $scope.downLink = "/file/"+d;
+                $scope.isDisabled = false;
+            })
         }
+
+        downFile();
 
         //查询模板
         $scope.templateListSearch = function(){

@@ -438,8 +438,6 @@ angular.module('app')
         }
 
         $scope.preview = function(){
-            console.log($scope.data);
-
             var url = "";
             if($stateParams.entity.tag == "edit"){
                 url = "/cmsapi/template/update";
@@ -455,7 +453,16 @@ angular.module('app')
         }
 
         $scope.doHoldSubmit = function(){
+            var url = "";
+            if($stateParams.entity.tag == "edit"){
+                url = "/cmsapi/template/update";
+            }else{
+                url = "/cmsapi/template/add";
+            }
 
+            enume.postData(url,$scope.data,function(d){
+                alert("保存成功");
+            })
         }
     });
 

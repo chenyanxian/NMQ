@@ -2,7 +2,7 @@
 <div class="searchRow clearfix">
     <div class="left mr15">
         <label>学校名称：</label>
-        <input type="text" placeholder="请输入学校名称" class="width287" ng-model="schoolName"/>
+        <input type="text" placeholder="请输入学校名称" class="width150" ng-model="schoolName"/>
     </div>
     <div class="left">
         <label>教室建设时间：</label>
@@ -10,11 +10,10 @@
         <span> 到 </span>
         <input type="date" placeholder="请选择结束时间" class="width150" ng-model="endDate"/>
     </div>
-</div>
-
-<div class="mt10">
-    <button class="btnGreen ml65" ng-click="searchRoom();">查询</button>
-    <button ng-show="showAddBtn.show" class="btnGreen" ng-click="createRoom();">注册教室</button>
+    <div class="left">
+        <button class="btnGreen ml65" ng-click="searchRoom();">查询</button>
+        <button ng-show="showAddBtn.show" class="btnGreen" ng-click="createRoom();">注册教室</button>
+    </div>
 </div>
 
 <div class="grayLine"></div>
