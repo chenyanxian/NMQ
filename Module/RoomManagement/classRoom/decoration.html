@@ -1,15 +1,55 @@
 
 <div class="navigation">我的应用 > 教室管理 > 课程系列 & 图标装修</div>
 
-<div class="classRoomBigContainer">选择课程</div>
-<div style="display: flex">
-    <div style="flex: 1">
-        <div style="border: 1px solid black;margin-bottom: 20px;margin-right: 10px;min-height: 160px;">
+<div class="searchRow clearfix">
+    <div class="left mr15">
+        <label>模版类型：</label>
+        <select class="width287" ng-model="selectCate" ng-options="m.code as m.name for m in templateCates"></select>
+    </div>
+    <div class="left">
+        <button class="btnGreen ml65">查询</button>
+    </div>
+</div>
+
+<div class="classRoomBigContainer" style="width: 278px">装修课程系列图标</div>
+<div class="flex">
+    <div class="flex_1">
+        <div class="decoration_info_box">
+            <table class="tableBox" border="1">
+                <thead>
+                <tr>
+                    <th>安全教室</th>
+                    <th>课程系列</th>
+                    <th>当前图标</th>
+                    <th>更换图标</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>安全教室</td>
+                    <td>消防安全系列</td>
+                    <td>http://baicu.com/image</td>
+                    <td class="pr">
+                        <input type="text" class="width100 h24"/>
+                        <input type="file" class="input_file"/>
+                        <button>选择</button>
+                        <button>上传</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="pagingContainer clearfix">
+                <paging get-url="getUrl" callback-fn="directiveCallBack"></paging>
+            </div>
 
         </div>
     </div>
 
-    <div style="width: 160px;height: 160px;background-color: #D7E5EE"></div>
+    <div class="decoration_img_box">
+        <img src="resource/images/class_icon.png"/>
+    </div>
 </div>
 
 
