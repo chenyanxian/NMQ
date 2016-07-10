@@ -309,11 +309,11 @@ angular.module('app')
             }
             var res = [];
             for(var i=0;i< selPros.length;i++){
-                res.push(selPros[i].lineid);
+                res.push(selPros[i].tanentid);
             }
 
             var tmp = {
-                classId: selClass[0].lineid,
+                classId: selClass[0].code,
                 proIds:res.join(','),
                 begin:$scope.beginDate,
                 end:$scope.endDate
@@ -343,6 +343,7 @@ angular.module('app')
             text: "http://www.baidu.com" //任意内容
         });
     })
+
     .controller('decorationCtl',function ($http,$scope,enume,$state,$stateParams) {
         var id = $stateParams.id;
 
