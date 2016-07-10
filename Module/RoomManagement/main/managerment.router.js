@@ -47,7 +47,7 @@ angular.module('app').config(function($stateProvider){
             controller: 'warrantCtl'
         })
         .state('roomManage.decoration', {
-            url: '/warrant',
+            url: '/decoration',
             params:{entity:{}},
             templateUrl: "./Module/RoomManagement/classRoom/decoration.html",
             controller: 'decorationCtl'

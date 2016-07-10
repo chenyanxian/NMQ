@@ -26,7 +26,6 @@ angular.module('app').factory("enume",function($http){
         this.xn = [{name:"全部",code:""}];                    //学年
         this.nj = [{name:"全部",code:""}];                    //年级
         this.bj = [{name:"全部",code:""}];                    //班级
-        this.skbh = [{name:"全部",code:""}];                  //授课编号
 
         this.provinces = [{name:"请选择",code:""}];            //省
 

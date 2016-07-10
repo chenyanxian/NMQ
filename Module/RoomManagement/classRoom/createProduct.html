@@ -6,7 +6,7 @@
         <span><input type="radio" value="jf" name="procate" ng-model="proCate" />教辅</span>
 
         <label>教辅分类：</label>
-        <select class="width287" ng-model="jfNum" ng-options="m.val as m.name for m in jfs"></select>
+        <select class="width287" ng-model="jfNum" ng-options="m.code as m.name for m in jfs"></select>
     </div>
     <div class="left">
         <label>适用教室版本号：</label>
@@ -19,7 +19,7 @@
         <span style="margin-right: 75px;"></span>
         <span><input type="radio" value="kc" name="procate" ng-model="proCate" />课程</span>
         <label>课程系列：</label>
-        <select class="width287" ng-model="kcxlsNum" ng-options="m.val as m.name for m in kcxls"></select>
+        <select class="width287" ng-model="kcxlsNum" ng-options="m.code as m.name for m in kcxls"></select>
     </div>
     <div class="left">
         <label class="ml28">当前版本号：</label>
