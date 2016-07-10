@@ -130,9 +130,9 @@ angular.module('app').factory("enume",function($http){
         //课程系列
         this.getKcxl  = function(){
             if(this.kcxl.length <= 1){
-                this.getData("/cmsapi/user/kcxl",function(tmp){
+                this.getData("/cmsapi/course/xilie",function(tmp){
                     for(var i=0;i<tmp.length;i++){
-                        that.kcxl.push({name: tmp[i].name,code: tmp[i].code});
+                        that.kcxl.push({name: tmp[i].kcxlmc,code: tmp[i].kcxlbh});
                     }
                 })
             }
@@ -182,17 +182,6 @@ angular.module('app').factory("enume",function($http){
             }
         }
 
-        //授课编号
-        this.getSkbh = function(){
-            if(this.skbh.length <= 1){
-                this.getData("/cmsapi/user/skbh",function(tmp){
-                    for(var i=0;i<tmp.length;i++){
-                        that.skbh.push({name: tmp[i].name,code: tmp[i].code});
-                    }
-                })
-            }
-        }
-
         //获取省
         this.getProvinces = function(){
             if(this.provinces.length <= 1){
@@ -207,7 +196,7 @@ angular.module('app').factory("enume",function($http){
         //获取人员类型
         this.getuRylxs = function(){
             if(this.uRylxs.length <= 1){
-                this.getData("/cmsapi/user/queryProvinces",function(tmp){
+                this.getData("/cmsapi/dictionary/queryByParentCode?parentCode=user_type",function(tmp){
                     for(var i=0;i<tmp.length;i++){
                         that.uRylxs.push({name: tmp[i].name,code: tmp[i].code});
                     }
@@ -218,7 +207,7 @@ angular.module('app').factory("enume",function($http){
         //获取岗位
         this.getuGws = function(){
             if(this.uGws.length <= 1){
-                this.getData("/cmsapi/user/queryProvinces",function(tmp){
+                this.getData("/cmsapi/dictionary/queryByParentCode?parentCode=position",function(tmp){
                     for(var i=0;i<tmp.length;i++){
                         that.uGws.push({name: tmp[i].name,code: tmp[i].code});
                     }
@@ -233,12 +222,11 @@ angular.module('app').factory("enume",function($http){
         this.getMaritalStatus();
         this.getMacao();
         this.getKcxl();
-        this.getKczt();
-        this.getXn();
-        this.getNj();
-        this.getBj();
-        this.getSkbh();
-        this.getProvinces();
+        //this.getKczt();
+        //this.getXn();
+        //this.getNj();
+        //this.getBj();
+        //this.getProvinces();
         this.getuRylxs();
         this.getuGws();
     }

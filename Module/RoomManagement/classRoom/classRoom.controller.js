@@ -56,7 +56,7 @@ angular.module('app')
 
         if($stateParams.entity.tag == "edit"){
             var spbh = $stateParams.entity.item.spbh;
-            enume.getData("/cmsapi/tclassRegister/detail?code="+spbh,function(d){
+            enume.getData("/cmsapi/course/detail?code="+spbh,function(d){
                     $scope.proCate=d.proCate,         //商品类别
                     $scope.jfNum=d.jfNum,             //选择的教辅id
                     $scope.syjsbbh=d.syjsbbh,          //适用教室版本号
@@ -239,7 +239,7 @@ angular.module('app')
         }
 
         function getInfoByCode(){
-            var tanentId = $stateParams.entity.item.oldTanentId;
+            var tanentId = $stateParams.entity.item.tanentid;
             var jsbh = $stateParams.entity.item.jsbh;
             enume.getData("/cmsapi/tclassRegister/detail?tanentId="+tanentId+"&jsbh="+jsbh,function(d){
                 $scope.zhh = d.zhh;
@@ -405,5 +405,4 @@ angular.module('app')
             text: "http://www.baidu.com" //任意内容
         });
     })
-
 
