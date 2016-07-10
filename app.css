@@ -919,3 +919,7 @@ input[type=file]{
 .decoration_img_box img{
     max-width: 100%;max-height: 100%;
 }
+
+.decoration_top_tip{
+    text-decoration: underline;color: #c34710;margin-top: 20px;
+}
